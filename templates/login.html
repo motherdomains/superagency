@@ -1,0 +1,24 @@
+<!-- templates/login.html -->
+{% extends 'layout.html' %}
+
+{% block title %}Logon to SuperAgency{% endblock %}
+
+{% block content %}
+<form method="POST" action="/login" class="w-50 mx-auto mt-3">
+<div class="row" style="margin-top: 15%">
+    <div class="twelve columns"><h4>Logon to SuperAgency</h4></div>
+</div>
+<div class="row">
+    <div class="two columns">Username:</div>
+    <div class="ten columns"><input type="text" class="form-control" id="username" name="username" required></div>
+</div>
+<div class="row">
+    <div class="two columns">Password:</div>
+    <div class="ten columns"><input type="password" class="form-control" id="password" name="password" required></div>
+</div>
+<div class="row">
+    <div class="two columns"> </div>
+    <div class="ten columns"><button type="submit" class="btn btn-primary w-100">LOGON</button></div>
+</div>
+</form>
+{% endblock %}
