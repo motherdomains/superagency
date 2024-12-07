@@ -9,7 +9,13 @@
     <div class="one-half column" style="margin-top: 15%">
         <h4>Welcome to the Super Agency</h4>
         <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content!</p>
-        <p><a href="/login">Logon to Super Agency</a></p>
+        <h4>{{ greeting }}</h4>
+{% if 'username' in session %}
+    <p><a href="/logout">Logout</a></p>
+{% else %}
+    <p><a href="/login">Login</a> or <a href="{{ url_for('register') }}">Register</a></p>
+{% endif %}
     </div>
 </div>
 {% endblock %}
+

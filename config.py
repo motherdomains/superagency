@@ -5,8 +5,9 @@ class Config:
     SQLALCHEMY_DATABASE_URI = (
         'mysql+mysqlconnector://superagent:x5GvGYSXJXK(!qi2@localhost/superagency'
     )
-    SECRET_KEY = 'your_secret_key'  # Used for Flask-Admin and Flash messages
+    SECRET_KEY = 'superCHAPAtestingDOG'  # Used for Flask-Admin and Flash messages
     TEMPLATES_AUTO_RELOAD = True
+    DEBUT = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # Avoids overhead warnings
     
     
