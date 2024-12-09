@@ -44,11 +44,11 @@ def login():
         app.logger.debug(f"Username: {username}, Password: {password}")  # Log form data
 
         # Test database connection and query
-        try:
-            test_user = User.query.first()
-            app.logger.debug(f"First user in database: {test_user.superName if test_user else 'No users found'}")
-        except Exception as e:
-            app.logger.error(f"Database error: {str(e)}")
+        # try:
+        test_user = User.query.first()
+        app.logger.debug(f"First user in database: {test_user.superName if test_user else 'No users found'}")
+        # except Exception as e:
+        #app.logger.error(f"Database error: {str(e)}")
 
         # Fetch user from database
         user = User.query.filter_by(superName=username).first()
@@ -58,13 +58,20 @@ def login():
                 session['user_id'] = user.superID
                 session['username'] = user.superName
                 flash(f'Welcome back, {user.superName}!', 'success')
-                return redirect(url_for('home'))
+                #return f"<h1>Form submitted!</h1><p>Username: {username}</p><p>Password: {password}</p>"
+                #return render_template('login-test.html')
+                return redirect('/')
             else:
                 flash('Invalid credentials, please try again.', 'danger')
+                #return f"<h1>Invalid credentials</h1>"
+                return render_template('login.html', greeting=f"Invalid credentials, please try again.")
         else:
             flash('User not found, please try again.', 'danger')
-
-    return render_template('login.html')
+            #return f"<h1>User not found</h1>"
+            return render_template('login.html', greeting=f"User not found, please try again.")
+        
+        #return f"<h1>Form submitted!</h1><p>Username: {username}</p><p>Password: {password}</p>"
+    return render_template('login.html', greeting=f"Logon to Super Agency")
 
 # Register Route
 @app.route('/register', methods=['GET', 'POST'])
