@@ -28,7 +28,7 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="../static/images/favicon.png">
+  <link rel="icon" type="image/png" href="/static/images/favicon.png">
     
 
 </head>
@@ -38,7 +38,11 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="/login">LOGIN</a></div>
+      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="users">USERS</a> | {% if logged_in %}
+            <a href="/logout">LOGOUT</a>
+            {% else %}
+            <a href="/login">LOGIN</a>
+            {% endif %}</div>
     </div>
       
         {% block content %}

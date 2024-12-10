@@ -1,0 +1,37 @@
+<!-- templates/user_list.html -->
+{% extends 'layout.html' %}
+
+{% block title %}List of Users{% endblock %}
+
+{% block content %}
+<table class="u-full-width">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if users %}
+            {% for user in users %}
+            <tr>
+                <td>{{ user.superID }}</td>
+                <td>{{ user.superName }}</td>
+                <td>{{ user.superEmail }}</td>
+                <td>{{ user.superRole }}</td>
+                <td>
+                    <a href="{{ url_for('edit_user', user_id=user.superID) }}" class="button-primary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">No users found.</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}

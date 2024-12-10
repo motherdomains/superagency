@@ -4,9 +4,12 @@ from flask_bcrypt import Bcrypt
 import logging
 from logging.handlers import RotatingFileHandler
 
+
 # Initialize Flask app from configuration
 app = Flask(__name__)
 app.config.from_object('config.Config')
+app.config['CACHE_TYPE'] = 'null'  # Disable caching (temp during dev)
+app.config['PROPAGATE_EXCEPTIONS'] = True  # Ensure exceptions propagate to Flask's error handling
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -23,6 +26,11 @@ class User(db.Model):
     superID = db.Column(db.Integer, primary_key=True)
     superName = db.Column(db.String(80), unique=True, nullable=False)
     superPassword = db.Column(db.String(120), nullable=False)
+    superEmail = db.Column(db.String(60), nullable=False)
+    superRole = db.Column(db.String(5), nullable=False)
+    
+# check if logged in    
+#logged_in = 'user_id' in session
 
 # Home Route
 @app.route('/')
@@ -31,7 +39,15 @@ def home():
     if username:
         return render_template('index.html', greeting=f"Welcome back, {username}!")
     else:
-        return render_template('index.html', greeting="Please log in.")
+        return render_template('index.html', greeting=f"Please log in.")
+    
+#@app.route('/users', methods=['GET'])
+#def users():
+#    return "Users route is working"
+
+#@app.route('/test', methods=['GET'])
+#def test():
+#    return "Test route is working"
     
 # Login Route
 @app.route('/login', methods=['GET', 'POST'])
@@ -73,6 +89,18 @@ def login():
         #return f"<h1>Form submitted!</h1><p>Username: {username}</p><p>Password: {password}</p>"
     return render_template('login.html', greeting=f"Logon to Super Agency")
 
+# Logout route
+@app.route('/logout')
+def logout():
+    # Clear the session
+    session.clear()
+    
+    # Flash a confirmation message
+    flash("You have been logged out successfully.", "success")
+    
+    # Redirect to the login page
+    return redirect('/login')
+
 # Register Route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -87,7 +115,7 @@ def register():
         db.session.commit()
 
         flash('Account created successfully! You can now log in.', 'success')
-        return redirect(url_for('login'))
+        return redirect('/login')
     return render_template('register.html')
 
 # Forgot Password Route
@@ -96,8 +124,36 @@ def forgot_password():
     if request.method == 'POST':
         email = request.form['email']
         flash('A password reset link has been sent to your email.', 'info')
-        return redirect(url_for('login'))
+        return redirect('/login')
     return render_template('forgot_password.html')
+
+# Admin route to view and manage users (add admin later)
+@app.route('/users', methods=['GET'])
+def users():
+    #return "Users route is working... again. But no template. Again.xxxxx"
+    app.logger.debug("Fetching user data...")
+
+    # Fetch all users from the database, ordered alphabetically by superName
+    users = User.query.order_by(User.superName.asc()).all()
+    
+    app.logger.debug(f"Rendering user list with {len(users)} users.")
+    #return "Rendering user list with {len(users)} users."
+    
+    # Render the admin users template
+    return render_template('user_list.html', users=users)
+
+#@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+#def edit_user(user_id):
+#    user = User.query.get_or_404(user_id)
+#    if request.method == 'POST':
+#        user.superName = request.form['username']
+#        user.superEmail = request.form['email']
+#        user.superRole = request.form['role']
+#        db.session.commit()
+#        flash('User updated successfully!', 'success')
+#        return redirect(url_for('users'))
+#    return render_template('edit_user.html', user=user)
+
 
 # Run the app
 if __name__ == '__main__':
