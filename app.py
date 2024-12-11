@@ -142,17 +142,17 @@ def users():
     # Render the admin users template
     return render_template('user_list.html', users=users)
 
-#@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
-#def edit_user(user_id):
-#    user = User.query.get_or_404(user_id)
-#    if request.method == 'POST':
-#        user.superName = request.form['username']
-#        user.superEmail = request.form['email']
-#        user.superRole = request.form['role']
-#        db.session.commit()
-#        flash('User updated successfully!', 'success')
-#        return redirect(url_for('users'))
-#    return render_template('edit_user.html', user=user)
+@app.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+def edit_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if request.method == 'POST':
+        user.superName = request.form['username']
+        user.superEmail = request.form['email']
+        user.superRole = request.form['role']
+        db.session.commit()
+        flash('User updated successfully!', 'success')
+        return redirect(url_for('users'))
+    return render_template('edit_user.html', user=user)
 
 
 # Run the app
