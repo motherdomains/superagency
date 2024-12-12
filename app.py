@@ -55,20 +55,21 @@ class UserAdmin(ModelView):
     column_default_sort = ('superName', True)
     form = UserForm  # Explicitly set the form for user management
     
+    # Customize form validation logic
     def create_form(self):
         form = super().create_form()
-        form.superPassword.data = None  # Ensure the password field is empty on form load
+        return form
+
+    def edit_form(self, obj=None):
+        form = super().edit_form(obj=obj)
         return form
 
     def on_model_change(self, form, model, is_created):
-        # Handle password hashing on both creation and edit
-        if is_created:
-            # Hash the password when a new user is created
-            model.superPassword = bcrypt.generate_password_hash(form.superPassword.data).decode('utf-8')
-        else:
-            # If the password is being updated, hash it
+        """Override the on_model_change method to hash the password before saving."""
+        if is_created:  # Only hash the password when creating a new user
             if form.superPassword.data:
-                model.superPassword = bcrypt.generate_password_hash(form.superPassword.data).decode('utf-8')
+                hashed_password = bcrypt.generate_password_hash(form.superPassword.data).decode('utf-8')
+                model.superPassword = hashed_password
         return super().on_model_change(form, model, is_created)
 
 # Add Flask-Admin views
@@ -144,6 +145,14 @@ def forgot_password():
         flash('A password reset link has been sent to your email.', 'info')
         return redirect('/login')
     return render_template('forgot_password.html')
+
+# Admin route to view and manage users
+@app.route('/users', methods=['GET'])
+def users():
+    app.logger.debug("Fetching user data...")
+    users = User.query.order_by(User.superName.asc()).all()
+    app.logger.debug(f"Fetched {len(users)} users.")
+    return render_template('user_list.html', users=users)
 
 # Print the URL map to verify routes
 app.logger.debug(f"Registered routes: {app.url_map}")
