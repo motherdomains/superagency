@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_admin import Admin
@@ -6,19 +6,26 @@ from flask_admin.contrib.sqla import ModelView
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SelectField
 from wtforms.validators import InputRequired, Email, Length
-import logging
+from flask_wtf.file import FileField, FileAllowed
+from werkzeug.utils import secure_filename
 from logging.handlers import RotatingFileHandler
+from config import Config  # Import configuration
+import os
+import logging
 
 # Initialize Flask app
 app = Flask(__name__)
+app.config.from_object(Config)
 
-# Load configuration
-app.config.from_object('config.Config')  # Ensure you have a config file or module
-app.config['CACHE_TYPE'] = 'null'  # Disable caching during development
-app.config['PROPAGATE_EXCEPTIONS'] = True  # Ensure exceptions propagate to Flask's error handling
+# Ensure the upload folder exists
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Set up detailed logging
-handler = RotatingFileHandler('app.log', maxBytes=100000, backupCount=3)
+# Set up logging
+handler = RotatingFileHandler(
+    app.config['LOG_FILE'], 
+    maxBytes=app.config['LOG_MAX_BYTES'], 
+    backupCount=app.config['LOG_BACKUP_COUNT']
+)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
@@ -27,135 +34,83 @@ app.logger.setLevel(logging.DEBUG)
 # Initialize extensions
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-
-# Flask-Admin setup
 admin = Admin(app, name="Super Agency Admin", template_mode='bootstrap4')
 
-# User model
+# User Model
 class User(db.Model):
-    __tablename__ = 'superTest'  # Change to match your table name
+    __tablename__ = 'superTest'
     superID = db.Column(db.Integer, primary_key=True)
     superName = db.Column(db.String(80), unique=True, nullable=False)
     superPassword = db.Column(db.String(120), nullable=False)
     superEmail = db.Column(db.String(60), nullable=False)
     superRole = db.Column(db.String(5), nullable=False)
 
-# User form for creating new users
+# Country Model
+class Country(db.Model):
+    __tablename__ = 'songCountry'
+    countryID = db.Column(db.SmallInteger, primary_key=True)
+    country = db.Column(db.String(60), nullable=False)
+    image = db.Column(db.String(255), nullable=True)  # Stores the image URL
+    status = db.Column(db.Enum('0', '1'), default='1', nullable=False)
+    display_order = db.Column('display_order', db.SmallInteger, nullable=False, default=0)
+
+# Country Admin Form
+class CountryForm(FlaskForm):
+    country = StringField('Country Name', validators=[InputRequired(), Length(max=60)])
+    image = FileField('Image File', validators=[FileAllowed(Config.ALLOWED_EXTENSIONS, 'Images only!')])
+    status = SelectField('Status', choices=[('1', 'Active'), ('0', 'Inactive')], validators=[InputRequired()])
+#    display_order = StringField('Display Order', validators=[InputRequired()])
+
+# User Admin Form
 class UserForm(FlaskForm):
-    superName = StringField('Username', validators=[InputRequired()])
-    superPassword = PasswordField('Password', validators=[InputRequired()])
+    superName = StringField('Username', validators=[InputRequired(), Length(max=80)])
     superEmail = StringField('Email', validators=[InputRequired(), Email(), Length(max=60)])
-    superRole = SelectField('Role', choices=[('admin', 'Admin'), ('user', 'User'), ('mod', 'Moderator')], validators=[InputRequired()])
+    superPassword = PasswordField('Password', validators=[InputRequired(), Length(min=6)])
+    superRole = SelectField('Role', choices=[('admin', 'Admin'), ('user', 'User')], validators=[InputRequired()])
 
-# Custom ModelView for User
+# Custom User Admin View
 class UserAdmin(ModelView):
-    # Exclude 'superPassword' from the list view
-    column_exclude_list = ['superPassword']
-    # Optionally, specify the default sorting for the list view
+    form = UserForm
+    column_list = ('superName', 'superEmail', 'superRole')
     column_default_sort = ('superName', True)
-    form = UserForm  # Explicitly set the form for user management
-    
-    # Customize form validation logic
-    def create_form(self):
-        form = super().create_form()
-        return form
+    column_display_pk = True
 
-    def edit_form(self, obj=None):
-        form = super().edit_form(obj=obj)
-        return form
+# Custom Country Admin View
+class CountryAdmin(ModelView):
+    form = CountryForm
+    column_list = ('country', 'status')
+    column_default_sort = ('display_order', True)
+    column_display_pk = True
+
+    # Format the 'status' field to display "Active" or "Hidden"
+    column_formatters = {
+        'status': lambda v, c, m, p: "Active" if m.status == '1' else "Hidden"
+    }
+    column_formatters_detail = column_formatters
 
     def on_model_change(self, form, model, is_created):
-        """Override the on_model_change method to hash the password before saving."""
-        if is_created:  # Only hash the password when creating a new user
-            if form.superPassword.data:
-                hashed_password = bcrypt.generate_password_hash(form.superPassword.data).decode('utf-8')
-                model.superPassword = hashed_password
+        """Handle file upload and save file URL."""
+        uploaded_file = form.image.data
+        if uploaded_file:
+            filename = secure_filename(uploaded_file.filename)
+            upload_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            uploaded_file.save(upload_path)
+            model.image = url_for('uploaded_file', filename=filename, _external=True)
         return super().on_model_change(form, model, is_created)
 
-# Add Flask-Admin views
+# Admin Views
 admin.add_view(UserAdmin(User, db.session))
+admin.add_view(CountryAdmin(Country, db.session))
 
-# Home Route
-@app.route('/')
-def home():
-    username = session.get('username')
-    greeting = f"Welcome back, {username}!" if username else "Please log in."
-    app.logger.debug(f"Home route accessed. Greeting: {greeting}")
-    return render_template('index.html', greeting=greeting)
+# Serve Uploaded Files
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-# Login Route
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    app.logger.debug("Entered login route")
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        app.logger.debug(f"Login form submitted. Username: {username}, Password: {password}")
-
-        # Fetch user from database
-        user = User.query.filter_by(superName=username).first()
-        if user:
-            app.logger.debug(f"User found: {user.superName}")
-            if bcrypt.check_password_hash(user.superPassword, password):
-                session['user_id'] = user.superID
-                session['username'] = user.superName
-                flash(f'Welcome back, {user.superName}!', 'success')
-                return redirect('/')
-            else:
-                app.logger.warning("Invalid credentials provided.")
-                flash('Invalid credentials, please try again.', 'danger')
-        else:
-            app.logger.warning("User not found.")
-            flash('User not found, please try again.', 'danger')
-    return render_template('login.html', greeting="Logon to Super Agency")
-
-# Logout Route
-@app.route('/logout')
-def logout():
-    session.clear()
-    app.logger.info("User logged out successfully.")
-    flash("You have been logged out successfully.", "success")
-    return redirect('/login')
-
-# Register Route
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
-        # Add user to database
-        new_user = User(superName=username, superPassword=hashed_password, superEmail=email, superRole='user')
-        db.session.add(new_user)
-        db.session.commit()
-
-        app.logger.info(f"New user registered: {username}")
-        flash('Account created successfully! You can now log in.', 'success')
-        return redirect('/login')
-    return render_template('register.html')
-
-# Forgot Password Route
-@app.route('/password', methods=['GET', 'POST'])
-def forgot_password():
-    if request.method == 'POST':
-        email = request.form['email']
-        app.logger.debug(f"Password reset requested for email: {email}")
-        flash('A password reset link has been sent to your email.', 'info')
-        return redirect('/login')
-    return render_template('forgot_password.html')
-
-# Admin route to view and manage users
-@app.route('/users', methods=['GET'])
-def users():
-    app.logger.debug("Fetching user data...")
-    users = User.query.order_by(User.superName.asc()).all()
-    app.logger.debug(f"Fetched {len(users)} users.")
-    return render_template('user_list.html', users=users)
-
-# Print the URL map to verify routes
-app.logger.debug(f"Registered routes: {app.url_map}")
-
+# Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=app.config['DEBUG'])
+    
+# Check UPLOAD_FOLDER and ensure it exists
+print("UPLOAD_FOLDER:", app.config['UPLOAD_FOLDER'])
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
