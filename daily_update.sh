@@ -11,4 +11,3 @@ git commit -m "Daily update: $(date '+%Y-%m-%d')"
 
 # Push the changes to the remote repository
 git push origin main
-
