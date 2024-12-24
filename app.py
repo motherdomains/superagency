@@ -22,6 +22,7 @@ app.config.from_object(Config)
 
 # Blueprint management
 
+
 # Ensure the upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
