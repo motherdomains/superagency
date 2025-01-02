@@ -1,3 +1,5 @@
+# SUPER AGENCY
+# Developed by S.E.Ansley
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -51,6 +53,7 @@ class User(db.Model):
     superEmail = db.Column(db.String(60), nullable=False)
     superRole = db.Column(db.String(5), nullable=False)
 
+# BLUEPRINT: Song Contest
 class Country(db.Model):
     __tablename__ = 'songCountry'
     countryID = db.Column(db.SmallInteger, primary_key=True)
