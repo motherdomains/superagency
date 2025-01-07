@@ -1,0 +1,185 @@
+# BUILD LOG
+
+
+## 2025 WORK THEOREM
+- Monday & Friday: Betterment of overall system
+- Tues, Wed, Thurs: Client/Feature-specific development
+
+Next week:
+
+- Mon: Separate app.py code into multiple files, including connect, Blueprints for specific modules, etc
+- Tue: Specific Blueprint work for Song Contest, getting it organised and arranged, pages accessible
+- Wed: Song Contest voting system, port over or replace previous code, adapt to # of contestants
+- Thu: Song Contest front end view, retrieving list of countries. Test voting process. Update Glynn on progress
+- Fri: Spillover / Admin day. Consider CMS plans.
+
+Week after:
+
+- System: Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
+- Song Contest: Introduce Show ID/code for one-login, one-vote. Show management features.
+
+
+This month:
+
+- Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
+- Client: Song Contest. Demo of panel, features, per show voting. Planning of animated scoreboard.
+- CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
+- First mobile UI/UX designed for prototypes
+- Consider initial Preferences / Settings
+- Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
+
+
+-----
+
+## Tue. Jan. 7 2025 ##  
+- Troubleshooted numerous issues after rebuilding Homebrew, etc
+- After much deliberation, successfully imported song_contest blueprint to run in revised modular system
+- Song Contest Flask-Admin CRUD now working. Attempted custom admin homepage (to improve later)
+
+
+## Mon. Jan. 6 2025 ##  3 hours
+- Restructured app, separating code from app.py into multiple subdirectories and files, including Blueprints
+- Troubleshooted numerous issues related to this
+- Flask-Admin successfully working again and connecting to MySQL by end of the session
+
+-----
+
+## Fri. Jan. 3 2025 ##  2 hours
+- Set up email forwarders to @superagency.pro
+- Set up and reserved @aisuperagency social handles (IG, Twitter, FB, Github, TG Channel)
+
+-----
+
+## HOLIDAYS - 1-2 hours of work to check in and plan. E.g. Thu Jan 2 planning session
+
+-----
+
+## Wed. Dec. 18 2024 ##  2 hours
+- Solved 404 Not Found error, because mistakenly had not compiled full app.py code
+- Created songShows admin / CRUD
+- Explored options for voting system DB tables and form structures
+- Conversation about dynamic, animated scoreboard for exciting, close results
+- Updated Glynn
+
+## Tue. Dec. 17 2024 ##  2 hours
+- Created songCountry CRUD, including working file upload field for Images, altered config.py
+- Contemplating best approaches to songShows, grouping participating countries, while tallying votes
+- Discussing Risk Management capabilities within Super Agency. Hard/soft risks. High end consultancy
+
+## Mon. Dec. 16 2024 ##  1.5 hours
+- Research start to week. Looked into app schema/planning, p2p messaging
+- Considered approaches for integration of AI "Receptionist", who then designates tasks / models / etc
+- Raised limits of PHP uploads, and imported um.sql / songcont.sql to review old database structures
+- Planned productive week ahead - likely final full work week of 2024
+
+This week:
+- Tue: Practice non-threaded Flask-Admin element setup. E.g. Countries - admin CRUD, Shows CRUD
+- Wed: Frontend view, retrieve countries and logos from database, thereby updating site. 
+- Thu: Song Contest: Replicate voting formula from original PHP code. Voting page
+- Fri: Pretty up, and present to Glynn
+
+
+Holidays:
+- Play with AI models and functions
+- Improve CMS, so it can update basic pages like gloa.live, animism.live (and consider remote updating)
+- Prepare to wrap Song Contest work
+- Attempt integrating API / AI chatbots
+
+
+--------
+## Fri. Dec. 13 2024 ##  1+ hours
+- Referred to Flask & Admin documentation, and crafted list of future features / functionality
+- Explored possibilities of Single Page Applications (SPA), React-based notifications, wallet & blockchain integration, and other possible Flask-Admin functionality
+- Considering next week's intended development, likely around basic CMS functionality for landing pages
+
+## Thu. Dec. 12 2024 ##  3 hours
+- Flask-Admin successfully deployed
+- Admin functions for Users: Create, Edit. Hashed passwords on Create and Edit 
+
+## Wed. Dec. 11 2024 ##  1 hour
+- Solved Terminal debug logging issue, by changing port to 5001
+- User list is now displaying. Now considering more dynamic, repeatable functions - add, edit, list (instead of separate templates or even routes all the time for each)
+- Looked into dynamic, modular routes & actions (e.g. not needing 50+ routes for 50+ elements)
+- Researched Flask-Admin vs building own admin functions
+
+## Tue. Dec. 10 2024 ##  3.5 hours
+- Successfully implemented logout script, and some basic variable changes based on status
+- Experienced further issues rendering inner templates when there is database logic / retrieval
+
+## Mon. Dec. 9 2024 ##  2+ hours
+- Attempted simpler Login test, to ensure form posted properly, data posting to correct route
+- Success of simpler Login test, including subsequent MySQL database user login check
+- Copied over results to working app.py script, and login is now successfully working
+
+This week:
+- Tue: Logout. Attempt List of users.
+- Wed: Fix logging issue so it shows in Terminal. List of users.
+- Thu:  Consider Flask-Admin. Edit user details (admin) Create new user (admin view).
+- Fri: Admin vs. User role differences, routes, verification? Reset password
+--------
+## Fri. Dec. 6 2024 ##  4+ hours
+- Tried and failed to logon, constantly thwarted by Internal Server Errors, and debug wasn't printing
+- Another wholly unsuccessful Friday
+
+## Thu. Dec. 5 2024 ##  0.5 hours
+- Commenced deeper reading of login/authentication in Python/Flask, and possible implementations
+- Progress thwarted due to issues related to local thieves (neighbours meetings, police visit, etc)
+- Tomorrow: Login to system
+
+## Wed. Dec. 4 2024 ##  3.5 hours
+- Crafted desktop shortcut to launch python/php/mysql servers, and open app/phpmyadmin in browser
+- Successfully established a test MySQL database connection, retrieving test data from a DB table
+- Set up remote Github repo updates, and daily GitHub update script, to keep profile fully active
+
+## Tue. Dec. 3 2024 ## 2+ hours
+- Despite numerous further issues, successfully installed & deployed phpymyadmin on localhost
+
+## Fri. Nov. 29 2024 ## 5+ hours
+- Frustratingly, most of a waste of a day, reminding why I detest programming and have tried to quit
+- Attempted to enact SQLite DB, & installed DB Browser for SQLite
+- DB Browser limitations (e.g. no pwd encryption) forced pivot to more-familiar MySQL/PHPMyAdmin
+- Spent 2+ hours trying and failing to reset MySQL root password, reinstall, and load phpmyadmin
+- Split up app.py into multiple files and routes, with inconsistent success/failure. Not sure it worked
+- Many blank screens, server restarts, unsuccessful data prints, etc
+- Day was a failure. Did not accomplish simple login mission.
+- Reminder that my role is to develop the MVP. Any further funding would onboard the Dev/s we need.
+
+## Thu. Nov. 28 2024 ## 3+ hours
+- Set up Skeleton as main layout/css framework
+- Created individual templates for Home, Login - using Jinja template inheritance
+- Explored scalable extendibility for more complex, multi-module Python apps
+- Researched best-practice pages and content for optimal pitch deck
+- Note that was stuck on various 404 display errors for around an hour, until resolved (redundant code)
+
+## Wed. Nov. 27 2024 ## 2 hours
+- Researched python vs php frameworks
+- Settled on and installed Flask for AI-related development
+- Aim to integrate Skeleton as CSS/layout with Flask
+- First test pages / app on Flask
+
+
+## Mon. Nov. 25 2024 ## 1.5 hours
+- Registered superagency.pro as primary domain
+- Set up DNS/hosting, and activated on Cloudstick
+
+// back from Bangkok, following 2+ weeks of networking & research
+// Noting that none of the world in September/October seems to have been logged
+
+## Thu. Aug 8 2024 - c.2 hours
+- Researched Models and more, in the HF documentation
+- Initiated a document about Page Builder / Self-Help app, plotting out schematics for a CMS
+- Researched VULTR server specs required to deploy AI-based applications
+
+Problem: Cost-prohibitive, high-spec GPU/RAM machines required to deploy and dev applications
+
+
+## Wed. Aug 7 2024 - c.4 hours
+- Successfully set up API access to update page on VULTR server
+- Successfully installed Hugging Face / API library for AI text generation, and updating the page.
+
+Problem: Model did not follow the prompt instructions, specifically to change the tour dates. It DID follow the instructions to replace all existing text with a message, but then auto-generated its own text at the bottom
+
+Solutions:
+- Simpler exercises to start
+- Replacing clearly-indicated areas, such as JSON fields or input areas
+- Might not need AI at this point, to generate a CMS-updating script
