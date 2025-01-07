@@ -9,14 +9,14 @@ Next week:
 
 - Mon: Separate app.py code into multiple files, including connect, Blueprints for specific modules, etc
 - Tue: Specific Blueprint work for Song Contest, getting it organised and arranged, pages accessible
-- Wed: Song Contest voting system, port over or replace previous code, adapt to # of contestants
-- Thu: Song Contest front end view, retrieving list of countries. Test voting process. Update Glynn on progress
+- Wed: SC voting system, recompile code, adapt to # of contestants. Front end view / list of countries
+- Thu: SC - Improve and test voting process. Update Glynn on progress
 - Fri: Spillover / Admin day. Consider CMS plans.
 
 Week after:
 
-- System: Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
-- Song Contest: Introduce Show ID/code for one-login, one-vote. Show management features.
+- System: Test blank Blueprints for other features (and consider Blueprint builder). Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
+- Song Contest: Start to improve visual process, with CSS for mobile access. Look into Show ID/code for one-login, one-vote. Show management features.
 
 
 This month:
@@ -31,11 +31,10 @@ This month:
 
 -----
 
-## Tue. Jan. 7 2025 ##  
+## Tue. Jan. 7 2025 ##  2.5 hours
 - Troubleshooted numerous issues after rebuilding Homebrew, etc
 - After much deliberation, successfully imported song_contest blueprint to run in revised modular system
 - Song Contest Flask-Admin CRUD now working. Attempted custom admin homepage (to improve later)
-
 
 ## Mon. Jan. 6 2025 ##  3 hours
 - Restructured app, separating code from app.py into multiple subdirectories and files, including Blueprints
