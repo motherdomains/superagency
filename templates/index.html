@@ -11,11 +11,10 @@
         <p>Super Agency is coming in 2025! We are presently in Alpha development. Each weekday, new features and functionality are being added, starting with the fundamentals.</p>
 
 {% if 'username' in session %}
-    <p><a href="/logout">Logout</a></p>
+    <p><a href="{{ url_for('auth.logout') }}">Logout</a></p>
 {% else %}
-    <p><a href="/login">Login</a> or <a href="{{ url_for('register') }}">Register</a></p>
+    <p><a href="{{ url_for('auth.login') }}">Login</a> or <a href="{{ url_for('auth.register') }}">Register</a></p>
 {% endif %}
     </div>
 </div>
 {% endblock %}
-

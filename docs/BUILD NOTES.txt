@@ -9,8 +9,8 @@ Next week:
 
 - Mon: Separate app.py code into multiple files, including connect, Blueprints for specific modules, etc
 - Tue: Specific Blueprint work for Song Contest, getting it organised and arranged, pages accessible
-- Wed: SC voting system, recompile code, adapt to # of contestants. Front end view / list of countries
-- Thu: SC - Improve and test voting process. Update Glynn on progress
+- Wed:  Explore CMS options, and research best practices for voting, Front end view / list of countries. 
+- Thu: SC - SC voting system, recompile code, adapt to # of contestants. Update Glynn on progress
 - Fri: Spillover / Admin day. Consider CMS plans.
 
 Week after:
@@ -28,8 +28,12 @@ This month:
 - Consider initial Preferences / Settings
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
 
-
 -----
+
+## Wed. Jan. 8 2025 ## 2.5 hours
+- Relocated the recent work (multiple files and blueprints), back into the root directory, and old code into OLD
+- Fixed 404 errors when trying to display the app homepage/index, and restored the auth routes
+- Researched and explored best-practice approaches for centralised vs remote vs hybrid CMS updates, including investigating Satellite servers, IPFS/Filecoin for media assets & permastorage
 
 ## Tue. Jan. 7 2025 ##  2.5 hours
 - Troubleshooted numerous issues after rebuilding Homebrew, etc

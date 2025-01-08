@@ -38,10 +38,10 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="users">USERS</a> | {% if logged_in %}
-            <a href="/logout">LOGOUT</a>
+      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="admin">ADMIN</a>  | <a href="users">USERS</a> | {% if logged_in %}
+            <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
             {% else %}
-            <a href="/login">LOGIN</a>
+            <a href="{{ url_for('auth.login') }}">LOGIN</a>
             {% endif %}</div>
     </div>
       

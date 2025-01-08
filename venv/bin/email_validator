@@ -1,4 +1,4 @@
-#!/Users/sea/Documents/dev/superapp/venv/bin/python3
+#!/Users/sea/Documents/dev/superapp/new/venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
