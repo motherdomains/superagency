@@ -1,16 +1,20 @@
-from flask_admin import Admin
+# blueprints/song_contest/admin.py
 from flask_admin.contrib.sqla import ModelView
 from extensions import db
-from .models import SongShow, SongCountry  # Import the models
+from .models import SongShow, SongCountry
 
+# Admin Views for SongShow and SongCountry
 class SongShowModelView(ModelView):
-    column_list = ('name', 'artist', 'country', 'date')  # Example fields
+    column_list = ('showName', 'showDate', 'totalContestants', 'showDesc')
+    form_excluded_columns = ('id',)  # Example of excluded columns
+    column_formatters = {
+        'showDate': lambda v, c, m, p: m.formatted_showDate()
+    }
 
 class SongCountryModelView(ModelView):
-    column_list = ('name', 'code')  # Example fields
+    column_list = ('country', 'status', 'display_order')
+    form_excluded_columns = ('id',)  # Example of excluded columns
 
-def register_admin_views(app):
-    with app.app_context():  # Ensure the app context is available
-        admin = Admin(app, name='Song Contest Admin', template_mode='bootstrap3')
-        admin.add_view(SongShowModelView(SongShow, db.session, name="Song Shows"))
-        admin.add_view(SongCountryModelView(SongCountry, db.session, name="Song Countries"))
+def register_admin_views(admin):
+    admin.add_view(SongShowModelView(SongShow, db.session, name="Song Shows"))
+    admin.add_view(SongCountryModelView(SongCountry, db.session, name="Song Countries"))

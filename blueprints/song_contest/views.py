@@ -1,31 +1,44 @@
-# blueprints/song_contest/views.py
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from blueprints.song_contest.models import SongCountry, SongShow
 from blueprints.song_contest.forms import CountryForm, SongShowForm
 from flask_admin.contrib.sqla import ModelView
 from extensions import db
 
-song_contest_bp = Blueprint('song_contest', __name__)
+# Initialize Blueprint
+song_contest_bp = Blueprint('song_contest', __name__, template_folder='templates')  # Use the main templates folder
 
-# Views for Country and Song Show models
+# Admin views for Song Contest models
 class SongCountryAdmin(ModelView):
     form = CountryForm
-    column_list = ('country', 'status')
+    column_list = ('country', 'status', 'display_order')
     column_display_pk = True
 
 class SongShowAdmin(ModelView):
     form = SongShowForm
     column_list = ('showName', 'showDate', 'totalContestants')
     column_display_pk = True
-    column_formatters = {'showDate': lambda v, c, m, p: m.formatted_showDate()}
+    column_formatters = {
+        'showDate': lambda view, context, model, name: model.formatted_showDate()
+    }
 
-# Register admin views for Song Contest
+# Function to register admin views
 def register_admin_views(admin):
-    admin.add_view(SongCountryAdmin(SongCountry, db.session))
-    admin.add_view(SongShowAdmin(SongShow, db.session))
+    """Registers the Song Contest admin views."""
+    admin.add_view(SongCountryAdmin(SongCountry, db.session, name="Countries"))
+    admin.add_view(SongShowAdmin(SongShow, db.session, name="Shows"))
 
 # Routes for Song Contest
-@song_contest_bp.route('/')
-def show_list():
-    shows = SongShow.query.all()
-    return render_template('song_contest/show_list.html', shows=shows)
+
+# Route for listing all shows
+#@song_contest_bp.route('/')
+#def show_list():
+#    """Render a list of song shows."""
+#    shows = SongShow.query.order_by(SongShow.showDate.desc()).all()
+#    return render_template('show_list.html', shows=shows)  # Templates are now in the main #'templates' folder
+
+# Route for listing all countries
+@song_contest_bp.route('/countries', endpoint='country_list')
+def country_list():
+    """Render a list of countries."""
+    countries = SongCountry.query.order_by(SongCountry.display_order.asc()).all()
+    return render_template('country_list.html', countries=countries)  # Templates are now in the main 'templates' folder

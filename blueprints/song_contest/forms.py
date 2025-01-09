@@ -1,19 +1,9 @@
-# blueprints/forms.py
+# blueprints/song_contest/forms.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, DateField
-from wtforms.validators import InputRequired, Email, Length
+from wtforms import StringField, SelectField, DateField
+from wtforms.validators import InputRequired, Length
 from flask_wtf.file import FileField, FileAllowed
 from config.config import Config
-
-class UserForm(FlaskForm):
-    superName = StringField('Username', validators=[InputRequired(), Length(max=80)])
-    superEmail = StringField('Email', validators=[InputRequired(), Email(), Length(max=60)])
-    superPassword = PasswordField('Password', validators=[InputRequired(), Length(min=6)])
-    superRole = SelectField('Role', choices=[('admin', 'Admin'), ('user', 'User'), ('mod', 'Moderator')], validators=[InputRequired()])
-
-class LoginForm(FlaskForm):
-    superName = StringField('Username', validators=[InputRequired(), Length(max=80)])
-    superPassword = PasswordField('Password', validators=[InputRequired()])
 
 class CountryForm(FlaskForm):
     country = StringField('Country Name', validators=[InputRequired(), Length(max=60)])

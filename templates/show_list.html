@@ -1,0 +1,8 @@
+{% for show in shows %}
+  <div>
+    <h3>{{ show.showName }}</h3>
+    <p>{{ show.showDesc }}</p>
+    <p>{{ show.formatted_showDate() }}</p>
+    <a href="{{ url_for('song_contest.show_countries', show_id=show.showID) }}">View Countries</a>
+  </div>
+{% endfor %}

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_admin import Admin
@@ -13,11 +13,14 @@ from blueprints.home import home_bp
 from blueprints.song_contest import song_contest_bp, register_admin_views
 from blueprints.auth import auth_bp  # Import the auth blueprint
 
-
 # Create the app
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Set the path for the upload folder
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
+    print("Upload folder path:", app.config['UPLOAD_FOLDER'])  # Debugging print statement
 
     # Initialize extensions
     db.init_app(app)
@@ -36,10 +39,22 @@ def create_app():
 
     # Register admin views
     admin.add_view(UserAdmin(User, db.session))
-    register_admin_views(admin)
+    register_admin_views(admin)  # Ensure Song Contest admin views are registered
+
+    # Register the uploads route
+    @app.route('/uploads/<filename>')
+    def uploaded_file(filename):
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        print(f"Serving file from: {file_path}")  # Debugging print statement
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+    # List routes when app starts using before_request
+    #@app.before_request
+    #def list_routes():
+    #    for rule in app.url_map.iter_rules():
+    #        print(rule)
 
     return app
-
 
 # Run the app
 if __name__ == '__main__':

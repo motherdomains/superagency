@@ -38,7 +38,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="admin">ADMIN</a>  | <a href="users">USERS</a> | {% if logged_in %}
+      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="admin">ADMIN</a>  | <a href="users">USERS</a>  | <!--<a href="show_list">SHOW LIST</a>  | --><a href="{{ url_for('song_contest.country_list') }}">COUNTRIES</a> | {% if logged_in %}
             <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
             {% else %}
             <a href="{{ url_for('auth.login') }}">LOGIN</a>

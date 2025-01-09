@@ -9,14 +9,14 @@ Next week:
 
 - Mon: Separate app.py code into multiple files, including connect, Blueprints for specific modules, etc
 - Tue: Specific Blueprint work for Song Contest, getting it organised and arranged, pages accessible
-- Wed:  Explore CMS options, and research best practices for voting, Front end view / list of countries. 
-- Thu: SC - SC voting system, recompile code, adapt to # of contestants. Update Glynn on progress
-- Fri: Spillover / Admin day. Consider CMS plans.
+- Wed:  Explore CMS options, and research best practices for voting. 
+- Thu: SC voting system, Front end view / list of countries
+- Fri: SC - Add countries to show (new table). List of countries based on particular show. Update Glynn on progress
 
 Week after:
 
 - System: Test blank Blueprints for other features (and consider Blueprint builder). Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
-- Song Contest: Start to improve visual process, with CSS for mobile access. Look into Show ID/code for one-login, one-vote. Show management features.
+- Song Contest: Proceed through voting mechanisms. If time, improve visual process, with CSS for mobile access. Look into Show ID/code for one-login, one-vote. Show management features.
 
 
 This month:
@@ -29,6 +29,9 @@ This month:
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
 
 -----
+## Thu. Jan. 9 2025 ## 2.5 hours
+- Set up countries_list for song_contest blueprint, eventually successfully displaying a list of countries/flags
+- Added temp navigation for countries and shows
 
 ## Wed. Jan. 8 2025 ## 2.5 hours
 - Relocated the recent work (multiple files and blueprints), back into the root directory, and old code into OLD
