@@ -29,6 +29,10 @@ This month:
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
 
 -----
+## Fri. Jan. 10 2025 ## 0.5 hours
+- Added MySQL table SongShowCountries, for voting
+- Unproductive day due to dealing with home burglary issues
+
 ## Thu. Jan. 9 2025 ## 2.5 hours
 - Set up countries_list for song_contest blueprint, eventually successfully displaying a list of countries/flags
 - Added temp navigation for countries and shows
