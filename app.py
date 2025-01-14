@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_admin import Admin
@@ -7,11 +7,10 @@ from config.config import Config
 from extensions import db, bcrypt
 from blueprints.admin_views import UserAdmin, CustomAdminIndexView
 from models.user import User
-
-# Import blueprints
-from blueprints.home import home_bp
 from blueprints.song_contest import song_contest_bp, register_admin_views
-from blueprints.auth import auth_bp  # Import the auth blueprint
+from blueprints.home import home_bp
+from blueprints.auth import auth_bp
+from blueprints.song_contest.models import SongShow
 
 # Create the app
 def create_app():
@@ -48,11 +47,21 @@ def create_app():
         print(f"Serving file from: {file_path}")  # Debugging print statement
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-    # List routes when app starts using before_request
-    #@app.before_request
-    #def list_routes():
-    #    for rule in app.url_map.iter_rules():
-    #        print(rule)
+    # Debugging route to view SongShows and their Actions links
+    @app.route('/debug_admin')
+    def debug_admin():
+        # Query the SongShow data to ensure it's available
+        song_shows = SongShow.query.all()  # Assuming you're querying the SongShow model
+        print("Song Shows:", song_shows)  # Debugging print statement to verify data
+
+        # Pass the queried data to the template
+        return render_template('admin/debug.html', song_shows=song_shows)
+
+    # List routes when app starts (Optional)
+    # @app.before_request
+    # def list_routes():
+    #     for rule in app.url_map.iter_rules():
+    #         print(rule)
 
     return app
 

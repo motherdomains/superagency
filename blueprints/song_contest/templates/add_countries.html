@@ -1,0 +1,13 @@
+<form method="POST">
+    <h3>Add Countries to Show: {{ show.showName }}</h3>
+    <p>Select exactly {{ show.totalContestants }} countries:</p>
+    <ul>
+        {% for country in countries %}
+        <li>
+            <input type="checkbox" name="countries" value="{{ country.id }}" id="country-{{ country.id }}">
+            <label for="country-{{ country.id }}">{{ country.country }}</label>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">Submit</button>
+</form>

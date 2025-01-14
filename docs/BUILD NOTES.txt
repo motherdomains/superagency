@@ -7,11 +7,11 @@
 
 Next week:
 
-- Mon: Separate app.py code into multiple files, including connect, Blueprints for specific modules, etc
-- Tue: Specific Blueprint work for Song Contest, getting it organised and arranged, pages accessible
-- Wed:  Explore CMS options, and research best practices for voting. 
-- Thu: SC voting system, Front end view / list of countries
-- Fri: SC - Add countries to show (new table). List of countries based on particular show. Update Glynn on progress
+- Mon: - Was ill
+- Tue: SC - Add countries to a specific show
+- Wed:  SC - Continue through guest voting path: Select country, choose 3 countries, thank you / confirm
+- Thu: SC - Tally voting, first example script. Update Glynn on progress
+- Fri: SC - Planning for next week, wrapping up SC. CMS features. Progress pitch deck.
 
 Week after:
 
@@ -27,6 +27,12 @@ This month:
 - First mobile UI/UX designed for prototypes
 - Consider initial Preferences / Settings
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
+
+
+-----
+## Tue. Jan. 14 2025 ##  2.5 hours
+- Update MySQL tables to accommodate adding countries to a specific show
+- Major struggles trying to output HTML links in Admin view to add countries to specific shows
 
 -----
 ## Fri. Jan. 10 2025 ## 0.5 hours
