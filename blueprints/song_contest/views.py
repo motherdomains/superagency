@@ -1,20 +1,20 @@
+# blueprints/song_contest/views.py
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_admin.contrib.sqla import ModelView
 from extensions import db
-from blueprints.song_contest.forms import CountryForm, SongShowForm
-from blueprints.song_contest.models import SongCountry, SongShow, SongShowCountry  # Import the new model for the many-to-many relationship
+from .models import SongCountry, SongShow, SongShowCountry  # Make sure SongShowCountry is imported
 
 # Initialize Blueprint
 song_contest_bp = Blueprint('song_contest', __name__, template_folder='templates')  # Use the main templates folder
 
 # Admin views for Song Contest models
 class SongCountryAdmin(ModelView):
-    form = CountryForm
+    form_columns = ('country', 'status', 'display_order')  # Define the form columns
     column_list = ('country', 'status', 'display_order')
     column_display_pk = True
 
 class SongShowAdmin(ModelView):
-    form = SongShowForm
+    form_columns = ('showName', 'showDate', 'totalContestants')
     column_list = ('showName', 'showDate', 'totalContestants', 'actions')  # Added 'actions' column
     column_display_pk = True
     column_formatters = {
@@ -22,15 +22,14 @@ class SongShowAdmin(ModelView):
         'actions': lambda view, context, model, name: f'<a href="{url_for("song_contest.add_countries_to_show", showID=model.showID)}">Add Countries</a>',
     }
 
-    # You can also add a formatter for showing countries for a show if needed
+    # Formatter for showing countries for a show (if needed)
     column_formatters.update({
-        'countries': lambda view, context, model, name: ', '.join([country.song_country.country for country in model.songShowCountries])  # Show countries in the SongShow view
+        'countries': lambda view, context, model, name: ', '.join([country.song_country.country for country in model.songShowCountries])  # Show countries
     })
 
 # Function to register admin views
 def register_admin_views(admin):
     """Registers the Song Contest admin views."""
-    # Ensure models are correctly used in admin views
     admin.add_view(SongCountryAdmin(SongCountry, db.session, name="Countries"))
     admin.add_view(SongShowAdmin(SongShow, db.session, name="Shows"))
 
@@ -39,7 +38,7 @@ def register_admin_views(admin):
 def country_list():
     """Render a list of countries."""
     countries = SongCountry.query.order_by(SongCountry.display_order.asc()).all()
-    return render_template('country_list.html', countries=countries)  # Templates are now in the main 'templates' folder
+    return render_template('country_list.html', countries=countries)
 
 @song_contest_bp.route('/add_countries/<int:showID>', methods=['GET', 'POST'], endpoint='add_countries_to_show')
 def add_countries_to_show(showID):

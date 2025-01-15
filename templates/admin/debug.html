@@ -6,17 +6,19 @@
     <title>Debug Admin</title>
 </head>
 <body>
-    <h1>Debug Admin View</h1>
-    <ul>
-        {% for song_show in song_shows %}
-            <li>
-                ID: {{ song_show.id }} | 
-                Show Name: {{ song_show.showName }} | 
-                Show Date: {{ song_show.showDate }} | 
-                Total Contestants: {{ song_show.totalContestants }} | 
-                Actions: {{ song_show.actions }}  <!-- Debugging the actions field -->
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Song Shows</h1>
+
+    {% if song_shows %}
+        <ul>
+            {% for show in song_shows %}
+                <li>
+                    {{ show.showName }} - 
+                    <a href="{{ url_for('song_contest.add_countries_to_show', showID=show.showID) }}">Add Countries</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No song shows available.</p>
+    {% endif %}
 </body>
 </html>

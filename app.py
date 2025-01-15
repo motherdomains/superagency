@@ -7,7 +7,7 @@ from config.config import Config
 from extensions import db, bcrypt
 from blueprints.admin_views import UserAdmin, CustomAdminIndexView
 from models.user import User
-from blueprints.song_contest import song_contest_bp, register_admin_views
+from blueprints.song_contest import song_contest_bp, register_admin_views  # Import from song_contest
 from blueprints.home import home_bp
 from blueprints.auth import auth_bp
 from blueprints.song_contest.models import SongShow
@@ -15,6 +15,10 @@ from blueprints.song_contest.models import SongShow
 # Create the app
 def create_app():
     app = Flask(__name__)
+    
+    # Disable Jinja2 template caching during development
+    app.jinja_env.cache = {}
+
     app.config.from_object(Config)
 
     # Set the path for the upload folder
@@ -36,7 +40,7 @@ def create_app():
     app.register_blueprint(song_contest_bp, url_prefix='/song_contest')  # Register the song contest blueprint
     app.register_blueprint(auth_bp, url_prefix='/auth')  # Register the auth blueprint with a URL prefix
 
-    # Register admin views
+    # Register admin views - only do this once here
     admin.add_view(UserAdmin(User, db.session))
     register_admin_views(admin)  # Ensure Song Contest admin views are registered
 
@@ -52,16 +56,18 @@ def create_app():
     def debug_admin():
         # Query the SongShow data to ensure it's available
         song_shows = SongShow.query.all()  # Assuming you're querying the SongShow model
-        print("Song Shows:", song_shows)  # Debugging print statement to verify data
+        print(f"Song Shows: {[show.__dict__ for show in song_shows]}")  # Debugging print statement to verify data
 
         # Pass the queried data to the template
         return render_template('admin/debug.html', song_shows=song_shows)
 
     # List routes when app starts (Optional)
-    # @app.before_request
-    # def list_routes():
-    #     for rule in app.url_map.iter_rules():
-    #         print(rule)
+    @app.before_request
+    def list_routes_once():
+        if not hasattr(app, '_routes_listed'):
+            for rule in app.url_map.iter_rules():
+                print(rule)
+            app._routes_listed = True  # Ensure it runs only once
 
     return app
 

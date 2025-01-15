@@ -1,4 +1,3 @@
-# blueprints/song_contest/models.py
 from extensions import db
 
 class SongCountry(db.Model):
@@ -12,7 +11,7 @@ class SongCountry(db.Model):
 class SongShow(db.Model):
     __tablename__ = 'songShows'
 
-    showID = db.Column(db.Integer, primary_key=True)
+    showID = db.Column(db.Integer, primary_key=True)  # This is the correct primary key field
     showName = db.Column(db.String(255), nullable=False)
     showDesc = db.Column(db.Text, nullable=True)
     showDate = db.Column(db.Date, nullable=False)
