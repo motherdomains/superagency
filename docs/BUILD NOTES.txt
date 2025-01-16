@@ -22,8 +22,6 @@ Next week:
 - Fri: AISA - Progress pitch deck, consider MVP for accelerator.
 
 
-
-
 Week after:
 
 - System: Test blank Blueprints for other features (and consider Blueprint builder). Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
@@ -41,6 +39,14 @@ This month:
 
 
 -----
+## Thu. Jan. 16 2025 ##  
+- ChatGPT not working properly today, and very unhelpful / unspecific, then some platform errors
+
+
+## Wed. Jan. 15 2025 ##  2.5 hours
+- Further struggles trying to output HTML links in Admin view to add countries to specific shows
+- Troubleshooting managed to directly access SongShowCountries, client feedback that we can take an alternate route for now, and come back to this later
+
 ## Tue. Jan. 14 2025 ##  2.5 hours
 - Update MySQL tables to accommodate adding countries to a specific show
 - Major struggles trying to output HTML links in Admin view to add countries to specific shows

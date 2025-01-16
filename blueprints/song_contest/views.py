@@ -14,7 +14,7 @@ class SongCountryAdmin(ModelView):
     column_display_pk = True
 
 class SongShowAdmin(ModelView):
-    form_columns = ('showName', 'showDate', 'totalContestants')
+    form_columns = ('showName', 'showDate','totalContestants')
     column_list = ('showName', 'showDate', 'totalContestants', 'actions')  # Added 'actions' column
     column_display_pk = True
     column_formatters = {
@@ -31,7 +31,9 @@ class SongShowAdmin(ModelView):
 def register_admin_views(admin):
     """Registers the Song Contest admin views."""
     admin.add_view(SongCountryAdmin(SongCountry, db.session, name="Countries"))
+    print("Registering SongCountryAdmin...")
     admin.add_view(SongShowAdmin(SongShow, db.session, name="Shows"))
+    print("SongCountryAdmin registered successfully.")
 
 # Routes for Song Contest
 @song_contest_bp.route('/countries', endpoint='country_list')

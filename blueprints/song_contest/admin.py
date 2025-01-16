@@ -1,3 +1,4 @@
+# song_contest/admin.py
 from flask import url_for
 from flask_admin.contrib.sqla import ModelView
 from markupsafe import Markup
