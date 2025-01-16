@@ -41,7 +41,8 @@ This month:
 -----
 ## Thu. Jan. 16 2025 ##  
 - ChatGPT not working properly today, and very unhelpful / unspecific, then some platform errors
-
+- Wasted hours. Will need to explore or develop our own coding-specific helper. Not interested in Copilot.
+- Kept hacking away, then to upload images, and spend another hour-plus not succeeding with image upload
 
 ## Wed. Jan. 15 2025 ##  2.5 hours
 - Further struggles trying to output HTML links in Admin view to add countries to specific shows

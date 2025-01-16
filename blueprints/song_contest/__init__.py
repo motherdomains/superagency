@@ -19,7 +19,7 @@ def add_countries_to_show(showID):
 from . import views, models
 
 # Function to register admin views
-def register_admin(app, admin):
+def register_song_contest_admin(app, admin):
     """
     Registers admin views for Song Contest models.
     :param app: Flask application instance

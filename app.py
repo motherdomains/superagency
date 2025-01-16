@@ -22,9 +22,9 @@ def create_app():
 
     app.config.from_object(Config)
 
-    # Set the path for the upload folder
-    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
-    print("Upload folder path:", app.config['UPLOAD_FOLDER'])  # Debugging print statement
+    # Set the path for the upload folder (ensure this matches Config)
+    app.config['UPLOAD_FOLDER'] = app.config['UPLOAD_FOLDER']  # Path already in config
+    print(f"Upload folder path set to: {app.config['UPLOAD_FOLDER']}")  # Debugging print statement
 
     # Initialize extensions
     db.init_app(app)
@@ -33,7 +33,7 @@ def create_app():
     # Create an Admin instance and initialize it
     admin = Admin(app, name='Admin Dashboard', template_mode='bootstrap3', index_view=CustomAdminIndexView())
 
-    # Set up logging
+    # Create the upload folder if it doesn't exist
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
     # Register blueprints
@@ -45,7 +45,7 @@ def create_app():
     admin.add_view(UserAdmin(User, db.session))
     register_admin_views(admin)  # Ensure Song Contest admin views are registered
 
-    # Register the uploads route
+    # Register the uploads route to serve uploaded files
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)

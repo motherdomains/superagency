@@ -27,14 +27,6 @@ class SongShowAdmin(ModelView):
         'countries': lambda view, context, model, name: ', '.join([country.song_country.country for country in model.songShowCountries])  # Show countries
     })
 
-# Function to register admin views
-def register_admin_views(admin):
-    """Registers the Song Contest admin views."""
-    admin.add_view(SongCountryAdmin(SongCountry, db.session, name="Countries"))
-    print("Registering SongCountryAdmin...")
-    admin.add_view(SongShowAdmin(SongShow, db.session, name="Shows"))
-    print("SongCountryAdmin registered successfully.")
-
 # Routes for Song Contest
 @song_contest_bp.route('/countries', endpoint='country_list')
 def country_list():

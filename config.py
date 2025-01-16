@@ -1,4 +1,5 @@
-import os  # Required for handling file paths
+# config.py
+import os
 
 class Config:
     SQLALCHEMY_DATABASE_URI = (
@@ -11,8 +12,9 @@ class Config:
 
     # File Upload Settings
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Absolute base directory
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')      # Folder where files are uploaded
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}     # Allowed file extensions
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')  # Folder where files are uploaded
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # Allowed file extensions
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max file size: 16 MB
 
     # Logging Settings
     LOG_FILE = 'app.log'

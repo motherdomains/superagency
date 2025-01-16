@@ -11,7 +11,13 @@ class CountryForm(FlaskForm):
     """
     country = StringField('Country Name', validators=[InputRequired(), Length(max=60)])
     image = FileField('Image File', validators=[FileAllowed(Config.ALLOWED_EXTENSIONS, 'Images only!')])
-    status = SelectField('Status', choices=[('1', 'Active'), ('0', 'Inactive')], validators=[InputRequired()])
+
+    # Leave as a 2-tuple, the default expected format for Flask-Admin
+    status = SelectField(
+        'Status', 
+        choices=[('1', 'Active'), ('0', 'Inactive')],  # Two values: (value, label)
+        validators=[InputRequired()]
+    )
 
 class SongShowForm(FlaskForm):
     """
@@ -22,7 +28,7 @@ class SongShowForm(FlaskForm):
     showDate = DateField('Show Date', format='%Y-%m-%d', validators=[InputRequired()])
     totalContestants = SelectField(
         'Total Contestants', 
-        choices=[(str(i), str(i)) for i in range(6, 13)], 
+        choices=[(str(i), str(i)) for i in range(6, 13)],  # Correctly pass two values (value, label)
         coerce=int, 
         validators=[InputRequired()]
     )
