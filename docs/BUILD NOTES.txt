@@ -21,13 +21,6 @@ Next week:
 - Thu: SC - Pretty up UI/UX. Upgrade Glynn with progress.
 - Fri: AISA - Progress pitch deck, consider MVP for accelerator.
 
-
-Week after:
-
-- System: Test blank Blueprints for other features (and consider Blueprint builder). Progress CMS-related features (Sites, Pages, layout controls, remote display, etc)
-- Song Contest: Proceed through voting mechanisms. If time, improve visual process, with CSS for mobile access. Look into Show ID/code for one-login, one-vote. Show management features.
-
-
 This month:
 
 - Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
@@ -39,7 +32,12 @@ This month:
 
 
 -----
-## Thu. Jan. 16 2025 ##  
+## Fri. Jan. 17 2025 ##  1 hour
+- Installed GPT4All and Reasoner model, getting used to it
+- Noting slower answers
+- Need to reevaluate entire process/project in general, noting we still need to finish Song Contest
+
+## Thu. Jan. 16 2025 ##  2.5 hours
 - ChatGPT not working properly today, and very unhelpful / unspecific, then some platform errors
 - Wasted hours. Will need to explore or develop our own coding-specific helper. Not interested in Copilot.
 - Kept hacking away, then to upload images, and spend another hour-plus not succeeding with image upload
