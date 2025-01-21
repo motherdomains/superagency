@@ -1,4 +1,3 @@
-# blueprints/song_contest/models.py
 from extensions import db
 
 class SongCountry(db.Model):
@@ -6,7 +5,7 @@ class SongCountry(db.Model):
     countryID = db.Column(db.SmallInteger, primary_key=True)
     country = db.Column(db.String(60), nullable=False)
     image = db.Column(db.String(255), nullable=True)
-    status = db.Column(db.String(1), default='1', nullable=False)  # Consider changing to String instead of Enum
+    status = db.Column(db.String(1), default='1', nullable=False)
     display_order = db.Column('display_order', db.SmallInteger, nullable=False, default='0')
 
 class SongShow(db.Model):

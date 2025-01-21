@@ -6,7 +6,7 @@
 
 This week:
 
-- Mon:  AISA - Any niche app/functions that could be commercially developed sooner?
+- Mon:  AISA - Progress pitch. Any niche app/functions that could be commercially developed sooner?
 - Tue: SC - Continue through guest voting path: Select country, choose 3 countries, thank you / confirm
 - Wed:  SC - Voting tally, display results & exciting script
 - Thu: SC - Pretty up UI/UX. Fix smaller issues. Upgrade Glynn with progress.
@@ -28,6 +28,13 @@ This month:
 - First mobile UI/UX designed for prototypes
 - Consider initial Preferences / Settings
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
+
+
+
+-----
+## Mon. Jan. 20 2025 ##  2+ hours
+- Progressed AISA plan & pitch deck, looking towards Outlier post-web accelerator
+- Researched AI-based web crawlers for research and reports
 
 
 -----
