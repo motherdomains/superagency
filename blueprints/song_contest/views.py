@@ -1,13 +1,19 @@
 # blueprints/song_contest/views.py
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_admin.contrib.sqla import ModelView
+from flask import render_template, request, redirect, url_for, flash
 from extensions import db
-from .models import SongCountry, SongShow, SongShowCountry  # Make sure SongShowCountry is imported
-
-# Initialize Blueprint
-song_contest_bp = Blueprint('song_contest', __name__, template_folder='templates')  # Use the main templates folder
+from .models import SongCountry, SongShow, SongShowCountry  # Ensure SongShowCountry is imported
+from . import song_contest_bp  # Import the blueprint from the current package (no circular import)
 
 # Routes for Song Contest
+
+@song_contest_bp.route('/')
+def song_contest_home():
+    return render_template('song_contest_home.html')  # Ensure this template exists
+
+@song_contest_bp.route('/test')
+def test_route():
+    return "Song Contest Blueprint is working!"
+
 @song_contest_bp.route('/countries', endpoint='country_list')
 def country_list():
     """Render a list of countries."""
@@ -30,6 +36,9 @@ def add_countries_to_show(showID):
                 db.session.add(show_country)
         db.session.commit()  # Commit the transaction
         flash('Countries successfully added to the show!', 'success')
+
+        # Debugging: Print the URL that is being generated
+        print(f"Redirecting to URL for showID={showID}: {url_for('song_contest.add_countries_to_show', showID=showID)}")
         return redirect(url_for('song_contest.add_countries_to_show', showID=showID))
 
     return render_template('add_countries_to_show.html', show=show, countries=countries)  # Render the form to add countries

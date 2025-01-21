@@ -1,4 +1,4 @@
-# Welcome the AI Super Agency
+# Welcome to the AI Super Agency
 from flask import Flask, send_from_directory, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -8,15 +8,15 @@ from config.config import Config
 from extensions import db, bcrypt
 from blueprints.admin_views import UserAdmin, CustomAdminIndexView
 from models.user import User
-from blueprints.song_contest import song_contest_bp, register_admin_views  # Import from song_contest
+from blueprints.song_contest import register_admin_views, register_blueprints  # Import only register functions
 from blueprints.home import home_bp
 from blueprints.auth import auth_bp
-from blueprints.song_contest.models import SongShow
+from blueprints.song_contest.models import SongShow  # Ensure this is imported for querying
 
 # Create the app
 def create_app():
     app = Flask(__name__)
-    
+
     # Disable Jinja2 template caching during development
     app.jinja_env.cache = {}
 
@@ -38,7 +38,7 @@ def create_app():
 
     # Register blueprints
     app.register_blueprint(home_bp)  # Register the home blueprint
-    app.register_blueprint(song_contest_bp, url_prefix='/song_contest')  # Register the song contest blueprint
+    register_blueprints(app)  # Register the song_contest blueprint
     app.register_blueprint(auth_bp, url_prefix='/auth')  # Register the auth blueprint with a URL prefix
 
     # Register admin views - only do this once here

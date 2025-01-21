@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Song Contest - List of Countries{% endblock %}
+
+{% block content %}
+<h1>List of Countries</h1>
+<ul>
+    {% for country in countries %}
+        <li>
+            {% if country.image.startswith('http://') or country.image.startswith('https://') or country.image.startswith('/') %}
+                <!-- If the image URL is a full URL, use it directly -->
+                <img src="{{ country.image }}" alt="Flag of {{ country.country }}" style="width: 50px; height: auto;">
+            {% else %}
+                <!-- If it's a relative path, use url_for to generate the correct uploads URL -->
+                <img src="{{ url_for('uploaded_file', filename=country.image) }}" alt="Flag of {{ country.country }}" style="width: 50px; height: auto;">
+            {% endif %}
+            {{ country.country }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
