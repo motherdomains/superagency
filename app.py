@@ -39,6 +39,10 @@ def create_app():
     # Register blueprints
     app.register_blueprint(home_bp)  # Register the home blueprint
     register_blueprints(app)  # Register the song_contest blueprint
+    
+    print(app.url_map)
+    print("Calling register_blueprints")
+    
     app.register_blueprint(auth_bp, url_prefix='/auth')  # Register the auth blueprint with a URL prefix
 
     # Register admin views - only do this once here
@@ -61,6 +65,11 @@ def create_app():
 
         # Pass the queried data to the template
         return render_template('admin/debug.html', song_shows=song_shows)
+    
+    @app.route('/test_blueprint')
+    def test_blueprint():
+        return url_for('song_contest.song_contest_home')
+
 
     # List routes when app starts (Optional)
     @app.before_request

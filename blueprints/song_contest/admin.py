@@ -37,11 +37,10 @@ class SongCountryAdmin(CustomModelView):
 
 class SongShowAdmin(CustomModelView):
     form_columns = ('showName', 'showDate', 'totalContestants')
-    column_list = ('showName', 'showDate', 'totalContestants', 'actions')
+    column_list = ('showName', 'showDate', 'totalContestants')  # Removed 'actions' column
     column_display_pk = True
     column_formatters = {
         'showDate': lambda view, context, model, name: model.formatted_showDate(),
-        'actions': lambda view, context, model, name: f'<a href="{url_for("song_contest.add_countries_to_show", showID=model.showID)}">Add Countries</a>',
     }
 
 # Function to register admin views

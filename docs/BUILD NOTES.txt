@@ -39,6 +39,7 @@ This month:
 ## Tue. Jan. 21 2025 ##  3+ hours
 - Another wasted day, running in circles with ChatGPT unable to solve the issue
 - Now finding this method is detrimental and too time consuming / inaccurate, slowing down progress
+- Removed "Add Country to Show" function, as this was causing ongoing issues, and wasn't working
 
 
 -----
