@@ -12,7 +12,9 @@ class Config:
 
     # File Upload Settings
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))  # Absolute base directory
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')  # Folder where files are uploaded
+    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+  # Folder where files are uploaded
+    
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}  # Allowed file extensions
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # Max file size: 16 MB
 
@@ -20,3 +22,6 @@ class Config:
     LOG_FILE = 'app.log'
     LOG_MAX_BYTES = 100000
     LOG_BACKUP_COUNT = 3
+    
+    # Blueprint load settings
+    ENABLE_CMS = True

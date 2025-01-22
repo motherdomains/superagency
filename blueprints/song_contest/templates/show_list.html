@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h1>Song Shows</h1>
+    <ul>
+        {% for show in shows %}
+            <li>
+                <a href="{{ url_for('song_contest.show_countries', show_id=show.showID) }}">{{ show.showName }}</a> ({{ show.showDate }})
+            </li>
+        {% else %}
+            <p>No shows available.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

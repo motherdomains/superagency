@@ -54,5 +54,6 @@ def register_admin_views(admin):
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
 
+    # Register the admin views for SongShow and SongCountry
     admin.add_view(SongShowAdmin(SongShow, db.session, upload_folder=upload_folder, name="Shows"))
     admin.add_view(SongCountryAdmin(SongCountry, db.session, upload_folder=upload_folder, name="Countries"))

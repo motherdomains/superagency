@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Song Contest Home</title>
-</head>
-<body>
-    <h1>Welcome to the Song Contest</h1>
-</body>
-</html>
+{% extends 'layout.html' %}
+
+{% block title %}Song Contest Home{% endblock %}
+
+{% block content %}
+<h1>Welcome to the Song Contest Home Page!</h1>
+Your navigational options:<br /><br />
+
+<ul>
+    <li><a href="countries">List of all Countries</a></li>
+    <li><a href="shows">List of all Shows</a></li>
+</ul>
+{% endblock %}

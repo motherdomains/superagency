@@ -7,9 +7,10 @@
 This week:
 
 - Mon:  AISA - Progress pitch. Any niche app/functions that could be commercially developed sooner?
-- Tue: SC - Continue through guest voting path: Select country, choose 3 countries, thank you / confirm
-- Wed:  SC - Voting tally, display results & exciting script
-- Thu: SC - Pretty up UI/UX. Fix smaller issues. Upgrade Glynn with progress.
+- Tue: SC - Keep fixing issues
+- Wed:  SC - Continue through guest voting path: Select country, choose 3 countries, thank you / confirm
+- Thu: SC - Voting tally, display results & exciting script
+- Fri: Pretty up UI/UX. Fix smaller issues. Upgrade Glynn with progress.
 - Fri: AISA - Progress pitch deck, consider MVP for accelerator.
 
 Next week:
@@ -17,7 +18,6 @@ Next week:
 - Wrap up Song Contest, for now (usable/working demo)
 - Turn attention to different features and components
 - Truly progress pitch deck and finalise application for Outlier (apply week after)
-
 
 
 This month:
@@ -40,6 +40,10 @@ This month:
 - Another wasted day, running in circles with ChatGPT unable to solve the issue
 - Now finding this method is detrimental and too time consuming / inaccurate, slowing down progress
 - Removed "Add Country to Show" function, as this was causing ongoing issues, and wasn't working
+
+## Wed. Jan. 22 2025 ##  1.5+ hours
+- Reverted to basics, setting up a simple test blueprint: "cms" - to better understand its structure
+- With everything working, restored song_contest blueprint, and routes/admin functions working again
 
 
 -----

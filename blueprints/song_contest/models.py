@@ -8,6 +8,8 @@ class SongCountry(db.Model):
     status = db.Column(db.String(1), default='1', nullable=False)
     display_order = db.Column('display_order', db.SmallInteger, nullable=False, default='0')
 
+    # You don't need to directly link show_id here, as the relationship is through SongShowCountry
+
 class SongShow(db.Model):
     __tablename__ = 'songShows'
     showID = db.Column(db.Integer, primary_key=True)
@@ -22,7 +24,7 @@ class SongShow(db.Model):
     songShowCountries = db.relationship('SongShowCountry', back_populates='song_show')
 
 class SongShowCountry(db.Model):
-    __tablename__ = 'songShowCountry'
+    __tablename__ = 'songShowCountries'
     showID = db.Column(db.Integer, db.ForeignKey('songShows.showID'), primary_key=True)
     countryID = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), primary_key=True)
 
