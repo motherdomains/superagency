@@ -41,10 +41,13 @@ This month:
 - Now finding this method is detrimental and too time consuming / inaccurate, slowing down progress
 - Removed "Add Country to Show" function, as this was causing ongoing issues, and wasn't working
 
-## Wed. Jan. 22 2025 ##  1.5+ hours
+## Wed. Jan. 22 2025 ##  3.5+ hours
 - Reverted to basics, setting up a simple test blueprint: "cms" - to better understand its structure
 - With everything working, restored song_contest blueprint, and routes/admin functions working again
+- Successfully retrieved lists of Countries and Shows, for song contest
+- Correct country image/flag issue, which wouldn't display from /uploads folder (moved to /static/uploads)
 
+Tomorrow: Finally set forth through the voting process
 
 -----
 ## Fri. Jan. 17 2025 ##  1 hour
