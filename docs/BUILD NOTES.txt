@@ -47,7 +47,10 @@ This month:
 - Successfully retrieved lists of Countries and Shows, for song contest
 - Correct country image/flag issue, which wouldn't display from /uploads folder (moved to /static/uploads)
 
-Tomorrow: Finally set forth through the voting process
+## Thu. Jan. 23 2025 ##  2+ hours
+- Ran through updated logic for song contest voting process, including javascript upgrades
+- Revised SongShowCountries DB table with added showOrder field
+- Some deeper consideration and resistance to proceed, including extra Votes table or keeping as is
 
 -----
 ## Fri. Jan. 17 2025 ##  1 hour

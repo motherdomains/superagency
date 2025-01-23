@@ -25,8 +25,19 @@ class SongShow(db.Model):
 
 class SongShowCountry(db.Model):
     __tablename__ = 'songShowCountries'
+    
     showID = db.Column(db.Integer, db.ForeignKey('songShows.showID'), primary_key=True)
     countryID = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), primary_key=True)
-
+    showOrder = db.Column(db.SmallInteger, nullable=False, default=1)
+    votesFirst = db.Column(db.SmallInteger, nullable=False, default=0)
+    votesSecond = db.Column(db.SmallInteger, nullable=False, default=0)
+    votesThird = db.Column(db.SmallInteger, nullable=False, default=0)
+    
+    # Relationships
     song_show = db.relationship('SongShow', back_populates='songShowCountries')
     song_country = db.relationship('SongCountry')
+    
+    def __repr__(self):
+        return (f"<SongShowCountry(showID={self.showID}, countryID={self.countryID}, "
+                f"showOrder={self.showOrder}, votesFirst={self.votesFirst}, "
+                f"votesSecond={self.votesSecond}, votesThird={self.votesThird})>")
