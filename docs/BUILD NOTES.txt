@@ -52,6 +52,8 @@ This month:
 - Revised SongShowCountries DB table with added showOrder field
 - Some deeper consideration and resistance to proceed, including extra Votes table or keeping as is
 
+Friday: Set up routes & templates, and attempt progressing through voting
+
 -----
 ## Fri. Jan. 17 2025 ##  1 hour
 - Installed GPT4All and Reasoner model, getting used to it

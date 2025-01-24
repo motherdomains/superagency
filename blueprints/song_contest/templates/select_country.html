@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{% if countries %}
+<h1>Select Your Assigned Country</h1>
+<div>
+    {% for country_id, country_name, image in countries %}
+    <div>
+        <a href="{{ url_for('song_contest.vote_page', show_id=show_id, assigned_country=country_id) }}">
+            <img src="{{ image or 'static/uploads/default_flag.jpg' }}" alt="{{ country_name }}" style="width:50px;">
+            {{ country_name }}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No countries available for this show.</p>
+{% endif %}
+{% endblock %}

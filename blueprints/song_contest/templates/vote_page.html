@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h1>Place Your Votes</h1>
+<form method="POST">
+    <label for="vote_1">First Place:</label>
+    <select id="vote_1" name="vote_1" onchange="updateOptions('vote_1', 'vote_2', 'vote_3')">
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="vote_2">Second Place:</label>
+    <select id="vote_2" name="vote_2" onchange="updateOptions('vote_2', 'vote_3')">
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="vote_3">Third Place:</label>
+    <select id="vote_3" name="vote_3">
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Submit Votes</button>
+</form>
+
+<script>
+    function updateOptions(...dropdownIds) {
+        let selectedValues = [];
+        dropdownIds.forEach(id => {
+            const dropdown = document.getElementById(id);
+            selectedValues.push(dropdown.value);
+        });
+
+        dropdownIds.forEach((id, index) => {
+            const dropdown = document.getElementById(id);
+            for (let option of dropdown.options) {
+                option.hidden = selectedValues.includes(option.value) && selectedValues.indexOf(option.value) !== index;
+            }
+        });
+    }
+</script>
+{% endblock %}
