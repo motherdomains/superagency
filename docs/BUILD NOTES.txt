@@ -52,7 +52,10 @@ This month:
 - Revised SongShowCountries DB table with added showOrder field
 - Some deeper consideration and resistance to proceed, including extra Votes table or keeping as is
 
-Friday: Set up routes & templates, and attempt progressing through voting
+## Fri. Jan. 24 2025 ##  2.5 hours
+- Set up voting views/routes and their templates, attending to each small issue (eg blocks)
+- Successfully made vote selections and submitted top 3 votes, thereby updating the database
+- Ready to pretty up and wrap most of the project next week
 
 -----
 ## Fri. Jan. 17 2025 ##  1 hour

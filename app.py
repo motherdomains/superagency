@@ -1,5 +1,6 @@
 from flask import Flask, send_from_directory
 from flask_admin import Admin
+from flask_sqlalchemy import SQLAlchemy
 from config.config import Config
 from extensions import db, bcrypt
 from models.user import User
@@ -43,7 +44,6 @@ def create_app():
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
         return send_from_directory(os.path.join(app.config['STATIC_FOLDER'], 'uploads'), filename)
-
 
     # Debugging route for CMS
     @app.route('/cms/debug')

@@ -1,34 +1,21 @@
 {% extends 'layout.html' %}
-
 {% block content %}
 
 <h1>Confirm Your Votes</h1>
 
 <p>First Place: 
-  {% if country_1 %}
-    <img src="{{ country_1.image or 'static/uploads/default_flag.jpg' }}" alt="{{ country_1.country }}" style="width:30px;">
+    <img src="{{ country_1.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_1.country }}" style="width:50px;">
     {{ country_1.country }}
-  {% else %}
-    {{ votes['vote_1'] }}
-  {% endif %}
 </p>
 
 <p>Second Place: 
-  {% if country_2 %}
-    <img src="{{ country_2.image or 'static/uploads/default_flag.jpg' }}" alt="{{ country_2.country }}" style="width:30px;">
+    <img src="{{ country_2.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_2.country }}" style="width:50px;">
     {{ country_2.country }}
-  {% else %}
-    {{ votes['vote_2'] }}
-  {% endif %}
 </p>
 
 <p>Third Place: 
-  {% if country_3 %}
-    <img src="{{ country_3.image or 'static/uploads/default_flag.jpg' }}" alt="{{ country_3.country }}" style="width:30px;">
+    <img src="{{ country_3.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_3.country }}" style="width:50px;">
     {{ country_3.country }}
-  {% else %}
-    {{ votes['vote_3'] }}
-  {% endif %}
 </p>
 
 <form method="POST">

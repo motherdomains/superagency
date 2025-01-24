@@ -1,5 +1,4 @@
 # blueprints/song_contest/__init__.py
-
 from flask import Blueprint
 from .admin import register_admin_views  # Import the function for registering admin views
 
