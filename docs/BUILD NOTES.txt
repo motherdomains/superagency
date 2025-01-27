@@ -6,12 +6,11 @@
 
 This week:
 
-- Mon:  AISA - Progress pitch. Any niche app/functions that could be commercially developed sooner?
-- Tue: SC - Keep fixing issues
-- Wed:  SC - Continue through guest voting path: Select country, choose 3 countries, thank you / confirm
-- Thu: SC - Voting tally, display results & exciting script
-- Fri: Pretty up UI/UX. Fix smaller issues. Upgrade Glynn with progress.
-- Fri: AISA - Progress pitch deck, consider MVP for accelerator.
+- Mon:  AISA - Progress pitch. Start planning survey/application. Core automation features (e.g. Scraping)
+- Tue: SC - Touch up voting process. Display contents of voting DB with script.
+- Wed:  SC - Pretty up UI/UX. Country flags.
+- Thu: SC - Look into remote server deployment (e.g. wrapping up Flask on a test server). Update Glynn
+- Fri: AISA - Progress pitch deck, draft MVP for accelerator.
 
 Next week:
 
