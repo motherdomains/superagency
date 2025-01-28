@@ -2,23 +2,24 @@
 
 {% block content %}
     <h1>Countries</h1>
-    <ul>
+<ul>
         {% for country in countries %}
-            <li>
+<li>
                 {% if country.image %}
                     {% if country.image.startswith('http://') or country.image.startswith('https://') %}
-                        <img src="{{ country.image }}" alt="Flag of {{ country.country }}">
+                        <img src="{{ country.image }}" align="left" height="50" alt="Flag of {{ country.country }}" title="Flag of {{ country.country }}">
                     {% elif country.image.startswith('static/uploads/') %}
                         <!-- Since the image path already includes 'static/', no need for url_for -->
-                        <img src="/{{ country.image }}" alt="Flag of {{ country.country }}">
+                        <img src="/{{ country.image }}" align="left" height="50" alt="Flag of {{ country.country }}" alt="Flag of {{ country.country }}">
                     {% else %}
                         <span>No valid image URL</span>
                     {% endif %}
                 {% else %}
                     <span>No image available</span>
                 {% endif %}
+    <br />
                 {{ country.country }}
-            </li>
+</li>
         {% endfor %}
-    </ul>
+</ul>
 {% endblock %}

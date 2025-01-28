@@ -36,6 +36,15 @@ This month:
 - Initiated draft of AI Super Agency survey/questionnaire, aimed to onboard further test clients
 - Comparative research for prospective AISA company jurisdictions, between Singapore, NZ & Thailand
 
+## Tue. Jan. 28 2025 ##  3  hours
+- Using DeepSeek, progressed Song Contest voting results system. DeepSeek asked useful questions on unanimous results and ties, that have been forwarded to the client
+- While waiting for client's answers, searched and found new country flags to use, resizing .png accordingly
+- Updated various code for the views and templates
+
+Wed: Voting results, improve layout / alignment of countries
+Thu: Polish up and present to Glynn (screenshare video)
+Fri: Consider app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
+
 
 -----
 ## Mon. Jan. 20 2025 ##  2+ hours

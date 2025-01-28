@@ -1,3 +1,6 @@
+# AI Super Agency
+# https://superagency.pro
+# app.py
 from flask import Flask, send_from_directory
 from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy

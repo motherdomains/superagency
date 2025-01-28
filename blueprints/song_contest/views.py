@@ -37,7 +37,7 @@ def register_routes(song_contest_bp):
     @song_contest_bp.route('/countries', endpoint='country_list')
     def country_list():
         """Render a list of countries."""
-        countries = SongCountry.query.order_by(SongCountry.display_order.asc()).all()
+        countries = SongCountry.query.order_by(SongCountry.country.asc()).all()
         
         # Ensure we handle the image attribute properly in the backend
         for country in countries:
@@ -45,12 +45,6 @@ def register_routes(song_contest_bp):
                 country.image = ""  # Provide a default value or handle as appropriate
         
         return render_template('country_list.html', countries=countries)
-    
-    @song_contest_bp.route('/test_show')
-    def test_show_list():
-        shows = SongShow.query.all()
-        return render_template('show_list.html', shows=shows)
-
 
     @song_contest_bp.route('/shows')
     def show_list():
@@ -68,7 +62,7 @@ def register_routes(song_contest_bp):
         # Handle missing images by setting a default value
         for country in countries:
             if not country.image:
-                country.image = "path/to/default/image.png"  # Set a default image path or URL if needed
+                country.image = "static/uploads/default.jpg"  # Set a default image path or URL if needed
         
         return render_template('country_list.html', countries=countries)
     
