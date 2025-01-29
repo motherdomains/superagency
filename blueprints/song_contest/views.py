@@ -191,8 +191,12 @@ def register_routes(song_contest_bp):
             grand_totals.append({
                 'countryID': result.countryID,
                 'country': result.country,
-                'total': total
+                'total': total,
+                'votesFirst': result.votesFirst,  # Include 1st place votes
+                'votesSecond': result.votesSecond,  # Include 2nd place votes
+                'votesThird': result.votesThird,  # Include 3rd place votes
             })
+
         # Debugging: Print the grand totals
         print("Grand Totals:", grand_totals)
         return sorted(grand_totals, key=lambda x: x['total'], reverse=True)
@@ -217,16 +221,31 @@ def register_routes(song_contest_bp):
     # Route to display results
     @song_contest_bp.route('/show/<int:show_id>/results')
     def show_results(show_id):
-        # Fetch results and calculate adjusted totals
+        # Fetch results and calculate grand totals
         results = get_show_results(show_id)
         grand_totals = calculate_grand_totals(results)
 
         # Get audience size (e.g., from the database or a configuration)
         audience_size = 100  # Example: Replace with actual audience size
 
+        # Calculate adjusted totals
         adjusted_totals = adjust_totals(grand_totals, audience_size)
 
-        # Render the results template
+        # Combine grand_totals and adjusted_totals into a single list of dictionaries
+        combined_results = []
+        for grand, adjusted in zip(grand_totals, adjusted_totals):
+            combined_results.append({
+                'countryID': grand['countryID'],
+                'country': grand['country'],
+                'grand_total': grand['total'],
+                'adjusted_total': adjusted['adjusted_total'],
+                'votes_first': grand['votesFirst'],  # Add 1st place votes
+                'votes_second': grand['votesSecond'],  # Add 2nd place votes
+                'votes_third': grand['votesThird'],  # Add 3rd place votes
+            })
+
         # Debugging: Print the final data being passed to the template
-        print("Data Passed to Template:", adjusted_totals)
-        return render_template('results.html', results=adjusted_totals)
+        print("Data Passed to Template:", combined_results)
+
+        # Render the results template
+        return render_template('results.html', results=combined_results)

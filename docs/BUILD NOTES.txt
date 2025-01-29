@@ -41,13 +41,17 @@ This month:
 - While waiting for client's answers, searched and found new country flags to use, resizing .png accordingly
 - Updated various code for the views and templates
 
-## Wed. Jan. 29 2025 ##  hours
+## Wed. Jan. 29 2025 ## 2.5 hours
 - Set up voting results, updating views.py with functions, template & route. It's starting to work
-- "Server is busy" issues with DeepSeek, that has otherwise been more useful than ChatGPT
+- "Server is busy" issues with DeepSeek, that has otherwise been more useful than ChatGPT. Stalled progress
+- Tried reverting to ChatGPT, but am cautious about its past trend in breaking working code
+- Eventually, DeepSeek worked again, and we were co-able to pinpoint remaining issues. Vote display success.
+- Noted in a lower-table tie, that the higher-ranked country had less 1st place votes (reconsider this)
 
-Wed: Voting results, improve layout / alignment of countries
-Thu: Polish up and present to Glynn (screenshare video)
-Fri: Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
+Tomorrow: 
+
+Thu: Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)
+Fri: Survey / Waiting list form? Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
 
 
 -----

@@ -5,6 +5,7 @@
 <form method="POST">
     <label for="vote_1">First Place:</label>
     <select id="vote_1" name="vote_1" onchange="updateOptions('vote_1', 'vote_2', 'vote_3')">
+        <option>Vote for First Place</option>
         {% for country_id, country_name in countries %}
         <option value="{{ country_id }}">{{ country_name }}</option>
         {% endfor %}
@@ -12,6 +13,7 @@
 
     <label for="vote_2">Second Place:</label>
     <select id="vote_2" name="vote_2" onchange="updateOptions('vote_2', 'vote_3')">
+        <option>Vote for Second Place</option>
         {% for country_id, country_name in countries %}
         <option value="{{ country_id }}">{{ country_name }}</option>
         {% endfor %}
@@ -19,6 +21,7 @@
 
     <label for="vote_3">Third Place:</label>
     <select id="vote_3" name="vote_3">
+        <option>Vote for Third Place</option>
         {% for country_id, country_name in countries %}
         <option value="{{ country_id }}">{{ country_name }}</option>
         {% endfor %}
