@@ -164,3 +164,69 @@ def register_routes(song_contest_bp):
     @song_contest_bp.route('/thank_you')
     def thank_you():
         return render_template('thank_you.html')
+    
+    # Function to fetch results from the database
+    def get_show_results(show_id):
+        results = db.session.query(
+            SongShowCountry.countryID,
+            SongCountry.country,
+            SongShowCountry.votesFirst,
+            SongShowCountry.votesSecond,
+            SongShowCountry.votesThird
+        ).join(
+            SongCountry, SongShowCountry.countryID == SongCountry.countryID
+        ).filter(
+            SongShowCountry.showID == show_id
+        ).all()
+
+        # Debugging: Print the results to verify
+        print("Fetched Results:", results)
+        return results
+
+    # Function to calculate grand totals
+    def calculate_grand_totals(results):
+        grand_totals = []
+        for result in results:
+            total = (result.votesFirst * 3) + (result.votesSecond * 2) + (result.votesThird * 1)
+            grand_totals.append({
+                'countryID': result.countryID,
+                'country': result.country,
+                'total': total
+            })
+        # Debugging: Print the grand totals
+        print("Grand Totals:", grand_totals)
+        return sorted(grand_totals, key=lambda x: x['total'], reverse=True)
+
+    # Function to adjust totals for "exciting" results
+    def adjust_totals(grand_totals, audience_size):
+        max_total = grand_totals[0]['total']
+        scaling_factor = audience_size / max_total
+
+        adjusted_totals = []
+        for i, result in enumerate(grand_totals):
+            adjusted_total = int((max_total - i) * scaling_factor)
+            adjusted_totals.append({
+                'countryID': result['countryID'],
+                'country': result['country'],
+                'adjusted_total': adjusted_total
+            })
+        # Debugging: Print the adjusted totals
+        print("Adjusted Totals:", adjusted_totals)
+        return adjusted_totals
+
+    # Route to display results
+    @song_contest_bp.route('/show/<int:show_id>/results')
+    def show_results(show_id):
+        # Fetch results and calculate adjusted totals
+        results = get_show_results(show_id)
+        grand_totals = calculate_grand_totals(results)
+
+        # Get audience size (e.g., from the database or a configuration)
+        audience_size = 100  # Example: Replace with actual audience size
+
+        adjusted_totals = adjust_totals(grand_totals, audience_size)
+
+        # Render the results template
+        # Debugging: Print the final data being passed to the template
+        print("Data Passed to Template:", adjusted_totals)
+        return render_template('results.html', results=adjusted_totals)
