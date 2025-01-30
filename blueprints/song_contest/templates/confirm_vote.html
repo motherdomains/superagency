@@ -1,25 +1,34 @@
 {% extends 'layout.html' %}
+{% block title %}Confirm your votes // Song Contest{% endblock %}
 {% block content %}
 
 <h1>Confirm Your Votes</h1>
 
-<p>First Place: 
-    <img src="{{ country_1.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_1.country }}" style="width:50px;">
-    {{ country_1.country }}
-</p>
-
-<p>Second Place: 
-    <img src="{{ country_2.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_2.country }}" style="width:50px;">
-    {{ country_2.country }}
-</p>
-
-<p>Third Place: 
-    <img src="{{ country_3.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_3.country }}" style="width:50px;">
-    {{ country_3.country }}
-</p>
-
+<div class="row">
+    <div class="four columns" align="center" valign="top">
+    First Place:<br />
+    <img src="/{{ country_1.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_1.country }}" title="{{ country_1.country }}" height="100" class="u-max-full-width:100px;"><br />
+    <b>{{ country_1.country }}</b>
+    <hr />
+    </div>
+    <div class="four columns" align="center" valign="top">
+    Second Place:<br />
+    <img src="/{{ country_2.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_2.country }}"  title="{{ country_2.country }}" height="100" class="u-max-full-width:100px;"><br />
+    <b>{{ country_2.country }}</b>
+    <hr />
+    </div>
+    <div class="four columns" align="center" valign="top">
+    Third Place:<br />
+    <img src="/{{ country_3.image or '/static/uploads/default_flag.jpg' }}" alt="{{ country_3.country }}" title="{{ country_3.country }}" height="100" class="u-max-full-width:100px;"><br />
+    <b>{{ country_3.country }}</b>
+    <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns" align="center">
 <form method="POST">
     <button type="submit">Confirm Votes</button>
 </form>
+</div>
 
 {% endblock %}

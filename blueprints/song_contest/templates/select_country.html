@@ -1,17 +1,32 @@
 {% extends 'layout.html' %}
+{% block title %}Select your assigned country // Song Contest{% endblock %}
 {% block content %}
 
 {% if countries %}
 <h1>Select Your Assigned Country</h1>
 
-    {% for country_id, country_name, image in countries %}
-    <div align="center">    <a href="{{ url_for('song_contest.vote_page', show_id=show_id, assigned_country=country_id) }}">
-            <img src="/{{ image or 'static/uploads/default.jpg' }}" alt="{{ country_name }}" style="width:100px;"><br />
-            {{ country_name }}
-        </a></div>
+{% for country in countries | batch(4) %} <!-- Group countries into rows of 4 -->
+<div class="row"> <!-- Open a new row for every 4 countries -->
+    {% for country_id, country_name, image in country %}
+    <div class="three columns" align="center" style="margin-bottom:10px;">
+        <a href="{{ url_for('song_contest.vote_page', show_id=show_id, assigned_country=country_id) }}">
+            <img src="/{{ image }}" alt="{{ country_name }}" class="u-max-full-width" style="max-width:160px;"><br />
+            <b>{{ country_name }}</b>
+        </a>
+    </div>
     {% endfor %}
+
+    {# Add placeholder DIVs to balance the last row if needed #}
+    {% if loop.last and country|length < 4 %} <!-- Check if this is the last row and it's incomplete -->
+        {% for i in range(4 - country|length) %}
+        <div class="three columns" style="visibility: hidden;"></div>
+        {% endfor %}
+    {% endif %}
+</div> <!-- Close the row -->
+{% endfor %}
 
 {% else %}
 <p>No countries available for this show.</p>
 {% endif %}
+
 {% endblock %}

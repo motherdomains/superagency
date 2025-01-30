@@ -46,6 +46,7 @@ def register_routes(song_contest_bp):
         
         return render_template('country_list.html', countries=countries)
 
+    # LIST OF SHOWS
     @song_contest_bp.route('/shows')
     def show_list():
         """List of shows."""
@@ -53,6 +54,7 @@ def register_routes(song_contest_bp):
         print(shows)  # Log the result to confirm data is fetched
         return render_template('show_list.html', shows=shows)  # Render the show_list template
     
+    # SELECT ASSIGNED COUNTRY
     @song_contest_bp.route('/show/<int:show_id>/countries')
     def show_countries(show_id):
         """Render a list of countries for a specific show."""
@@ -64,20 +66,13 @@ def register_routes(song_contest_bp):
             if not country.image:
                 country.image = "static/uploads/default.jpg"  # Set a default image path or URL if needed
         
-        return render_template('country_list.html', countries=countries)
+        # Prepare the data for the template
+        country_data = [(country.countryID, country.country, country.image) for country in countries]
+    
+        return render_template('select_country.html', countries=country_data, show_id=show_id)
     
     
     # VOTING SYSTEM
-    
-    @song_contest_bp.route('/select_country/<int:show_id>', methods=['GET'])
-    def select_country(show_id):
-        # Fetch countries for the current show
-        show_countries = SongShowCountry.query.filter_by(showID=show_id).all()
-        country_choices = [(sc.countryID, sc.song_country.country, sc.song_country.image) for sc in show_countries]
-        
-        print(country_choices)  # Add this line before rendering the template
-        return render_template('select_country.html', countries=country_choices, show_id=show_id)
-    
     @song_contest_bp.route('/vote/<int:show_id>/<int:assigned_country>', methods=['GET', 'POST'])
     def vote_page(show_id, assigned_country):
         # Fetch countries for the show, excluding the assigned country
@@ -85,19 +80,26 @@ def register_routes(song_contest_bp):
             SongShowCountry.showID == show_id,
             SongShowCountry.countryID != assigned_country
         ).all()
-    
-        country_choices = [(sc.countryID, sc.song_country.country) for sc in show_countries]
-    
-        if request.method == 'POST':
-            vote_1 = int(request.form.get('vote_1'))
-            vote_2 = int(request.form.get('vote_2'))
-            vote_3 = int(request.form.get('vote_3'))
 
-            # Ensure valid votes
+        # Prepare country choices for the template
+        countries = [(sc.countryID, sc.song_country.country) for sc in show_countries]
+
+        if request.method == 'POST':
+            try:
+                # Ensure all votes are selected and valid
+                vote_1 = int(request.form.get('vote_1'))
+                vote_2 = int(request.form.get('vote_2'))
+                vote_3 = int(request.form.get('vote_3'))
+            except (TypeError, ValueError):
+                # Handle invalid input (e.g., empty or non-integer values)
+                flash("Invalid votes! Please ensure all votes are selected.", 'danger')
+                return redirect(url_for('song_contest.vote_page', show_id=show_id, assigned_country=assigned_country))
+
+            # Ensure no duplicate votes
             if len({vote_1, vote_2, vote_3}) != 3:
                 flash("Invalid votes! Please ensure no duplicate selections.", 'danger')
                 return redirect(url_for('song_contest.vote_page', show_id=show_id, assigned_country=assigned_country))
-        
+
             # Store votes temporarily in session
             session['votes'] = {
                 'assigned_country': assigned_country,
@@ -106,9 +108,11 @@ def register_routes(song_contest_bp):
                 'vote_3': vote_3,
             }
             return redirect(url_for('song_contest.confirm_vote', show_id=show_id))
+
+        # Render the template with the correct variable
+        return render_template('vote_page.html', countries=countries, assigned_country=assigned_country)
     
-        return render_template('vote_page.html', countries=country_choices, assigned_country=assigned_country)
-    
+    # CONFIRM VOTE PAGE
     @song_contest_bp.route('/confirm_vote/<int:show_id>', methods=['GET', 'POST'])
     def confirm_vote(show_id):
         votes = session.get('votes', {})

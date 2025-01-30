@@ -48,10 +48,13 @@ This month:
 - Eventually, DeepSeek worked again, and we were co-able to pinpoint remaining issues. Vote display success.
 - Noted in a lower-table tie, that the higher-ranked country had less 1st place votes (reconsider this)
 
-Tomorrow: 
+## Thu. Jan. 30 2025 ## hours
+- Adjusted HTML templates to improve layout alignment and balance
+- Slight tweaks to voting code in views.py, to ensure empty options are not selected
+- General HTML touching up, while looking into bp-specific templates overriding defaults as necessary
 
-Thu: Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)
-Fri: Survey / Waiting list form? Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
+Tomorrow:  Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)
+Survey / Waiting list form? Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
 
 
 -----
