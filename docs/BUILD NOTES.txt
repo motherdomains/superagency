@@ -48,7 +48,7 @@ This month:
 - Eventually, DeepSeek worked again, and we were co-able to pinpoint remaining issues. Vote display success.
 - Noted in a lower-table tie, that the higher-ranked country had less 1st place votes (reconsider this)
 
-## Thu. Jan. 30 2025 ## hours
+## Thu. Jan. 30 2025 ## 2.5 hours
 - Adjusted HTML templates to improve layout alignment and balance
 - Slight tweaks to voting code in views.py, to ensure empty options are not selected
 - General HTML touching up, while looking into bp-specific templates overriding defaults as necessary
