@@ -5,9 +5,9 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>{% block title %}Welcome Test{% endblock %} // Super Agency</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <title>{% block title %}Welcome Test{% endblock %} // Song Contest</title>
+  <meta name="description" content="Song Contest is a Eurovision-inspired musical theatred production in south Australia">
+  <meta name="author" content="Song Contest">
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -20,7 +20,7 @@
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/song_contest.css') }}">
     
   {% block head %}
   <!-- Page-specific meta tags or other head elements -->
@@ -37,14 +37,18 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="admin">ADMIN</a>   | <!--<a href="show_list">SHOW LIST</a>  | --><a href="/song_contest/countries">COUNTRIES</a> | <a href="{{ url_for('song_contest.show_list') }}">SHOW LIST</a>
+        <div class="twelve columns"><!-- Add this to both the blueprint and application-wide layout.html -->
+<!-- Blueprint-specific layout -->
+<p>Using blueprint layout.html</p></div>
+    </div>
+      
+    <div class="row">
+      <div class="twelve columns" style="margin-top: 0%"><!--<a href="/">HOME</a> | <a href="admin">ADMIN</a>   | <!--<a href="show_list">SHOW LIST</a>  | <a href="/song_contest/countries">COUNTRIES</a> | <a href="{{ url_for('song_contest.show_list') }}">SHOW LIST</a>
  | {% if logged_in %}
             <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
             {% else %}
             <a href="{{ url_for('auth.login') }}">LOGIN</a>
-            {% endif %}<br />
-        <!-- Blueprint-specific layout -->
-<p>Using master layout.html</p></div>
+            {% endif %}--></div>
     </div>
       
         {% block content %}

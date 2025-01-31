@@ -7,7 +7,7 @@ song_contest_bp = Blueprint(
     'song_contest', 
     __name__, 
     template_folder='templates', 
-    static_folder=None  # Do not serve static files from this blueprint
+    static_folder='static'
 )
 
 def register_blueprints(app, admin):

@@ -53,6 +53,10 @@ This month:
 - Slight tweaks to voting code in views.py, to ensure empty options are not selected
 - General HTML touching up, while looking into bp-specific templates overriding defaults as necessary
 
+## Fri. Jan. 31 2025 ## hours
+- Overriding master AISA layout templates with blueprint-specific files
+
+
 Tomorrow:  Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)
 Survey / Waiting list form? Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
 

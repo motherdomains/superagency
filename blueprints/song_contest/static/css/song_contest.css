@@ -1,0 +1,8 @@
+/* app/blueprints/song_contest/static/css/song_contest.css */
+body {
+    background-color: #f0f8ff; /* Light blue background for Song Contest */
+}
+
+h1 {
+    color: #ff6347; /* Tomato color for headings */
+}
