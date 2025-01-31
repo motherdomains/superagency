@@ -53,8 +53,11 @@ This month:
 - Slight tweaks to voting code in views.py, to ensure empty options are not selected
 - General HTML touching up, while looking into bp-specific templates overriding defaults as necessary
 
-## Fri. Jan. 31 2025 ## hours
+## Fri. Jan. 31 2025 ## 2.5 hours
 - Overriding master AISA layout templates with blueprint-specific files
+- Have completely stalled trying to ascertain while the bp/templates/layout.html isn't loading
+- Noticed that the system seems to be reversed: first checking the master templates folder, and then when could not find layout.html (I renamed the master one to layoutOLD), it then loads the blueprint template
+- Despite ongoing issues, plus persistent DeepSeek "server busy" messages, drafted through a simple Song Contest layout for voting that improves upon the present live site, and shared with Glynn
 
 
 Tomorrow:  Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)

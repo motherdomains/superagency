@@ -3,15 +3,18 @@
 {% block content %}
 
 {% if countries %}
-<h1>Select Your Assigned Country</h1>
+
+<div class="row">
+    <div class="twelve columns" align="center"><h3>Please select Your Assigned Country</h3></div>
+</div>
 
 {% for country in countries | batch(4) %} <!-- Group countries into rows of 4 -->
 <div class="row"> <!-- Open a new row for every 4 countries -->
     {% for country_id, country_name, image in country %}
     <div class="three columns" align="center" style="margin-bottom:10px;">
         <a href="{{ url_for('song_contest.vote_page', show_id=show_id, assigned_country=country_id) }}">
-            <img src="/{{ image }}" alt="{{ country_name }}" class="u-max-full-width" style="max-width:160px;"><br />
-            <b>{{ country_name }}</b>
+            <img src="/{{ image }}" alt="{{ country_name }}" style="u-max-full-width:160px;"><br />
+            <p class="button">{{ country_name }}</p>
         </a>
     </div>
     {% endfor %}
