@@ -6,11 +6,11 @@
 
 This week:
 
-- Mon:  AISA - Progress pitch. Start planning survey/application. Core automation features (e.g. Scraping)
-- Tue: SC - Touch up voting process. Display contents of voting DB with script.
-- Wed:  SC - Pretty up UI/UX. Country flags.
+- Mon:  AISA - Progress pitch. Commence survey/application and seek to source clients.
+- Tue: SC - Solve BP templates issue. Touch up voting process. Display contents of voting DB with script.
+- Wed:  SC - Continue from yesterday. Also progress finding new clients.
 - Thu: SC - Look into remote server deployment (e.g. wrapping up Flask on a test server). Update Glynn
-- Fri: AISA - Progress pitch deck, draft MVP for accelerator.
+- Fri: AISA - Make big progress on pitch deck and application (deadline is next week)
 
 Next week:
 
@@ -22,11 +22,20 @@ Next week:
 This month:
 
 - Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
-- Client: Song Contest. Demo of panel, features, per show voting. Planning of animated scoreboard.
+- Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 - First mobile UI/UX designed for prototypes
 - Consider initial Preferences / Settings
 - Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
+
+
+-----
+## Mon. Feb. 3 2025 ##  3+ hours
+- Progressed AISA plan, pitch deck and various documentation
+- Explored types of business/work visas in Thailand, specific to running a Singapore Pte. Ltd.
+- Progressed Survey system, draft of mysql schema
+
+Tomorrow: Chat with JMan, continue building survey system
 
 
 -----
@@ -58,11 +67,6 @@ This month:
 - Have completely stalled trying to ascertain while the bp/templates/layout.html isn't loading
 - Noticed that the system seems to be reversed: first checking the master templates folder, and then when could not find layout.html (I renamed the master one to layoutOLD), it then loads the blueprint template
 - Despite ongoing issues, plus persistent DeepSeek "server busy" messages, drafted through a simple Song Contest layout for voting that improves upon the present live site, and shared with Glynn
-
-
-Tomorrow:  Polish up UI/UX, attempt original "script", present to Glynn (screenshare video)
-Survey / Waiting list form? Consider how-to app deployment on 3rd party servers, company-hosted servers (e.g. MD), etc
-
 
 -----
 ## Mon. Jan. 20 2025 ##  2+ hours
