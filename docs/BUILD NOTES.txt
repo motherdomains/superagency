@@ -35,7 +35,12 @@ This month:
 - Explored types of business/work visas in Thailand, specific to running a Singapore Pte. Ltd.
 - Progressed Survey system, draft of mysql schema
 
-Tomorrow: Chat with JMan, continue building survey system
+## Tue. Feb. 4 2025 ##  2.5 hours
+- Started earlier (<830am), turned in productive session before random magic day
+- Chat with Jarred
+- Setup of Surveys blueprint. Despite predictable server delays, by return home, the whole blueprint was working
+
+Tomorrow: continue building survey system
 
 
 -----

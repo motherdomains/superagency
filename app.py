@@ -1,6 +1,3 @@
-# AI Super Agency
-# https://superagency.pro
-# app.py
 from flask import Flask, send_from_directory
 from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
@@ -12,6 +9,9 @@ from blueprints.auth import auth_bp
 from blueprints.cms import create_cms  # New CMS blueprint
 from blueprints.admin_views import UserAdmin, CustomAdminIndexView
 from blueprints.song_contest import register_blueprints  # Ensure song_contest blueprint is registered
+from blueprints.surveys import init_app as surveys_init
+from blueprints.surveys.admin import register_admin_views, CustomModelView  # Import CustomModelView
+from blueprints.surveys.models import Survey, SurveyQuestion, SurveyResponse, SurveyUser  # Import Survey models
 
 import os
 
@@ -39,6 +39,12 @@ def create_app():
 
     # Register song contest blueprint and admin views
     register_blueprints(app, admin)  # Ensure song_contest blueprint is registered
+
+    # Register Surveys Blueprint
+    surveys_init(app)
+
+    # Register surveys admin views
+    register_admin_views(admin)  # Register surveys admin views
 
     # Admin views
     admin.add_view(UserAdmin(User, db.session))
@@ -72,5 +78,4 @@ def create_app():
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        db.create_all()  # Ensure all database tables are created
-    app.run(debug=True)
+        db.create
