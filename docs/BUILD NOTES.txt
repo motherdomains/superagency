@@ -40,6 +40,9 @@ This month:
 - Chat with Jarred
 - Setup of Surveys blueprint. Despite predictable server delays, by return home, the whole blueprint was working
 
+## Wed. Feb. 5 2025 ##  hours
+- Progressed Outlier Ventures Post-Web Accelerator application form (due next week)
+
 Tomorrow: continue building survey system
 
 
