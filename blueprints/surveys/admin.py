@@ -57,15 +57,6 @@ class SurveyQuestionAdmin(CustomModelView):
     """
     Admin view for the SurveyQuestion model.
     """
-    form_overrides = {
-        'options': JSONTextAreaField  # Use the custom JSON field
-    }
-    form_widget_args = {
-        'options': {
-            'widget': TextArea(),  # Render as a textarea
-            'rows': 10  # Set the number of rows for the textarea
-        }
-    }
     form_columns = ('survey_id', 'question_text', 'question_type', 'options')
     column_list = ('questionID', 'survey_id', 'question_text', 'question_type', 'options')
     column_display_pk = True

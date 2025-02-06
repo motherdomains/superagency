@@ -1,5 +1,6 @@
 from extensions import db
 from datetime import datetime
+from sqlalchemy import JSON
 
 class Survey(db.Model):
     __tablename__ = 'surveys'
@@ -14,7 +15,7 @@ class SurveyQuestion(db.Model):
     survey_id = db.Column(db.Integer, db.ForeignKey('surveys.surveyID'), nullable=False)
     question_text = db.Column(db.Text, nullable=False)
     question_type = db.Column(db.Enum('select', 'multiple_choice', 'scale', 'open_ended', name='question_type'), nullable=False)
-    options = db.Column(db.JSON)  # For multiple-choice questions
+    options = db.Column(db.Text, nullable=True)  # Change JSON to Text
 
 class SurveyResponse(db.Model):
     __tablename__ = 'surveyResponses'
