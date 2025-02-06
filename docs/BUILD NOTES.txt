@@ -9,6 +9,8 @@ Next week:
 - Wrap up Song Contest, for now (usable/working demo), script, scoreboard, server installation
 - Turn attention to different features and components
 - Finish pitch deck and submit application for Outlier (apply week after)
+- Pitch deck needs: Improved imagery, better headlines, content filled in, run through DS for comments
+
 
 
 This month:
@@ -39,7 +41,10 @@ This month:
 Tomorrow: continue building survey system
 
 ## Thu. Feb. 6 2025 ##  hours
-- 
+- Increasing Server Busy delays on DeepSeek, with new "You are sending too many messages" warnings
+- This is stunting programming progress to the point of considering custom API or other services for now
+- Between this and rescheduled FRRO appointment, today will not be a full programming day
+- Instead, progressing pitch deck
 
 
 -----
