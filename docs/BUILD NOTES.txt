@@ -4,19 +4,11 @@
 - Monday & Friday: Betterment of overall system
 - Tues, Wed, Thurs: Client/Feature-specific development
 
-This week:
-
-- Mon:  AISA - Progress pitch. Commence survey/application and seek to source clients.
-- Tue: SC - Solve BP templates issue. Touch up voting process. Display contents of voting DB with script.
-- Wed:  SC - Continue from yesterday. Also progress finding new clients.
-- Thu: SC - Look into remote server deployment (e.g. wrapping up Flask on a test server). Update Glynn
-- Fri: AISA - Make big progress on pitch deck and application (deadline is next week)
-
 Next week:
 
-- Wrap up Song Contest, for now (usable/working demo)
+- Wrap up Song Contest, for now (usable/working demo), script, scoreboard, server installation
 - Turn attention to different features and components
-- Truly progress pitch deck and finalise application for Outlier (apply week after)
+- Finish pitch deck and submit application for Outlier (apply week after)
 
 
 This month:
@@ -40,10 +32,14 @@ This month:
 - Chat with Jarred
 - Setup of Surveys blueprint. Despite predictable server delays, by return home, the whole blueprint was working
 
-## Wed. Feb. 5 2025 ##  hours
+## Wed. Feb. 5 2025 ##  1.5 hours
 - Progressed Outlier Ventures Post-Web Accelerator application form (due next week)
+- Looking for full programming day on Thursday (today has some domestic/registration priorities)
 
 Tomorrow: continue building survey system
+
+## Thu. Feb. 6 2025 ##  hours
+- 
 
 
 -----
