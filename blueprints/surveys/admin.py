@@ -5,7 +5,7 @@ from .models import Survey, SurveyQuestion, SurveyResponse, SurveyUser
 import os
 from werkzeug.utils import secure_filename
 from flask import flash, url_for
-from wtforms import TextAreaField
+from wtforms import SelectField, TextAreaField  # Import SelectField and TextAreaField
 from wtforms.widgets import TextArea
 import json
 
@@ -57,11 +57,33 @@ class SurveyQuestionAdmin(CustomModelView):
     """
     Admin view for the SurveyQuestion model.
     """
+    form_overrides = {
+        'question_type': SelectField,  # Use SelectField for question_type
+        'options': JSONTextAreaField  # Use the custom JSON field
+    }
+    form_args = {
+        'question_type': {
+            'choices': [('select', 'Select'), ('multiple_choice', 'Multiple Choice'), ('scale', 'Scale'), ('open_ended', 'Open Ended')]
+        }
+    }
+    form_widget_args = {
+        'options': {
+            'widget': TextArea(),  # Render as a textarea
+            'rows': 10  # Set the number of rows for the textarea
+        }
+    }
     form_columns = ('survey_id', 'question_text', 'question_type', 'options')
     column_list = ('questionID', 'survey_id', 'question_text', 'question_type', 'options')
     column_display_pk = True
     column_searchable_list = ['question_text']  # Enable search by question text
     column_filters = ['question_type']  # Add filters for question type
+
+    def on_form_prefill(self, form, id):
+        """
+        Log form data for debugging.
+        """
+        print("Form data:", form.data)
+        super().on_form_prefill(form, id)
 
 class SurveyResponseAdmin(CustomModelView):
     """
