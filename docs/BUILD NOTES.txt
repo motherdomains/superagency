@@ -51,11 +51,17 @@ This month:
 - Wrote to Outlier Ventures (via LinkedIn) to confirm actual application deadline (if not Feb. 14)
 - Successfully populated the opening round of survey questions to find and onboard new clients (with some technical / setup issues, such as select options)
 - Looks like several survey blueprint issues related to json, public display of surveys, etc
+- Feedback from Song Contest: Looks great, aiming for March 9 tests (week before dress rehearsal)
+- Updated pip and installed wtforms_sqlalchemy. Used research to help pinpoint small issue in the interim.
 
 Next week:
 
+- SUBMIT OUTLIER APPLICATION!
 - Solve Survey issues, improve UI/UX for prospects, and share across personal/professional networks
-- Song Contest: Finish script / results, share with Glynn for feedback (later sessions/cookies for 1 vote each)
+- Song Contest: Finish script / results, change order of countries, share with Glynn for feedback (later sessions/cookies for 1 vote each)
+- Find coding assistant alternative, to prevent the constant server downtime stalling our progress
+
+Week after - Song Contest Scoreboard
 
 
 -----

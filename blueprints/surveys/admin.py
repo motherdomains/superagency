@@ -5,7 +5,8 @@ from .models import Survey, SurveyQuestion, SurveyResponse, SurveyUser
 import os
 from werkzeug.utils import secure_filename
 from flask import flash, url_for
-from wtforms import SelectField, TextAreaField  # Import SelectField and TextAreaField
+from wtforms import SelectField, TextAreaField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.widgets import TextArea
 import json
 
@@ -16,9 +17,11 @@ class JSONTextAreaField(TextAreaField):
     def process_formdata(self, valuelist):
         if valuelist:
             try:
-                self.data = json.loads(valuelist[0])  # Parse JSON input
-            except json.JSONDecodeError:
-                raise ValueError("Invalid JSON data")
+                # Split the input by commas and strip whitespace
+                options = [opt.strip() for opt in valuelist[0].split(',') if opt.strip()]
+                self.data = options  # Convert to a JSON array
+            except Exception as e:
+                raise ValueError("Invalid options format. Use comma-separated values.")
 
 class CustomModelView(ModelView):
     """
@@ -57,11 +60,20 @@ class SurveyQuestionAdmin(CustomModelView):
     """
     Admin view for the SurveyQuestion model.
     """
+    def survey_query():
+        return Survey.query  # Query to retrieve all surveys
+
     form_overrides = {
+        'survey_id': QuerySelectField,  # Use QuerySelectField for survey_id
         'question_type': SelectField,  # Use SelectField for question_type
         'options': JSONTextAreaField  # Use the custom JSON field
     }
     form_args = {
+        'survey_id': {
+            'query_factory': survey_query,  # Use the survey_query function
+            'get_label': 'title',  # Display the survey title in the dropdown
+            'allow_blank': False  # Ensure a survey is selected
+        },
         'question_type': {
             'choices': [('select', 'Select'), ('multiple_choice', 'Multiple Choice'), ('scale', 'Scale'), ('open_ended', 'Open Ended')]
         }
@@ -77,13 +89,6 @@ class SurveyQuestionAdmin(CustomModelView):
     column_display_pk = True
     column_searchable_list = ['question_text']  # Enable search by question text
     column_filters = ['question_type']  # Add filters for question type
-
-    def on_form_prefill(self, form, id):
-        """
-        Log form data for debugging.
-        """
-        print("Form data:", form.data)
-        super().on_form_prefill(form, id)
 
 class SurveyResponseAdmin(CustomModelView):
     """
