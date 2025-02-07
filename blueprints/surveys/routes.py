@@ -36,7 +36,7 @@ def add_question(survey_id):
     return jsonify({"message": "Question added", "questionID": new_question.questionID}), 201
 
 # Route to submit a response to a question
-@surveys_bp.route('/respond', methods=['POST'])
+@surveys_bp.route('/respond', methods=['GET', 'POST'])
 def submit_response():
     data = request.get_json()
     new_response = SurveyResponse(
