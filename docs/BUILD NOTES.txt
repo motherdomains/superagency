@@ -4,11 +4,11 @@
 - Monday & Friday: Betterment of overall system
 - Tues, Wed, Thurs: Client/Feature-specific development
 
-Next week:
+This week:
 
-- Wrap up Song Contest, for now (usable/working demo), script, scoreboard, server installation
-- Turn attention to different features and components
 - Finish pitch deck and submit application for Outlier (apply week after)
+- Wrap up Song Contest, for now (usable/working demo), script, scoreboard, server installation
+- Some sort of working Survey, to start finding clients
 - Pitch deck needs: Improved imagery, better headlines, content filled in, run through DS for comments
 
 
