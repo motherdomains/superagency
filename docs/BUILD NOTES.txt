@@ -24,6 +24,16 @@ This month:
 
 
 -----
+## Mon. Feb. 10 2025 ##  0 hours
+- No progress, Super Bowl morning and stay over guests
+
+## Tue. Feb. 11 2025 ##  hours
+- Returned to Survey programming, attempting to generate end-user view of Survey
+- Downloaded Ollama to use Qwen 3.2 coder (DeepSeek: Too many Server Busy messages, slowing us down)
+- Installed Docker locally, but issues connecting to the server (will try again tomorrow)
+
+
+-----
 ## Mon. Feb. 3 2025 ##  3+ hours
 - Progressed AISA plan, pitch deck and various documentation
 - Explored types of business/work visas in Thailand, specific to running a Singapore Pte. Ltd.

@@ -12,6 +12,7 @@ from blueprints.song_contest import register_blueprints  # Ensure song_contest b
 from blueprints.surveys import init_app as surveys_init
 from blueprints.surveys.admin import register_admin_views, CustomModelView  # Import CustomModelView
 from blueprints.surveys.models import Survey, SurveyQuestion, SurveyResponse, SurveyUser  # Import Survey models
+from blueprints.surveys.routes import surveys_bp
 
 import os
 
@@ -41,7 +42,7 @@ def create_app():
     register_blueprints(app, admin)  # Ensure song_contest blueprint is registered
 
     # Register Surveys Blueprint
-    surveys_init(app)
+    app.register_blueprint(surveys_bp)  # Directly register the surveys Blueprint
 
     # Register surveys admin views
     register_admin_views(admin)  # Register surveys admin views
