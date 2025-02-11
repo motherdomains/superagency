@@ -25,6 +25,9 @@ def create_app():
     app.jinja_env.cache = {}  # Disable template caching for development
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)  # Ensure upload folder exists
 
+    # Log the template search path
+    print("Template search path:", app.jinja_loader.searchpath)
+
     # Initialize extensions
     db.init_app(app)
     bcrypt.init_app(app)

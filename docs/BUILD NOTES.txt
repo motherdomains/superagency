@@ -27,10 +27,12 @@ This month:
 ## Mon. Feb. 10 2025 ##  0 hours
 - No progress, Super Bowl morning and stay over guests
 
-## Tue. Feb. 11 2025 ##  hours
+## Tue. Feb. 11 2025 ##  3+ hours
 - Returned to Survey programming, attempting to generate end-user view of Survey
 - Downloaded Ollama to use Qwen 3.2 coder (DeepSeek: Too many Server Busy messages, slowing us down)
 - Installed Docker locally, but issues connecting to the server (will try again tomorrow)
+- Too slow to progress programming reliably on cloud-hosted DeepSeek
+- Placed view_survey.html in main /templates folder as a test, and now it's working. Form fields need to be edited, made larger, etc
 
 
 -----
