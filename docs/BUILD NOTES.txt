@@ -35,10 +35,11 @@ This month:
 - Placed view_survey.html in main /templates folder as a test, and now it's working. Form fields need to be edited, made larger, etc
 - Survey form posted properly, filling up the Survey Responses DB. Definitely needs formatting
 
-
 ## Wed. Feb. 12 2025 ##  2+ hours
 - Progressed pitch deck, dialling in TAM, SAM & SOM
 
+## Thu. Feb. 13 2025 ##  4+ hours
+- Progressed pitch deck, revising layout, simplifying points, improving pages
 
 
 Thursday:
