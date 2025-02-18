@@ -29,7 +29,8 @@ This month:
 - Positive meeting with Matthew @ Outlier, following presenting AISA pitch for the first time
 
 ## Tue. Feb. 18 2025 ##   hours
-- 
+- Downloaded and installed various coder assistants - Qwen vs Deepseek-Coder. Finding Qwen faster, more useful and better understanding already.
+- Will continue to develop my Python-Flask demo, but will likely rebuild from scratch upon onboarding a seasoned Python programmer, now that I know what needs to be done, and how
 
 
 -----
