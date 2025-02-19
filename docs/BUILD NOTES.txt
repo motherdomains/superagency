@@ -6,11 +6,14 @@
 
 This week:
 
-- Finish pitch deck and submit application for Outlier (apply week after)
-- Wrap up Song Contest, for now (usable/working demo), script, scoreboard, server installation
-- Some sort of working Survey, to start finding clients
-- Pitch deck needs: Improved imagery, better headlines, content filled in, run through DS for comments
+- Wrap up Song Contest, for now (usable/working demo), script
+- Touch up Survey, to start finding clients from next week
 
+
+Next week:
+
+- Simple Python app/site upload test to a "normal" web server, to discover the process / steps
+- Wrap up Song Contest script & code
 
 
 This month:
@@ -18,9 +21,6 @@ This month:
 - Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
-- First mobile UI/UX designed for prototypes
-- Consider initial Preferences / Settings
-- Preparing groundwork for Outlier application (pitch deck, research papers, forecasts, etc)
 
 
 -----
@@ -28,9 +28,15 @@ This month:
 - Finished touching up slides ahead of Outlier meeting
 - Positive meeting with Matthew @ Outlier, following presenting AISA pitch for the first time
 
-## Tue. Feb. 18 2025 ##   hours
+## Tue. Feb. 18 2025 ##  5+ hours
 - Downloaded and installed various coder assistants - Qwen vs Deepseek-Coder. Finding Qwen faster, more useful and better understanding already.
 - Will continue to develop my Python-Flask demo, but will likely rebuild from scratch upon onboarding a seasoned Python programmer, now that I know what needs to be done, and how
+- I'm confident we can resume regular programming from tomorrow, unless there is a new meeting scheduled to further discuss Super Agency.
+- Long weekly meeting with Jarred (2 1/2 hours), including presenting the pitch to him. Good feedback!
+
+## Wed. Feb. 19 2025 ##   hours
+- Revisited original Song Contest, scouring voting results script, and clarifying some points with Glynn
+
 
 
 -----
