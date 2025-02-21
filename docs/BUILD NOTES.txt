@@ -4,16 +4,13 @@
 - Monday & Friday: Betterment of overall system
 - Tues, Wed, Thurs: Client/Feature-specific development
 
-This week:
-
-- Wrap up Song Contest, for now (usable/working demo), script
-- Touch up Survey, to start finding clients from next week
-
 
 Next week:
 
 - Simple Python app/site upload test to a "normal" web server, to discover the process / steps
 - Wrap up Song Contest script & code
+- Progress details in Pitch, more on product / process
+- Progress Surveys element for clients & research
 
 
 This month:
@@ -34,10 +31,15 @@ This month:
 - I'm confident we can resume regular programming from tomorrow, unless there is a new meeting scheduled to further discuss Super Agency.
 - Long weekly meeting with Jarred (2 1/2 hours), including presenting the pitch to him. Good feedback!
 
-## Wed. Feb. 19 2025 ##   hours
+## Wed. Feb. 19 2025 ##  2+ hours
 - Revisited original Song Contest, scouring voting results script, and clarifying some points with Glynn
+- Becoming more familiar with Qwen coder on the local machine. Still finding its limitations. It's also not as polite and friendly as DeepSeek, which is a note on future customisation of conversational styles for clients.
+- Discussing with QwenCoder, options for the forthcoming CMS feature, where pages and layout can be managed through more Conversational approaches
 
-
+## Fri. Feb. 21 2025 ##  2+ hours
+- Referring to Song Contest voting script, preparing to finish off next week
+- Advice from AdLunam about project value, researching valuations of other AI-type fundraising campaigns
+- Looked into comparable-project fundraising rounds on CryptoRank.io
 
 -----
 ## Mon. Feb. 10 2025 ##  0 hours
