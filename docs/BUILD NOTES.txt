@@ -1,16 +1,18 @@
-# BUILD LOG
+# AI SUPER AGENCY
+## BUILD LOG
 
 ## 2025 WORK THEOREM
 - Monday & Friday: Betterment of overall system
 - Tues, Wed, Thurs: Client/Feature-specific development
 
 
-Next week:
+This week:
 
 - Simple Python app/site upload test to a "normal" web server, to discover the process / steps
 - Wrap up Song Contest script & code
 - Progress details in Pitch, more on product / process
 - Progress Surveys element for clients & research
+- Further investor, accelerator and grant research (test AISA web crawl)
 
 
 This month:
@@ -18,6 +20,13 @@ This month:
 - Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
+
+
+-----
+## Mon. Feb. 24 2025 ##   hours
+- Progressed extended version of pitch deck, with Short Operations Timeline & other tweaks
+- Progressed eventual Business Plan, with details on Radical Transparency & Open Governance
+
 
 
 -----
@@ -40,6 +49,7 @@ This month:
 - Referring to Song Contest voting script, preparing to finish off next week
 - Advice from AdLunam about project value, researching valuations of other AI-type fundraising campaigns
 - Looked into comparable-project fundraising rounds on CryptoRank.io
+- Further research into investor meetings and determining the remaining important information to ready
 
 -----
 ## Mon. Feb. 10 2025 ##  0 hours
