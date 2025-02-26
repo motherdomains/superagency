@@ -3,6 +3,12 @@
 # Navigate to your local project directory (adjust the path as needed)
 cd /Users/sea/Documents/dev/superapp
 
+# Use the stored GitHub token
+GIT_USERNAME="motherdomains"
+GIT_REPO="github.com/motherdomains/superagency.git"
+
+git remote set-url origin https://$GITHUB_TOKEN@$GIT_REPO
+
 # Stage all changes (new, modified, deleted files)
 git add .
 
