@@ -36,9 +36,14 @@ This month:
 - Followed up with Outlier re: last week's meeting, next steps
 - Rotated Github token - 
 - Updated daily_update script - should make separate one to start updating super agency (once rebuilding main script is in place) << need to finish properly
-- 11am FRRO appointment at Pernem Police Station adjourned any morning programming 
+- 11am FRRO appointment at Pernem Police Station adjourned any morning programming
+- Was invited to apply to another Accelerator, weighing options of concurrent applications
 
-
+## Thu. Feb. 27 2025 ## 3 hours
+- Took forever, but fixed Github daily update, with new token (initial security breach, ChatGPT confusion)
+- Resumed programming, which has been a struggle to regain focus/momentum after a lengthy break (due to pitch decks, etc). Qwen Coder on Ollama is showing some limitations, and it's taking some time to become accustomed with it
+- Creating SongShowCountries admin route, to be able to change the order of countries in a show, installing necessary dependences, etc
+- Still too many considerations, and Qwen coder is not as reliable as the original DeepSeek I used to make good progress. Programming brain is warmed up again, but will need to continue this on Friday.
 
 
 
