@@ -34,9 +34,14 @@ This month:
 
 ## Wed. Feb. 26 2025 ## 1.5 hours
 - Followed up with Outlier re: last week's meeting, next steps
-- Rotated Github token - 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
+- Rotated Github token - 
 - Updated daily_update script - should make separate one to start updating super agency (once rebuilding main script is in place) << need to finish properly
 - 11am FRRO appointment at Pernem Police Station adjourned any morning programming 
+
+
+git remote set-url origin https://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@github.com/motherdomains/superagency.git
+
+
 
 
 ## Thu. Feb. 27 2025 ## hours
