@@ -5,6 +5,7 @@ cd /Users/sea/Documents/dev/superapp
 
 # Use the stored GitHub token
 GIT_USERNAME="motherdomains"
+GITHUB_TOKEN="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"
 GIT_REPO="github.com/motherdomains/superagency.git"
 
 git remote set-url origin https://$GITHUB_TOKEN@$GIT_REPO
