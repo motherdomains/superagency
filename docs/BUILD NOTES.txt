@@ -46,10 +46,7 @@ This month:
 - Still too many considerations, and Qwen coder is not as reliable as the original DeepSeek I used to make good progress. Programming brain is warmed up again, but will need to continue this on Friday.
 
 
-
-
-
-## Thu. Feb. 27 2025 ## hours
+- remote tomorrow, test to ensure update is working
 
 
 To do:
