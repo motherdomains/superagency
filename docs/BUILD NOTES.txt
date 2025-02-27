@@ -39,7 +39,7 @@ This month:
 - 11am FRRO appointment at Pernem Police Station adjourned any morning programming 
 
 
-git remote set-url origin https://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@github.com/motherdomains/superagency.git
+
 
 
 
