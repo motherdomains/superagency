@@ -45,6 +45,13 @@ This month:
 - Creating SongShowCountries admin route, to be able to change the order of countries in a show, installing necessary dependences, etc
 - Still too many considerations, and Qwen coder is not as reliable as the original DeepSeek I used to make good progress. Programming brain is warmed up again, but will need to continue this on Friday.
 
+## Fri. Feb. 28 2025 ##  4 hours
+- Supremely disappointed in localhost coding assistants (QwenCoder, DeepSeekCoder) where they can't keep our entire working code base in memory, to then help with development from there. Results in a lot of redundant and inconsistent information, that wastes a lot of time.
+- After some issues, was able to create test route for Results Script, displaying in html template
+- Then, more and more delays and misunderstandings, as QwenCoder is stalling the project, like ChatGPT was
+- Looking into alternatives for memory-storing, like RAG, vector database, simple JSON snippets, etc
+- Reverted to a simpler version, will attempt Scripts again next week. Big week ahead to wrap up song contest.
+
 
 - remote tomorrow, test to ensure update is working
 

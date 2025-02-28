@@ -3,6 +3,8 @@ from flask import render_template, request, session, redirect, url_for, flash
 from flask import current_app as app
 from app import db  # Import from the main app file
 from .models import SongCountry, SongShow, SongShowCountry
+from sqlalchemy.orm import aliased
+
 
 # Function to update votes in the database
 def update_votes(show_id, vote_1, vote_2, vote_3):
@@ -165,6 +167,7 @@ def register_routes(song_contest_bp):
                                 country_2=country_2, 
                                 country_3=country_3)
     
+    # Post-voting Thank You results
     @song_contest_bp.route('/thank_you')
     def thank_you():
         return render_template('thank_you.html')
@@ -221,20 +224,28 @@ def register_routes(song_contest_bp):
         # Debugging: Print the adjusted totals
         print("Adjusted Totals:", adjusted_totals)
         return adjusted_totals
+    
+    # Route to generate voting results script
+    @song_contest_bp.route('/show/<int:show_id>/script')
+    def show_results_script(show_id):
 
-    # Route to display results
+        # Fetch countries in order and join with SongCountry to get country names
+        results = get_show_results(show_id)
+    
+        # Render the voting results script template with the list of countries
+        return render_template('results-script.html', countries=results, show_id=show_id)
+
+
+    # Internal voting results
     @song_contest_bp.route('/show/<int:show_id>/results')
-    def show_results(show_id):
+    def display_results(show_id):
         # Fetch results and calculate grand totals
         results = get_show_results(show_id)
         grand_totals = calculate_grand_totals(results)
-
         # Get audience size (e.g., from the database or a configuration)
         audience_size = 100  # Example: Replace with actual audience size
-
         # Calculate adjusted totals
         adjusted_totals = adjust_totals(grand_totals, audience_size)
-
         # Combine grand_totals and adjusted_totals into a single list of dictionaries
         combined_results = []
         for grand, adjusted in zip(grand_totals, adjusted_totals):
@@ -247,9 +258,7 @@ def register_routes(song_contest_bp):
                 'votes_second': grand['votesSecond'],  # Add 2nd place votes
                 'votes_third': grand['votesThird'],  # Add 3rd place votes
             })
-
         # Debugging: Print the final data being passed to the template
         print("Data Passed to Template:", combined_results)
-
         # Render the results template
         return render_template('results.html', results=combined_results)
