@@ -53,7 +53,13 @@ This month:
 - Reverted to a simpler version, will attempt Scripts again next week. Big week ahead to wrap up song contest.
 
 
-- remote tomorrow, test to ensure update is working
+NEXT WEEK:
+
+- Monday: Test PY script, resolve script view (main task for week)
+- Tuesday: Complete script / results
+- Wednesday: Upload to server, touchups
+- Thursday: Song Contest tests with client
+- Friday: Final to-do list for next week
 
 
 To do:
