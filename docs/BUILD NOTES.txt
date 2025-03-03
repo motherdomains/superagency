@@ -23,6 +23,13 @@ This month:
 
 
 -----
+## Mon. March 3 2025 ## 2+ hours
+- Preliminary Python-compatible server checks (JetHostPRO, Vultr, Cloudstick) and hosting backup plan
+- Working on alternative, PY-based process for the close results script. (PHP script as backup for Thursday)
+
+
+
+-----
 ## Mon. Feb. 24 2025 ## 3 hours
 - Progressed extended version of pitch deck, with Short Operations Timeline & other tweaks
 - Progressed eventual Business Plan, with details on Radical Transparency & Open Governance
