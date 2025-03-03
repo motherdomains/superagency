@@ -26,6 +26,7 @@ This month:
 ## Mon. March 3 2025 ## 2+ hours
 - Preliminary Python-compatible server checks (JetHostPRO, Vultr, Cloudstick) and hosting backup plan
 - Working on alternative, PY-based process for the close results script. (PHP script as backup for Thursday)
+- Several positive attempts at script, but the logic still isn't being executed properly
 
 
 
@@ -58,23 +59,6 @@ This month:
 - Then, more and more delays and misunderstandings, as QwenCoder is stalling the project, like ChatGPT was
 - Looking into alternatives for memory-storing, like RAG, vector database, simple JSON snippets, etc
 - Reverted to a simpler version, will attempt Scripts again next week. Big week ahead to wrap up song contest.
-
-
-NEXT WEEK:
-
-- Monday: Test PY script, resolve script view (main task for week)
-- Tuesday: Complete script / results
-- Wednesday: Upload to server, touchups
-- Thursday: Song Contest tests with client
-- Friday: Final to-do list for next week
-
-
-To do:
-> Warm up: Fix Github update issue
-> Song Contest. Route: Voting Script
-
-> Friday: Server test PY script
-> Next week: Tidy, wrap, deploy
 
 
 
