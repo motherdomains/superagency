@@ -1,3 +1,4 @@
+# blueprints/song_contest/views.py
 from flask import render_template, request, session, redirect, url_for, flash
 from flask import current_app as app
 from app import db  # Import from the main app file
@@ -22,7 +23,6 @@ def update_votes(show_id, vote_1, vote_2, vote_3):
 
     # Commit changes to the database
     db.session.commit()
-
 
 # Function to register all the routes
 def register_routes(song_contest_bp):
@@ -194,7 +194,7 @@ def register_routes(song_contest_bp):
     def calculate_grand_totals(results):
         grand_totals = []
         for result in results:
-            total = (result.votesFirst * 12) + (result.votesSecond * 8) + (result.votesThird * 5)
+            total = (result.votesFirst * 3) + (result.votesSecond * 2) + (result.votesThird * 1)
             grand_totals.append({
                 'countryID': result.countryID,
                 'country': result.country,
@@ -228,6 +228,7 @@ def register_routes(song_contest_bp):
     # Route to generate voting results script
     @song_contest_bp.route('/show/<int:show_id>/script')
     def show_results_script(show_id):
+
         # Fetch countries in order and join with SongCountry to get country names
         results = get_show_results(show_id)
     
@@ -261,62 +262,3 @@ def register_routes(song_contest_bp):
         print("Data Passed to Template:", combined_results)
         # Render the results template
         return render_template('results.html', results=combined_results)
-
-    # Route to generate emcee script
-    @song_contest_bp.route('/show/<int:show_id>/emcee_script')
-    def generate_emcee_script(show_id):
-        # Fetch results and calculate grand totals
-        results = get_show_results(show_id)
-        grand_totals = calculate_grand_totals(results)
-
-        # Generate the emcee script
-        script = generate_suspenseful_script(results, grand_totals)
-
-        # Render the emcee script template
-        return render_template('emcee_script.html', script=script)
-
-    def generate_suspenseful_script(results, grand_totals):
-        script = []
-        current_totals = {result.countryID: 0 for result in results}  # Initialize current totals for each country
-
-        # Create a mapping of countryID to country name
-        country_names = {result.countryID: result.country for result in results}
-
-        for result in results:
-            country_id = result.countryID
-            country_name = result.country
-
-            # Assign points to maintain suspense
-            points = assign_points(country_id, current_totals, grand_totals)
-
-            # Replace countryID with country name in the points dictionary
-            points_with_names = {
-                country_names[recipient_id]: value for recipient_id, value in points.items()
-            }
-
-            script.append({
-                'country': country_name,
-                'points': points_with_names
-            })
-
-            # Update current totals
-            for recipient_id, value in points.items():
-                current_totals[recipient_id] += value
-
-        return script
-
-    def assign_points(country_id, current_totals, grand_totals):
-        # Logic to assign points in a way that maintains suspense
-        # Example: Ensure the top 3 countries are always close in points
-
-        # Sort grand_totals by total points in descending order
-        sorted_grand_totals = sorted(grand_totals, key=lambda x: x['total'], reverse=True)
-
-        # Assign points to the top 3 countries
-        points = {
-            sorted_grand_totals[0]['countryID']: 12,  # 12 points for 1st place
-            sorted_grand_totals[1]['countryID']: 8,   # 8 points for 2nd place
-            sorted_grand_totals[2]['countryID']: 5    # 5 points for 3rd place
-        }
-
-        return points

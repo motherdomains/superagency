@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Emcee Script</h1>
+<ol>
+    {% for entry in script %}
+    <li>
+        <strong>{{ entry.country }} votes:</strong>
+        {% for country_name, points in entry.points.items() %}
+        {{ points }} points for {{ country_name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}
