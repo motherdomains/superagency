@@ -209,7 +209,6 @@ def register_routes(song_contest_bp):
         print("Grand Totals:", grand_totals)
         return sorted(grand_totals, key=lambda x: x['total'], reverse=True)
 
-    # Route to generate emcee script
     @song_contest_bp.route('/show/<int:show_id>/emcee_script')
     def generate_emcee_script(show_id):
         # Fetch results and calculate grand totals
@@ -224,6 +223,11 @@ def register_routes(song_contest_bp):
 
         # Create a mapping of countryID to country name
         country_names = {result['countryID']: result['country'] for result in grand_totals}
+
+        # Debug prints
+        print("Script:", script)
+        print("Leaderboard:", sorted_leaderboard)
+        print("Country Names:", country_names)
 
         # Render the emcee script template
         return render_template('emcee_script.html', script=script, leaderboard=sorted_leaderboard, country_names=country_names)
