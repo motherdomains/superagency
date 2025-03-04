@@ -11,4 +11,24 @@
     </li>
     {% endfor %}
 </ol>
+
+<h1>Leaderboard</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Country</th>
+            <th>Total Points</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for country_id, total_points in leaderboard %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ country_names[country_id] }}</td>
+            <td>{{ total_points }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

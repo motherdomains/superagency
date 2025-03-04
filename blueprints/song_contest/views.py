@@ -177,6 +177,7 @@ def register_routes(song_contest_bp):
         results = db.session.query(
             SongShowCountry.countryID,
             SongCountry.country,
+            SongShowCountry.showOrder,  # Include showOrder in the query
             SongShowCountry.votesFirst,
             SongShowCountry.votesSecond,
             SongShowCountry.votesThird
@@ -208,60 +209,6 @@ def register_routes(song_contest_bp):
         print("Grand Totals:", grand_totals)
         return sorted(grand_totals, key=lambda x: x['total'], reverse=True)
 
-    # Function to adjust totals for "exciting" results
-    def adjust_totals(grand_totals, audience_size):
-        max_total = grand_totals[0]['total']
-        scaling_factor = audience_size / max_total
-
-        adjusted_totals = []
-        for i, result in enumerate(grand_totals):
-            adjusted_total = int((max_total - i) * scaling_factor)
-            adjusted_totals.append({
-                'countryID': result['countryID'],
-                'country': result['country'],
-                'adjusted_total': adjusted_total
-            })
-        # Debugging: Print the adjusted totals
-        print("Adjusted Totals:", adjusted_totals)
-        return adjusted_totals
-    
-    # Route to generate voting results script
-    @song_contest_bp.route('/show/<int:show_id>/script')
-    def show_results_script(show_id):
-        # Fetch countries in order and join with SongCountry to get country names
-        results = get_show_results(show_id)
-    
-        # Render the voting results script template with the list of countries
-        return render_template('results-script.html', countries=results, show_id=show_id)
-
-
-    # Internal voting results
-    @song_contest_bp.route('/show/<int:show_id>/results')
-    def display_results(show_id):
-        # Fetch results and calculate grand totals
-        results = get_show_results(show_id)
-        grand_totals = calculate_grand_totals(results)
-        # Get audience size (e.g., from the database or a configuration)
-        audience_size = 100  # Example: Replace with actual audience size
-        # Calculate adjusted totals
-        adjusted_totals = adjust_totals(grand_totals, audience_size)
-        # Combine grand_totals and adjusted_totals into a single list of dictionaries
-        combined_results = []
-        for grand, adjusted in zip(grand_totals, adjusted_totals):
-            combined_results.append({
-                'countryID': grand['countryID'],
-                'country': grand['country'],
-                'grand_total': grand['total'],
-                'adjusted_total': adjusted['adjusted_total'],
-                'votes_first': grand['votesFirst'],  # Add 1st place votes
-                'votes_second': grand['votesSecond'],  # Add 2nd place votes
-                'votes_third': grand['votesThird'],  # Add 3rd place votes
-            })
-        # Debugging: Print the final data being passed to the template
-        print("Data Passed to Template:", combined_results)
-        # Render the results template
-        return render_template('results.html', results=combined_results)
-
     # Route to generate emcee script
     @song_contest_bp.route('/show/<int:show_id>/emcee_script')
     def generate_emcee_script(show_id):
@@ -270,24 +217,37 @@ def register_routes(song_contest_bp):
         grand_totals = calculate_grand_totals(results)
 
         # Generate the emcee script
-        script = generate_suspenseful_script(results, grand_totals)
+        script, leaderboard = generate_suspenseful_script(results, grand_totals)
 
-        # Render the emcee script template
-        return render_template('emcee_script.html', script=script)
-
-    def generate_suspenseful_script(results, grand_totals):
-        script = []
-        current_totals = {result.countryID: 0 for result in results}  # Initialize current totals for each country
+        # Sort the leaderboard by total points in descending order
+        sorted_leaderboard = sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
 
         # Create a mapping of countryID to country name
-        country_names = {result.countryID: result.country for result in results}
+        country_names = {result['countryID']: result['country'] for result in grand_totals}
 
-        for result in results:
+        # Render the emcee script template
+        return render_template('emcee_script.html', script=script, leaderboard=sorted_leaderboard, country_names=country_names)
+
+    # Function to generate suspenseful emcee script
+    def generate_suspenseful_script(results, grand_totals):
+        script = []
+        current_totals = {result['countryID']: 0 for result in grand_totals}  # Initialize current totals for each country
+
+        # Create a mapping of countryID to country name
+        country_names = {result['countryID']: result['country'] for result in grand_totals}
+
+        # Sort results by showOrder (the order in which countries will announce their votes)
+        sorted_results = sorted(results, key=lambda x: x.showOrder)
+
+        # Track how many times each country has been mentioned
+        mention_counts = {result['countryID']: 0 for result in grand_totals}
+
+        for result in sorted_results:
             country_id = result.countryID
             country_name = result.country
 
-            # Assign points to maintain suspense
-            points = assign_points(country_id, current_totals, grand_totals)
+            # Assign points to maintain suspense and ensure each country is mentioned exactly 3 times
+            points = assign_points(country_id, current_totals, grand_totals, mention_counts)
 
             # Replace countryID with country name in the points dictionary
             points_with_names = {
@@ -299,24 +259,30 @@ def register_routes(song_contest_bp):
                 'points': points_with_names
             })
 
-            # Update current totals
+            # Update current totals and mention counts
             for recipient_id, value in points.items():
                 current_totals[recipient_id] += value
+                mention_counts[recipient_id] += 1
 
-        return script
+        return script, current_totals
 
-    def assign_points(country_id, current_totals, grand_totals):
-        # Logic to assign points in a way that maintains suspense
-        # Example: Ensure the top 3 countries are always close in points
-
+    # Function to assign points for suspenseful results
+    def assign_points(country_id, current_totals, grand_totals, mention_counts):
         # Sort grand_totals by total points in descending order
         sorted_grand_totals = sorted(grand_totals, key=lambda x: x['total'], reverse=True)
 
-        # Assign points to the top 3 countries
-        points = {
-            sorted_grand_totals[0]['countryID']: 12,  # 12 points for 1st place
-            sorted_grand_totals[1]['countryID']: 8,   # 8 points for 2nd place
-            sorted_grand_totals[2]['countryID']: 5    # 5 points for 3rd place
-        }
+        # Exclude the current country from the list of recipients
+        eligible_recipients = [result for result in sorted_grand_totals if result['countryID'] != country_id]
+
+        # Distribute points fairly while ensuring each country is mentioned exactly 3 times
+        points = {}
+        for i, recipient in enumerate(eligible_recipients):
+            if mention_counts[recipient['countryID']] < 3:  # Ensure each country is mentioned exactly 3 times
+                if i == 0:
+                    points[recipient['countryID']] = 12  # 12 points for 1st place
+                elif i == 1:
+                    points[recipient['countryID']] = 8   # 8 points for 2nd place
+                elif i == 2:
+                    points[recipient['countryID']] = 5    # 5 points for 3rd place
 
         return points
