@@ -28,6 +28,11 @@ This month:
 - Working on alternative, PY-based process for the close results script. (PHP script as backup for Thursday)
 - Several positive attempts at script, but the logic still isn't being executed properly
 
+## Tue. March 4 2025 ## 2+ hours
+- Further processes for close results script, getting closer to resolution, but still buggy
+- Backup plan to institute Wednesday, is pre-scripting for 7 teams, and having code generated for it
+- Wednesday plan is to complete this script, and make mods, before deploying on the server for testing
+
 
 
 -----

@@ -289,4 +289,8 @@ def register_routes(song_contest_bp):
                 elif i == 2:
                     points[recipient['countryID']] = 5    # 5 points for 3rd place
 
+        # Ensure at least one country receives points
+        if not points:
+            points[eligible_recipients[0]['countryID']] = 12  # Default to awarding 12 points to the top country
+
         return points

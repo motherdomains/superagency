@@ -5,9 +5,13 @@
     {% for entry in script %}
     <li>
         <strong>{{ entry.country }} votes:</strong>
-        {% for country_name, points in entry.points.items() %}
-        {{ points }} points for {{ country_name }}{% if not loop.last %}, {% endif %}
-        {% endfor %}
+        {% if entry.points %}
+            {% for country_name, points in entry.points.items() %}
+                {{ points }} points for {{ country_name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        {% else %}
+            No points awarded.
+        {% endif %}
     </li>
     {% endfor %}
 </ol>
@@ -25,7 +29,7 @@
         {% for country_id, total_points in leaderboard %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ country_names[country_id] }}</td>
+            <td>{{ country_names.get(country_id, 'Unknown Country') }}</td>
             <td>{{ total_points }}</td>
         </tr>
         {% endfor %}
