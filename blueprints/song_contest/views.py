@@ -218,8 +218,8 @@ def register_routes(song_contest_bp):
         print("Data Passed to Template:", combined_results)
         # Render the results template
         return render_template('results.html', results=combined_results)
-
     
+    # Functions for results and emcee script
     def get_show_results(show_id):
         """Fetch results for a specific show."""
         results = db.session.query(
@@ -235,40 +235,22 @@ def register_routes(song_contest_bp):
             SongShowCountry.showID == show_id
         ).all()
 
-        return results
-
-
-    @song_contest_bp.route('/show/<int:show_id>/emcee_script')
-    def get_show_results(show_id):
-        """Fetch results for a specific show."""
-        results = db.session.query(
-            SongShowCountry.countryID,
-            SongCountry.country,
-            SongShowCountry.showOrder,
-            SongShowCountry.votesFirst,
-            SongShowCountry.votesSecond,
-            SongShowCountry.votesThird
-        ).join(
-            SongCountry, SongShowCountry.countryID == SongCountry.countryID
-        ).filter(
-            SongShowCountry.showID == show_id
-        ).all()
-
-        return results
+        # Convert SQLAlchemy Row objects to tuples for simplicity
+        return [(r.countryID, r.country, r.showOrder, r.votesFirst, r.votesSecond, r.votesThird) for r in results]
 
 
     def calculate_grand_totals(results):
         """Calculate grand totals for each country."""
         grand_totals = []
         for result in results:
-            total = (result.votesFirst * 12) + (result.votesSecond * 8) + (result.votesThird * 5)
+            total = (result[3] * 12) + (result[4] * 8) + (result[5] * 5)
             grand_totals.append({
-                'countryID': result.countryID,
-                'country': result.country,
+                'countryID': result[0],
+                'country': result[1],
                 'total': total,
-                'votesFirst': result.votesFirst,
-                'votesSecond': result.votesSecond,
-                'votesThird': result.votesThird,
+                'votesFirst': result[3],
+                'votesSecond': result[4],
+                'votesThird': result[5],
             })
 
         # Sort by total points in descending order
@@ -280,7 +262,7 @@ def register_routes(song_contest_bp):
         script = []
 
         # Sort countries by showOrder (Country1 to Country7)
-        sorted_by_show_order = sorted(results, key=lambda x: x.showOrder)
+        sorted_by_show_order = sorted(results, key=lambda x: x[2])  # showOrder is at index 2
 
         # Sort countries by finishing position (Place1 to Place7)
         sorted_by_finishing_position = sorted(grand_totals, key=lambda x: x['total'], reverse=True)
@@ -302,12 +284,12 @@ def register_routes(song_contest_bp):
         # Create a preliminary array of points distributions
         preliminary_script = []
         for i, country in enumerate(sorted_by_show_order):
-            country_id = country.countryID
-            country_name = country.country
+            country_id = country[0]  # countryID is at index 0
+            country_name = country[1]  # country name is at index 1
 
             # Get the points distribution for this country
             rule = script_rules[i]
-            points = {}
+            points = []
 
             # Assign points based on the rule
             for points_value, place in rule.items():
@@ -316,10 +298,10 @@ def register_routes(song_contest_bp):
 
                 # Ensure the recipient is not the same as the voting country
                 if recipient['countryID'] != country_id:
-                    points[recipient['country']] = int(points_value)
+                    points.append((int(points_value), recipient['country']))
                 else:
                     # Mark this as a conflict
-                    points['conflict'] = (points_value, place_index)
+                    points.append(('conflict', (points_value, place_index)))
 
             preliminary_script.append({
                 'country': country_name,
@@ -329,50 +311,59 @@ def register_routes(song_contest_bp):
         # Step 2: Assess conflicts
         conflicts = []
         for i, entry in enumerate(preliminary_script):
-            if 'conflict' in entry['points']:
-                conflicts.append((i, entry['points']['conflict']))
+            for j, (points_value, recipient) in enumerate(entry['points']):
+                if points_value == 'conflict':
+                    conflicts.append((i, j, recipient))
 
         # Step 3: Resolve conflicts
         for conflict in conflicts:
-            entry_index, (points_value, place_index) = conflict
+            entry_index, point_index, (points_value, place_index) = conflict
             entry = preliminary_script[entry_index]
-            country_id = sorted_by_show_order[entry_index].countryID
+            country_id = sorted_by_show_order[entry_index][0]  # countryID is at index 0
 
             # Find a non-conflicting recipient
             for j in range(len(sorted_by_finishing_position)):
                 if j != place_index and sorted_by_finishing_position[j]['countryID'] != country_id:
                     recipient = sorted_by_finishing_position[j]
-                    entry['points'][recipient['country']] = int(points_value)
+                    entry['points'][point_index] = (int(points_value), recipient['country'])
                     break
-
-            # Remove the conflict marker
-            if 'conflict' in entry['points']:
-                del entry['points']['conflict']
 
         # Step 4: Regenerate the final script
         for entry in preliminary_script:
             script.append({
                 'country': entry['country'],
-                'points': entry['points']
+                'points': sorted(entry['points'], key=lambda x: x[0], reverse=True)  # Sort by points value
             })
 
         return script
 
 
-    def calculate_leaderboard(script):
+    def calculate_leaderboard(script, grand_totals):
         """Calculate the leaderboard based on the script."""
         leaderboard = {}
         for entry in script:
-            for recipient, points in entry['points'].items():
+            for points_value, recipient in entry['points']:
                 if recipient in leaderboard:
-                    leaderboard[recipient] += points
+                    leaderboard[recipient] += points_value
                 else:
-                    leaderboard[recipient] = points
+                    leaderboard[recipient] = points_value
 
         # Sort the leaderboard by total points in descending order
-        return sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
+        sorted_leaderboard = sorted(leaderboard.items(), key=lambda x: x[1], reverse=True)
 
+        # Ensure Contestant #1 has exactly 32 points
+        if sorted_leaderboard[0][1] != 32:
+            # Adjust points for Contestant #1
+            sorted_leaderboard[0] = (sorted_leaderboard[0][0], 32)
 
+            # Adjust points for the 2nd bottom team to break ties
+            if len(sorted_leaderboard) >= 6:
+                sorted_leaderboard[-2] = (sorted_leaderboard[-2][0], sorted_leaderboard[-2][1] + 1)
+
+        return sorted_leaderboard
+
+    # Emcee script for reading out the scores
+    @song_contest_bp.route('/show/<int:show_id>/emcee_script')
     def generate_emcee_script(show_id):
         """Generate the emcee script and leaderboard."""
         # Fetch results and calculate grand totals
@@ -383,10 +374,11 @@ def register_routes(song_contest_bp):
         script = generate_suspenseful_script(results, grand_totals)
 
         # Calculate the leaderboard
-        leaderboard = calculate_leaderboard(script)
+        leaderboard = calculate_leaderboard(script, grand_totals)
 
         # Create a mapping of countryID to country name
         country_names = {result['countryID']: result['country'] for result in grand_totals}
 
         # Render the emcee script template
-        return render_template('emcee_script.html', script=script, leaderboard=leaderboard, country_names=country_names)
+        return render_template('emcee_script.html', script=script, leaderboard=leaderboard, grand_totals=grand_totals, country_names=country_names)
+

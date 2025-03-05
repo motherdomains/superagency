@@ -7,8 +7,8 @@
         {% for entry in script %}
             <li>{{ entry.country }} votes:
                 <ul>
-                    {% for country, points in entry.points.items() %}
-                        <li>{{ points }} points for {{ country }}</li>
+                    {% for points_value, recipient in entry.points %}
+                        <li>{{ points_value }} points for {{ recipient }}</li>
                     {% endfor %}
                 </ul>
             </li>
@@ -30,7 +30,7 @@
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ country }}</td>
-                    <td>{{ country_names[country] }}</td>
+                    <td>{{ grand_totals[loop.index0]['total'] }}</td>
                     <td>{{ total }}</td>
                 </tr>
             {% endfor %}
