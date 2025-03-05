@@ -41,6 +41,11 @@ This month:
 - May inform client about delays, but can screen-record where things are at
 
 
+Thursday - solve server issues
+Friday - send link to client for first rough test
+
+Next week: Polish up localhost app, and deploy on server with login, links working, better navigation buttons, in time for tech/dress rehearsal
+
 
 
 -----
