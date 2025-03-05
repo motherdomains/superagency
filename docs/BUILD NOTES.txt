@@ -33,6 +33,14 @@ This month:
 - Backup plan to institute Wednesday, is pre-scripting for 7 teams, and having code generated for it
 - Wednesday plan is to complete this script, and make mods, before deploying on the server for testing
 
+## Wed. March 5 2025 ##  7+ hours
+- First progression of localhost-dev app, preparing for remote server deployment (Song Contest)
+- Continued progressing the emcee script - so close, with only one little tweak for now, but "server busy" errors keep thwarting progress
+- vote.songcontest.xyz subdomain configured and working
+- Spent many hours trying to put up a basic test app.py Flask app, but encountered numerous server issues, including firewall blocks, and seem to have caused server-wide issues taking down all our sites
+- May inform client about delays, but can screen-record where things are at
+
+
 
 
 -----

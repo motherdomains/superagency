@@ -1,38 +1,39 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1>Emcee Script</h1>
-<ol>
-    {% for entry in script %}
-    <li>
-        <strong>{{ entry.country }} votes:</strong>
-        {% if entry.points %}
-            {% for country_name, points in entry.points.items() %}
-                {{ points }} points for {{ country_name }}{% if not loop.last %}, {% endif %}
-            {% endfor %}
-        {% else %}
-            No points awarded.
-        {% endif %}
-    </li>
-    {% endfor %}
-</ol>
-
-<h1>Leaderboard</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Rank</th>
-            <th>Country</th>
-            <th>Total Points</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for country_id, total_points in leaderboard %}
-        <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ country_names.get(country_id, 'Unknown Country') }}</td>
-            <td>{{ total_points }}</td>
-        </tr>
+    <h1>Emcee Script</h1>
+    
+    <h2>Voting Results</h2>
+    <ul>
+        {% for entry in script %}
+            <li>{{ entry.country }} votes:
+                <ul>
+                    {% for country, points in entry.points.items() %}
+                        <li>{{ points }} points for {{ country }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
-    </tbody>
-</table>
+    </ul>
+
+    <h2>Leaderboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Place</th>
+                <th>Contestant</th>
+                <th>Grand Total</th>
+                <th>Revised Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for country, total in leaderboard %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ country }}</td>
+                    <td>{{ country_names[country] }}</td>
+                    <td>{{ total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
