@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>{% block title %}Welcome Test{% endblock %} // Song Contest</title>
+  <meta name="description" content="Song Contest is a Eurovision-inspired musical theatred production in south Australia">
+  <meta name="author" content="Song Contest">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+     
+  <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    
+  {% block head %}
+  <!-- Page-specific meta tags or other head elements -->
+  {% endblock %}
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+        <div class="twelve columns" align="center"><img src="/song_contest/static/img/song_contest_white.png"
+        width="400" style="u-max-full-width:160px;"></div>
+    </div>
+      
+    <div class="row">
+      <div class="twelve columns" style="margin-top: 0%"><!--<a href="/">HOME</a> | <a href="admin">ADMIN</a>   | <!--<a href="show_list">SHOW LIST</a>  | <a href="/song_contest/countries">COUNTRIES</a> | <a href="{{ url_for('song_contest.show_list') }}">SHOW LIST</a>
+ | {% if logged_in %}
+            <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">LOGIN</a>
+            {% endif %}--></div>
+    </div>
+      
+        {% block content %}
+        <!-- Default content could go here -->
+        {% endblock %}
+      
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

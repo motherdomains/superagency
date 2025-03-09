@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block title %}Voting Results // Song Contest{% endblock %}
+
+{% block content %}
+<div align="center"><h3>Voting Results</h3></div>
+<table align="center">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Country</th>
+            <th>Actual Total</th>
+            <th>Adjusted Total</th>
+            <th>1st Place Votes</th>
+            <th>2nd Place Votes</th>
+            <th>3rd Place Votes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ result.country }}</td>
+            <td>{{ result.grand_total }}</td>
+            <td>{{ result.adjusted_total }}</td>
+            <td>{{ result.votes_first }}</td>
+            <td>{{ result.votes_second }}</td>
+            <td>{{ result.votes_third }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

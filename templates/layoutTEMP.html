@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>{% block title %}Welcome Test{% endblock %} // Super Agency</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    
+  {% block head %}
+  <!-- Page-specific meta tags or other head elements -->
+  {% endblock %}
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout 
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns" style="margin-top: 0%"><a href="/">HOME</a> | <a href="admin">ADMIN</a>   | <!--<a href="show_list">SHOW LIST</a>  | --><a href="/song_contest/countries">COUNTRIES</a> | <a href="{{ url_for('song_contest.show_list') }}">SHOW LIST</a>
+ | {% if logged_in %}
+            <a href="{{ url_for('auth.logout') }}">LOGOUT</a>
+            {% else %}
+            <a href="{{ url_for('auth.login') }}">LOGIN</a>
+            {% endif %}<br />
+        <!-- Blueprint-specific layout -->
+<p>Using master layout.html</p></div>
+    </div>
+      
+        {% block content %}
+        <!-- Default content could go here -->
+        {% endblock %}
+      
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

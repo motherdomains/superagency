@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block title %}Vote for your favourite countries // Song Contest{% endblock %}
+{% block content %}
+
+
+<form method="POST">
+    <div class="row">
+    <div class="twelve columns" align="center">
+        <img src="/{{ assigned_country.image }}" alt="{{ assigned_country.name }}" style="max-width: 160px;"><br />
+        <h3>{{ assigned_country.name }}</h3>
+    </div>
+</div>
+    <div class="row">
+        <div class="twelve columns" align="center"><h3>Place Your Votes</h3></div>
+    </div>
+    <div class="row">
+        <div class="twelve columns" align="center"><label for="vote_1">First Place:</label>
+    <select id="vote_1" name="vote_1" onchange="updateOptions('vote_1', 'vote_2', 'vote_3')" required>
+        <option value="" disabled selected>Vote for First Place</option>
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns" align="center"><label for="vote_2">Second Place:</label>
+    <select id="vote_2" name="vote_2" onchange="updateOptions('vote_2', 'vote_3')" required>
+        <option value="" disabled selected>Vote for Second Place</option>
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns" align="center"><label for="vote_3">Third Place:</label>
+    <select id="vote_3" name="vote_3" required>
+        <option value="" disabled selected>Vote for Third Place</option>
+        {% for country_id, country_name in countries %}
+        <option value="{{ country_id }}">{{ country_name }}</option>
+        {% endfor %}
+    </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns" align="center"><button type="submit">Submit Votes</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function updateOptions() {
+        let firstVote = document.getElementById("vote_1").value;
+        let secondVote = document.getElementById("vote_2").value;
+
+        document.querySelectorAll("#vote_2 option, #vote_3 option").forEach(option => {
+            option.hidden = false;
+        });
+
+        if (firstVote) {
+            document.querySelectorAll(`#vote_2 option[value="${firstVote}"], #vote_3 option[value="${firstVote}"]`).forEach(option => {
+                option.hidden = true;
+            });
+        }
+        
+        if (secondVote) {
+            document.querySelectorAll(`#vote_3 option[value="${secondVote}"]`).forEach(option => {
+                option.hidden = true;
+            });
+        }
+    }
+
+    document.getElementById("vote_1").addEventListener("change", updateOptions);
+    document.getElementById("vote_2").addEventListener("change", updateOptions);
+</script>
+
+{% endblock %}

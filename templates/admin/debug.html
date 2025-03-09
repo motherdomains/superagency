@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Admin</title>
+</head>
+<body>
+    <h1>Song Shows</h1>
+
+    {% if song_shows %}
+        <ul>
+            {% for show in song_shows %}
+                <li>
+                    {{ show.showName }} - 
+                    <a href="{{ url_for('song_contest.add_countries_to_show', showID=show.showID) }}">Add Countries</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No song shows available.</p>
+    {% endif %}
+</body>
+</html>

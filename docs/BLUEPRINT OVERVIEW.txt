@@ -1,0 +1,19 @@
+blueprints/: This is the parent directory that houses all of your blueprints. You can have multiple blueprints here.
+bp_directory/: A directory for the new blueprint, named based on its purpose
+__init__.py: Makes this directory a package and initializes the Blueprint.
+views.py: This file contains the routes and the logic for how the views should be rendered (i.e., the routes the user accesses).
+models.py: This file contains the SQLAlchemy models or other related data models for this blueprint.
+forms.py: This file contains forms related to this blueprint, using Flask-WTF if you have forms.
+templates/: This folder contains all of the template files for this blueprint (e.g., songs.html, shows.html).
+static/: This folder holds static files specific to the blueprint (e.g., images, JavaScript, CSS files).
+
+
+
+
+Best-Practice Naming Conventions
+
+    Blueprint Name: Use lowercase and underscore-separated names (e.g., song_contest).
+    Model Classes: Use PascalCase for model names (e.g., Song, Show).
+    Forms: Name your form classes based on the entity they represent (e.g., SongForm, ShowForm).
+    Templates: Organize templates in a folder structure that mimics the blueprint's name (e.g., templates/song_contest/).
+    Static Files: Store blueprint-specific static assets in a static folder within the blueprint's directory.

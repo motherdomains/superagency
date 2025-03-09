@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Survey Questions // AI Super Agency{% endblock %}
+{% block content %}
+
+<h1>{{ survey.title }}</h1>
+    <p>{{ survey.description }}</p>
+
+    <form action="{{ url_for('surveys.submit_response', survey_id=survey.surveyID) }}" method="POST">
+        {% for question in questions %}
+            <div>
+                <label for="question_{{ question.questionID }}">{{ question.question_text }}</label>
+                {% if question.question_type == 'open_ended' %}
+                    <textarea id="question_{{ question.questionID }}" name="question_{{ question.questionID }}" required></textarea>
+                {% elif question.question_type == 'select' or question.question_type == 'multiple_choice' %}
+                    <select id="question_{{ question.questionID }}" name="question_{{ question.questionID }}" {% if question.question_type == 'multiple_choice' %}multiple{% endif %} required>
+                        {% for option in question.options %}
+                            <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                {% elif question.question_type == 'scale' %}
+                    <input type="number" id="question_{{ question.questionID }}" name="question_{{ question.questionID }}" min="1" max="10" required>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
