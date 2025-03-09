@@ -12,4 +12,4 @@ git remote set-url origin git@github.com:motherdomains/superagency.git
 git commit -m "Daily update: $(date '+%Y-%m-%d')"
 
 # Push the changes to the remote repository
-git push origin master
+git push origin main
