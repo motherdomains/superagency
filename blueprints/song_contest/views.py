@@ -77,6 +77,10 @@ def register_routes(song_contest_bp):
     # VOTING SYSTEM
     @song_contest_bp.route('/vote/<int:show_id>/<int:assigned_country>', methods=['GET', 'POST'])
     def vote_page(show_id, assigned_country):
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 395f008 (Daily update: 2025-03-09)
         # Fetch countries for the show, excluding the assigned country
         show_countries = SongShowCountry.query.filter(
             SongShowCountry.showID == show_id,
@@ -191,6 +195,25 @@ def register_routes(song_contest_bp):
         print("Fetched Results:", results)
         return results
     
+<<<<<<< HEAD
+=======
+       # Function to adjust totals for "exciting" results
+    def adjust_totals(grand_totals, audience_size):
+        max_total = grand_totals[0]['total']
+        scaling_factor = audience_size / max_total
+
+        adjusted_totals = []
+        for i, result in enumerate(grand_totals):
+            adjusted_total = int((max_total - i) * scaling_factor)
+            adjusted_totals.append({
+                'countryID': result['countryID'],
+                'country': result['country'],
+                'adjusted_total': adjusted_total
+            })
+        # Debugging: Print the adjusted totals
+        print("Adjusted Totals:", adjusted_totals)
+        return adjusted_totals
+>>>>>>> 395f008 (Daily update: 2025-03-09)
     
     # Internal voting results
     @song_contest_bp.route('/show/<int:show_id>/results')
