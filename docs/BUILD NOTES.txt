@@ -21,6 +21,12 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+-----
+## Mon. March 10 2025 ## 2+ hours
+- Learned from SongContest client that the site never loaded properly, despite all that work / effort
+- This week - final work on Song Contest
+- Reactivated Flask / VENV on localhost environment, which stopped working since uploading site
+
 
 -----
 ## Mon. March 3 2025 ## 2+ hours
