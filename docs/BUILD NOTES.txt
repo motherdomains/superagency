@@ -33,10 +33,11 @@ This month:
 - Left for evening plans with health side effects and needing to calm the brain
 - Was unable to upload this Build Notes file, too busy with it all
 
-## Wed. March 12 2025 ## 3+ hours
+## Wed. March 12 2025 ## 4+ hours
 - Plan B - set up a dedicated VULTR/Ubuntu instance for our Flask apps
 - Solved, online, propagating, SSL setup... within around an hour!
 - Tweaked initial Client Questionnaire/ Survey, and shared the link across my closer networks, for now https://form.jotform.com/250681339936466
+- Generated new approach to exciting results script, using ILP.
 
 
 -----
