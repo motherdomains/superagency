@@ -26,7 +26,12 @@ This month:
 - Learned from SongContest client that the site never loaded properly, despite all that work / effort
 - This week - final work on Song Contest
 - Reactivated Flask / VENV on localhost environment, which stopped working since uploading site
+- Spent much more time trying/failing to solve the shared site issue, getting vote.songcontest.xyz accessible by the client (at the sacrifice of the other sites on the server), but not both at the same time
+- Left for evening plans with health side effects and needing to calm the brain 
 
+## Tue. March 11 2025 ## 3+ hours
+- Plan B - set up a dedicated VULTR/Ubuntu instance for our Flask apps
+- Solved, online, propagating, SSL setup... within around an hour!
 
 -----
 ## Mon. March 3 2025 ## 2+ hours
