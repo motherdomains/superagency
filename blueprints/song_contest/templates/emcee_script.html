@@ -1,39 +1,52 @@
 {% extends 'layout.html' %}
+
 {% block content %}
     <h1>Emcee Script</h1>
-    
-    <h2>Voting Results</h2>
+
+    <h2>Voting Announcements</h2>
     <ul>
-        {% for entry in script %}
-            <li>{{ entry.country }} votes:
-                <ul>
-                    {% for points_value, recipient in entry.points %}
-                        <li>{{ points_value }} points for {{ recipient }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
+        {% for line in script %}
+            <li>{{ line }}</li>
         {% endfor %}
     </ul>
 
     <h2>Leaderboard</h2>
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <th>Place</th>
                 <th>Contestant</th>
                 <th>Grand Total</th>
-                <th>Revised Points</th>
+                <th>Adjusted Total</th>
+                <th>12pt Votes</th>
+                <th>10pt Votes</th>
+                <th>8pt Votes</th>
             </tr>
         </thead>
         <tbody>
-            {% for country, total in leaderboard %}
+            {% for entry in leaderboard %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ country }}</td>
-                    <td>{{ grand_totals[loop.index0]['total'] }}</td>
-                    <td>{{ total }}</td>
+                    <td>{{ entry.country }}</td>
+                    <td>{{ entry.grand_total }}</td>
+                    <td>{{ entry.adjusted_total }}</td>
+                    <td>{{ entry.votes_first }}</td>
+                    <td>{{ entry.votes_second }}</td>
+                    <td>{{ entry.votes_third }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <h2>Manual Adjustments (If Necessary)</h2>
+    <p><b>Dear Stage Manager!</b> Please do double-check this script.<br />
+    <b>FOR MAXIMAL EXCITING RESULTS:</b> If the final country to announce their points is NOT the winner, you can swap the "12 points for" for another valid "12 points for", and this ensures the winner won't be known until the very final vote! Other adjustments flagged by the system, if any, will be noted below.</p>
+    {% if adjustments %}
+        
+        <ul>
+            {% for adjustment in adjustments %}
+                <li>{{ adjustment }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
