@@ -39,9 +39,10 @@ This month:
 - Tweaked initial Client Questionnaire/ Survey, and shared the link across my closer networks, for now https://form.jotform.com/250681339936466
 - Generated new approach to exciting results script, using ILP.
 
-## Thu. March 13 2025 ##  hours
+## Thu. March 13 2025 ##  2 hours
 - Installed PuLP on new app server, for ILP processing of voting results
-- Successfully deployed script, and it seems like it is working well!
+- Successfully deployed script on localhost, and it seems like it is working well!
+- Deployed script on server, and everything is still working well! Sent to client
 
 
 -----

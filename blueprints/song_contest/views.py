@@ -328,31 +328,41 @@ def register_routes(song_contest_bp):
     @song_contest_bp.route('/show/<int:show_id>/emcee_script')
     def generate_emcee_script(show_id):
         """Generate the emcee script and leaderboard using an ILP vote assignment."""
-        # Fetch show results and compute grand totals from database data
+        # 1. Fetch show results and compute grand totals.
         results = get_show_results(show_id)
         grand_totals = calculate_grand_totals(results)
-
         # Sort by finishing position (descending Grand Total)
         sorted_grand_totals = grand_totals
-        # Create a list of contestant names in finishing order:
-        finishing_order = [ct['country'] for ct in sorted_grand_totals]
 
-        # For our sample, assign target adjusted totals using a simple formula:
-        # Rank 1: 36, Rank 2: 34, Rank 3: 32, etc.
+        # 2. Compute targets dynamically based on number of contestants.
+        N = len(sorted_grand_totals)
+        # Total available points per country = 30 (since each awarding country gives 12+10+8)
+        # So total available overall is 30 * N. For an arithmetic progression with N terms, we require:
+        # (A + B)/2 * N = 30N, hence A + B = 60. For our sample we use A=36, B=24 if possible.
+        # For N != 7, we calculate the step as:
+        d = 12 / (N - 1) if N > 1 else 0
         targets = {}
         for i, ct in enumerate(sorted_grand_totals):
             rank = i + 1
-            targets[ct['country']] = 36 - (rank - 1) * 2  # For 7 countries: 36,34,32,30,28,26,24
+            # Compute the target as a float, then round to the nearest integer.
+            targets[ct['country']] = int(round(36 - (rank - 1) * d))
 
-        # Create list of all contestant names (as expected by the ILP)
-        contestants_list = list(targets.keys())
+        # 3. Retrieve the awarding order dynamically from the database (ordered by showOrder)
+        show_countries = SongShowCountry.query.join(SongCountry, SongShowCountry.countryID == SongCountry.countryID)\
+                                .filter(SongShowCountry.showID == show_id)\
+                                .order_by(SongShowCountry.showOrder.asc()).all()
+        awarding_order = [sc.song_country.country for sc in show_countries]
 
-        # Begin ILP formulation: each contestant is both an awarding country and a recipient.
+        # Create a list of all contestants (by country name) from the grand totals
+        contestants_list = [ct['country'] for ct in sorted_grand_totals]
+
+        # 4. ILP Formulation: Each contestant is both awarding and receiving.
         vote_values = [12, 10, 8]
+        from pulp import LpProblem, LpVariable, LpBinary, lpSum, LpStatus, LpMinimize
         prob = LpProblem("Song_Contest_Vote_Assignment", LpMinimize)
         prob += 0  # Dummy objective
 
-        # Decision variables: x[(i, j, p)] = 1 if awarding country i gives vote p to recipient j.
+        # Decision variables: x[(i, j, p)] is 1 if awarding country i gives vote p to recipient j.
         x = {}
         for i in contestants_list:
             for j in contestants_list:
@@ -365,23 +375,23 @@ def register_routes(song_contest_bp):
             for p in vote_values:
                 prob += lpSum(x[(i, j, p)] for j in contestants_list if j != i) == 1, f"One_{p}_vote_from_{i}"
 
-        # Constraint 2: An awarding country cannot give more than one vote to the same recipient.
+        # Constraint 2: No awarding country gives more than one vote to the same recipient.
         for i in contestants_list:
             for j in contestants_list:
                 if i != j:
                     prob += lpSum(x[(i, j, p)] for p in vote_values) <= 1, f"At_most_one_vote_{i}_to_{j}"
 
-        # Constraint 3: For each recipient, the sum of points received equals their target adjusted total.
+        # Constraint 3: For each recipient, the sum of points received equals their target.
         for j in contestants_list:
             prob += lpSum(p * x[(i, j, p)] for i in contestants_list if i != j for p in vote_values) == targets[j], f"Target_for_{j}"
 
         # Solve the ILP.
         status = prob.solve()
         if LpStatus[status] != "Optimal":
-            flash("Could not generate a valid emcee script.", "danger")
+            flash("Could not generate a valid emcee script. Please check the vote targets or constraints.", "danger")
             return redirect(url_for("song_contest.show_list"))
 
-        # Build the assignment dictionary: assignment[awarding][vote_value] = recipient
+        # Build assignment dictionary: assignment[awarding][vote_value] = recipient
         assignment = {}
         for i in contestants_list:
             assignment[i] = {}
@@ -390,10 +400,7 @@ def register_routes(song_contest_bp):
                     if i != j and x[(i, j, p)].varValue == 1:
                         assignment[i][p] = j
 
-        # Pre-determined show order for the emcee script:
-        awarding_order = ["Norway", "India", "Argentina", "Sweden", "Australia", "United Kingdom", "Iceland"]
-
-        # Build the emcee script using the assignment.
+        # 5. Build the emcee script using the dynamic awarding_order.
         emcee_script = []
         for awarding in awarding_order:
             rec12 = assignment[awarding][12]
@@ -402,7 +409,7 @@ def register_routes(song_contest_bp):
             script_line = f"{awarding} announces: 'We award 8 points to {rec8}, 10 points to {rec10}, and 12 points to {rec12}!'"
             emcee_script.append(script_line)
 
-        # Tally the manipulated totals (Adjusted Totals) from the ILP assignment.
+        # 6. Tally manipulated totals from the ILP assignment.
         manipulated_totals = {country: 0 for country in contestants_list}
         vote_breakdown = {country: {12: 0, 10: 0, 8: 0} for country in contestants_list}
         for i in contestants_list:
@@ -411,8 +418,7 @@ def register_routes(song_contest_bp):
                 manipulated_totals[recipient] += p
                 vote_breakdown[recipient][p] += 1
 
-        # Build a leaderboard (table) that shows for each contestant:
-        # Country name, Grand Total (from database), Adjusted Total (from ILP), and breakdown of votes.
+        # 7. Build leaderboard data: include Grand Total (from DB) and Adjusted Total (from ILP)
         leaderboard = []
         for ct in sorted_grand_totals:
             country = ct['country']
@@ -425,8 +431,15 @@ def register_routes(song_contest_bp):
                 'votes_third': vote_breakdown[country][8]
             })
 
-        # Render the emcee_script template with the generated data.
+        # 8. Optionally, add manual adjustment instructions (fail-safe mechanism)
+        manual_adjustments = []
+        # Example check: if the gap between the top two is larger than desired.
+        top_two = sorted(leaderboard, key=lambda x: x['adjusted_total'], reverse=True)[:2]
+        if abs(top_two[0]['adjusted_total'] - top_two[1]['adjusted_total']) > 12:
+            manual_adjustments.append("Consider swapping a 10-point vote with an 8-point vote between the top two countries.")
+
         return render_template('emcee_script.html', 
                                script=emcee_script, 
                                leaderboard=leaderboard,
-                               targets=targets)
+                               targets=targets,
+                               adjustments=manual_adjustments)
