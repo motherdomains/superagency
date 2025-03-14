@@ -39,10 +39,24 @@ This month:
 - Tweaked initial Client Questionnaire/ Survey, and shared the link across my closer networks, for now https://form.jotform.com/250681339936466
 - Generated new approach to exciting results script, using ILP.
 
-## Thu. March 13 2025 ##  2 hours
+## Thu. March 13 2025 ##  3 hours
 - Installed PuLP on new app server, for ILP processing of voting results
 - Successfully deployed script on localhost, and it seems like it is working well!
 - Deployed script on server, and everything is still working well! Sent to client
+
+## FRI:
+- Scoreboard script (need confirmation from client)
+- Touchup: improve index of vote.songcontest.xyz <<<
+- Touchup: After selecting assigned country, that flag should show on the Votes page <<<
+- Touchup: Use new visual assets, as provided by client
+- Reset votes function for shows (songShowCountries) with confirm 
+- Set up temp, pwd-controlled admin area
+- QR code to specific show page?  <<< if show 6
+
+## Monday / Tuesday
+- Final cosmetic touchups
+- Implement SQLite database upgrades for higher concurrent votes (should be fine for 500-600 votes)
+- Stress test SQLite (any problems, or for future considerations, plan Postgre migration)
 
 
 -----

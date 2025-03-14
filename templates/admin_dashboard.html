@@ -1,18 +1,34 @@
-<!-- templates/admin_dashboard.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-</head>
-<body>
-    <h1>Welcome to the Admin Dashboard</h1>
-    <p>Here's a list of things you can do:</p>
-    <ul>
-        <li><a href="{{ url_for('admin.index') }}">Admin Home</a></li>
-        <li><a href="{{ url_for('admin.user.index_view') }}">Manage Users</a></li>
-        <li><a href="{{ url_for('admin.songshow.index_view') }}">Manage Shows</a></li>
-    </ul>
-</body>
-</html>
+<!-- templates/index.html -->
+{% extends 'layout.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="twelve columns" align="center"><h2>Admin Dashboard</h2>
+    <hr \>
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+        <hr \>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns" align="center">
+    <form action="{{ url_for('song_contest.reset_votes', show_id=6) }}" method="post">
+    <button type="submit">Reset Votes for Show 6</button>
+</form>
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns" align="center"><hr \>
+        <a href="{{ url_for('song_contest.admin_logout') }}" class="button">Logout</a></div>
+</div>
+
+{% endblock %}

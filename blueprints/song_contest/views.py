@@ -3,6 +3,7 @@ from flask import current_app as app
 from app import db  # Import from the main app file
 from .models import SongCountry, SongShow, SongShowCountry
 from sqlalchemy.orm import aliased
+from functools import wraps  # For admin authentication
 
 # Make sure to have PuLP installed in your environment:
 from pulp import LpProblem, LpVariable, LpBinary, lpSum, LpStatus, value, LpMinimize
@@ -38,6 +39,63 @@ def register_routes(song_contest_bp):
     @song_contest_bp.route('/')
     def song_contest_home():
         return render_template('song_contest_home.html')  # Ensure this template exists
+    
+    # Admin authentication decorator
+    def admin_required(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if session.get("is_admin") is not True:  # Only allow if admin is logged in
+                flash("Access Denied! Admins only.", "danger")
+                return redirect(url_for("song_contest.admin_login"))
+            return f(*args, **kwargs)
+        return decorated_function
+
+    # Admin login page
+    @song_contest_bp.route('/admin/login', methods=['GET', 'POST'])
+    def admin_login():
+        if request.method == 'POST':
+            password = request.form.get("password")
+            if password == "superSHOW25!":  # Set a strong password!
+                session["is_admin"] = True
+                flash("Admin login successful!", "success")
+                return redirect(url_for("song_contest.admin_dashboard"))
+            else:
+                flash("Incorrect password!", "danger")
+
+        return render_template("admin_login.html")
+
+    # Admin logout
+    @song_contest_bp.route('/admin/logout')
+    def admin_logout():
+        session.pop("is_admin", None)
+        flash("Logged out successfully!", "info")
+        return redirect(url_for("song_contest.admin_login"))
+
+    # Admin dashboard
+    @song_contest_bp.route('/admin')
+    @admin_required
+    def admin_dashboard():
+        return render_template("admin_dashboard.html")  # Create this template!
+
+    # Reset votes for a specific show
+    @song_contest_bp.route('/admin/reset_votes/<int:show_id>', methods=['POST'])
+    @admin_required
+    def reset_votes(show_id):
+        try:
+            db.session.query(SongShowCountry).filter(SongShowCountry.showID == show_id).update({
+                "votesFirst": 0,
+                "votesSecond": 0,
+                "votesThird": 0
+            })
+            db.session.commit()
+            flash(f"✅ Successfully reset votes for Show ID {show_id}!", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash(f"❌ Error resetting votes: {e}", "danger")
+
+        return redirect(url_for("song_contest.admin_dashboard"))
+    
+    
 
     # List of Countries
     @song_contest_bp.route('/countries', endpoint='country_list')
@@ -77,10 +135,15 @@ def register_routes(song_contest_bp):
     
         return render_template('select_country.html', countries=country_data, show_id=show_id)
     
-    
-    # VOTING SYSTEM
+    # VOTE ON CONTESTANTS
     @song_contest_bp.route('/vote/<int:show_id>/<int:assigned_country>', methods=['GET', 'POST'])
     def vote_page(show_id, assigned_country):
+        # Fetch the assigned country details
+        assigned_country_data = SongCountry.query.get(assigned_country)
+
+        if not assigned_country_data:
+            flash("Assigned country not found!", 'danger')
+            return redirect(url_for('song_contest.select_country', show_id=show_id))
 
         # Fetch countries for the show, excluding the assigned country
         show_countries = SongShowCountry.query.filter(
@@ -98,7 +161,6 @@ def register_routes(song_contest_bp):
                 vote_2 = int(request.form.get('vote_2'))
                 vote_3 = int(request.form.get('vote_3'))
             except (TypeError, ValueError):
-                # Handle invalid input (e.g., empty or non-integer values)
                 flash("Invalid votes! Please ensure all votes are selected.", 'danger')
                 return redirect(url_for('song_contest.vote_page', show_id=show_id, assigned_country=assigned_country))
 
@@ -116,8 +178,16 @@ def register_routes(song_contest_bp):
             }
             return redirect(url_for('song_contest.confirm_vote', show_id=show_id))
 
-        # Render the template with the correct variable
-        return render_template('vote_page.html', countries=countries, assigned_country=assigned_country)
+        # Ensure `assigned_country_data.image` is valid and fallback to default
+        assigned_country_image = assigned_country_data.image if assigned_country_data.image else "static/uploads/default_flag.jpg"
+
+        return render_template('vote_page.html', 
+                               countries=countries, 
+                               assigned_country={
+                                   'name': assigned_country_data.country,
+                                   'image': assigned_country_image
+                               })
+
     
     # CONFIRM VOTE PAGE
     @song_contest_bp.route('/confirm_vote/<int:show_id>', methods=['GET', 'POST'])

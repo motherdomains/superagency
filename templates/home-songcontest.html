@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+{% extends 'layout.html' %}
+
+{% block title %}Song Contest - Eurovision{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="twelve columns" align="center">
+        <h4><b>Welcome to Song Contest!</b></h4>
+        <p>Please select one of the following options:</p>
+    </div>
+<div class="row">
+    <div class="twelve columns" align="center">
+    <a href="{{ url_for('song_contest.admin_login') }}" class="button">ADMIN AREA</a>
+    <hr \></div>
+</div>
+</div>
+
+
+{% endblock %}

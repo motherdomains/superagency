@@ -6,4 +6,4 @@ from . import home_bp  # Import the blueprint defined in __init__.py
 def index():
     username = session.get('username')
     greeting = f"Welcome back, {username}!" if username else "Please log in."
-    return render_template('index.html', greeting=greeting, title="Home")
+    return render_template('home-songcontest.html', greeting=greeting, title="Home")

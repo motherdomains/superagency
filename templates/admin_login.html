@@ -1,0 +1,15 @@
+<!-- templates/index.html -->
+{% extends 'layout.html' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+
+<div align="center">
+<form method="post">
+    <label>Admin Password:</label>
+    <input type="password" name="password" required>
+    <button type="submit">Login</button>
+</form></div>
+
+{% endblock %}
