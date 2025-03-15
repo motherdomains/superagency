@@ -44,16 +44,20 @@ This month:
 - Successfully deployed script on localhost, and it seems like it is working well!
 - Deployed script on server, and everything is still working well! Sent to client
 
-## Thu. March 13 2025 ##  3 hours
+## Fri. March 14 2025 ##  3+ hours
 - Touchup: improve index of vote.songcontest.xyz <<< simple link to pwd-controlled admin
 - Touchup: After selecting assigned country, that flag should show on the Votes page <<<
 - Reset votes function for shows (songShowCountries) with confirm <<< 
 - Set up temp, pwd-controlled admin area <<< 
-- QR code to specific show page?  <<< if show 6, asked client if they want to start from show 1
+- QR code to specific show page?  <<< done if show 6; asked client if they want to start from show 1
 
 // waiting on client:
 - Scoreboard script (need confirmation from client)
 - Touchup: Use new visual assets, as provided by client
+
+
+## Sat. March 15 2025 ##  1 hours
+- Updated links in temp admin section to generate close results script for show 6
 
 
 ## Monday / Tuesday
