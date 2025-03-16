@@ -51,6 +51,11 @@ This month:
 - Set up temp, pwd-controlled admin area <<< 
 - QR code to specific show page?  <<< done if show 6; asked client if they want to start from show 1
 
+## Sun. March 16 2025 ##  1 hours
+- Some pre-dress rehearsal touchups for client
+- Changed logo to Club Eurovision
+- Edited all references of Song Contest from code, changing to Club Eurovision
+
 // waiting on client:
 - Scoreboard script (need confirmation from client)
 - Touchup: Use new visual assets, as provided by client

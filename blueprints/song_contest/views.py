@@ -95,7 +95,6 @@ def register_routes(song_contest_bp):
 
         return redirect(url_for("song_contest.admin_dashboard"))
     
-    
 
     # List of Countries
     @song_contest_bp.route('/countries', endpoint='country_list')
