@@ -8,18 +8,24 @@
 
 This week:
 
-- Simple Python app/site upload test to a "normal" web server, to discover the process / steps
-- Wrap up Song Contest script & code
-- Progress details in Pitch, more on product / process
-- Progress Surveys element for clients & research
-- Further investor, accelerator and grant research (test AISA web crawl)
-
 
 This month:
 
 - Blueprints for different feature sets (e.g. Songcontest, CMS, messaging, shop, AI features, etc)
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
+
+-----
+## Mon. March 17 2025 ## 5+ hours
+
+- Set up LOCK VOTES and UNLOCK VOTES functions for each Show - only when OPEN, can votes be submitted by the audience.
+- From there, the point awards are saved in the new songShowVotes table, from which the Scoreboard draws out the same scores as the stage manager's written script for the performers
+- View Scoreboard function generated
+- Many hours spent trying to get the NEXT / PREV buttons working properly (o3-mini-high rapidly solved what 4o could not solve in hours)
+
+- To do: Scoreboard, saving script values to import into scoreboard, for play-by-play
+- To do: Cosmetic enhancements - Post-vote upsell
+
 
 -----
 ## Mon. March 10 2025 ## 2+ hours

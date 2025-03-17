@@ -17,6 +17,8 @@ class SongShow(db.Model):
     showDesc = db.Column(db.Text, nullable=True)
     showDate = db.Column(db.Date, nullable=False)
     totalContestants = db.Column(db.Integer, nullable=False)
+    # Change TINYINT(1) to SmallInteger (SQLAlchemy-compatible)
+    voting_status = db.Column(db.SmallInteger, default=0, nullable=False)  # 0=locked, 1=open, 2=final
     
     def formatted_showDate(self):
         return self.showDate.strftime('%d %B %Y')
@@ -39,3 +41,17 @@ class SongShowCountry(db.Model):
         return (f"<SongShowCountry(showID={self.showID}, countryID={self.countryID}, "
                 f"showOrder={self.showOrder}, votesFirst={self.votesFirst}, "
                 f"votesSecond={self.votesSecond}, votesThird={self.votesThird})>")
+    
+class SongShowVotes(db.Model):
+    __tablename__ = 'songShowVotes'
+    
+    showID = db.Column(db.Integer, db.ForeignKey('songShows.showID'), primary_key=True)
+    awarding_countryID = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), primary_key=True)  # Country giving votes
+    recipient_12 = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), nullable=False)  # 12 points
+    recipient_10 = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), nullable=False)  # 10 points
+    recipient_8 = db.Column(db.SmallInteger, db.ForeignKey('songCountry.countryID'), nullable=False)  # 8 points
+
+    awarding_country = db.relationship('SongCountry', foreign_keys=[awarding_countryID])
+    recipient_12_country = db.relationship('SongCountry', foreign_keys=[recipient_12])
+    recipient_10_country = db.relationship('SongCountry', foreign_keys=[recipient_10])
+    recipient_8_country = db.relationship('SongCountry', foreign_keys=[recipient_8])

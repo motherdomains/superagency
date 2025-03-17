@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="twelve columns" align="center">
+            <h1>🎭 Live Scoreboard 🎭</h1>
+        </div>
+    </div>
+
+    <!-- Scoreboard Section -->
+    {% for entry in leaderboard %}
+    <div class="row">
+        <div class="two columns" align="center">#{{ loop.index }}</div>
+        <div class="five columns">
+            <img src="{{ url_for('static', filename=entry.image.replace('static/', '')) }}" 
+                 alt="{{ entry.country }} Flag" 
+                 class="country-flag"
+                 height="60"
+                 hspace="20"
+                 align="left">
+            <b>{{ entry.country }}</b>
+        </div>
+        <div class="three columns" align="center"><b>{{ entry.score }}</b></div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Navigation Controls (Hidden for Audience, Visible for Stage Manager) -->
+<!-- Navigation Controls (For Stage Manager) -->
+<div class="row stage-manager-controls">
+    <div class="twelve columns center-text" align="center">
+        {% if current_index > -1 %}
+            <a href="{{ url_for('song_contest.rewind_scoreboard', show_id=show_id) }}" class="button">⏪ Previous</a>
+        {% endif %}
+        
+        {% if current_index + 1 < total_steps %}
+            <a href="{{ url_for('song_contest.advance_scoreboard', show_id=show_id) }}" class="button button-primary">Next ⏩</a>
+        {% elif total_steps > 0 %}
+            <p><b>All votes have been announced!</b></p>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}
