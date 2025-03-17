@@ -76,6 +76,12 @@
                                         <a href="{{ url_for('song_contest.live_scoreboard', show_id=show.showID) }}" class="button">View Scoreboard</a>
                                     {% endif %}
                                 {% endif %}
+
+                                <!-- Reset Votes Button (Always Available) -->
+                                <form method="POST" action="{{ url_for('song_contest.reset_votes', show_id=show.showID) }}" 
+                                      onsubmit="return confirm('Are you sure you want to reset all votes for this show? This will also lock voting.');">
+                                    <button type="submit" class="button button-small button-danger">Reset Votes</button>
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}

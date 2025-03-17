@@ -6,13 +6,13 @@ from extensions import db, bcrypt
 from models.user import User
 from blueprints.home import home_bp
 from blueprints.auth import auth_bp
-from blueprints.cms import create_cms  # New CMS blueprint
+# from blueprints.cms import create_cms  # New CMS blueprint
 from blueprints.admin_views import UserAdmin, CustomAdminIndexView
 from blueprints.song_contest import register_blueprints  # Ensure song_contest blueprint is registered
-from blueprints.surveys import init_app as surveys_init
-from blueprints.surveys.admin import register_admin_views, CustomModelView  # Import CustomModelView
-from blueprints.surveys.models import Survey, SurveyQuestion, SurveyResponse, SurveyUser  # Import Survey models
-from blueprints.surveys.routes import surveys_bp
+# from blueprints.surveys import init_app as surveys_init
+# from blueprints.surveys.admin import register_admin_views, CustomModelView  # Import CustomModelView
+# from blueprints.surveys.models import Survey, SurveyQuestion, SurveyResponse, SurveyUser  # Import Survey models
+# from blueprints.surveys.routes import surveys_bp
 
 import os
 
@@ -38,17 +38,17 @@ def create_app():
     # Register Blueprints
     app.register_blueprint(home_bp)
     app.register_blueprint(auth_bp, url_prefix='/auth')
-    cms_bp = create_cms()
-    app.register_blueprint(cms_bp, url_prefix='/cms')
+    # cms_bp = create_cms()
+    # app.register_blueprint(cms_bp, url_prefix='/cms')
 
     # Register song contest blueprint and admin views
     register_blueprints(app, admin)  # Ensure song_contest blueprint is registered
 
     # Register Surveys Blueprint
-    app.register_blueprint(surveys_bp)  # Directly register the surveys Blueprint
+   # app.register_blueprint(surveys_bp)  # Directly register the surveys Blueprint
 
     # Register surveys admin views
-    register_admin_views(admin)  # Register surveys admin views
+    #register_admin_views(admin)  # Register surveys admin views
 
     # Admin views
     admin.add_view(UserAdmin(User, db.session))
@@ -59,9 +59,9 @@ def create_app():
         return send_from_directory(os.path.join(app.config['STATIC_FOLDER'], 'uploads'), filename)
 
     # Debugging route for CMS
-    @app.route('/cms/debug')
-    def cms_debug():
-        return "CMS Debug Route Working!"
+    #@app.route('/cms/debug')
+    #def cms_debug():
+    #    return "CMS Debug Route Working!"
 
     # List routes (run once at app startup)
     @app.before_request
@@ -78,8 +78,10 @@ def create_app():
 
     return app
 
-# Run the Flask app
+app = create_app()  # ✅ Gunicorn needs this
+
+# Only run this when executing `python app.py`, NOT for Gunicorn
 if __name__ == '__main__':
-    app = create_app()
     with app.app_context():
-        db.create
+        db.create_all()
+    app.run()

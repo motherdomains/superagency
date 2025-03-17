@@ -1,6 +1,6 @@
 from flask import render_template, request, session, redirect, url_for, flash
 from flask import current_app as app
-from app import db  # Import from the main app file
+from extensions import db
 from .models import SongCountry, SongShow, SongShowCountry, SongShowVotes
 from sqlalchemy.orm import aliased
 from functools import wraps  # For admin authentication
@@ -134,19 +134,50 @@ def register_routes(song_contest_bp):
     @song_contest_bp.route('/admin/reset_votes/<int:show_id>', methods=['POST'])
     @admin_required
     def reset_votes(show_id):
+        """Resets all votes for a show and locks voting (voting_status = 0)."""
         try:
+            # Reset all vote counts
             db.session.query(SongShowCountry).filter(SongShowCountry.showID == show_id).update({
                 "votesFirst": 0,
                 "votesSecond": 0,
                 "votesThird": 0
             })
+
+            # Optionally reset voting status to 0 (Pre-voting Locked)
+            show = SongShow.query.get_or_404(show_id)
+            show.voting_status = 0  # Lock voting
+
             db.session.commit()
-            flash(f"✅ Successfully reset votes for Show ID {show_id}!", "success")
+
+            flash(f"✅ Successfully reset votes and locked voting for Show ID {show_id}!", "success")
         except Exception as e:
             db.session.rollback()
             flash(f"❌ Error resetting votes: {e}", "danger")
 
         return redirect(url_for("song_contest.admin_dashboard"))
+    
+    # RETURN TO PRE-OPEN VOTING
+    @song_contest_bp.route('/show/<int:show_id>/return_to_preopen', methods=['POST'])
+    @admin_required
+    def return_to_preopen(show_id):
+        """
+        Returns a show from Voting Open (voting_status == 1) to the pre-open state (voting_status = 0).
+        This allows admins to revert a show back to locked state without resetting votes.
+        """
+        try:
+            show = SongShow.query.get_or_404(show_id)
+            if show.voting_status != 1:
+                flash("Show is not in a Voting Open state.", "danger")
+            else:
+                show.voting_status = 0  # Revert to pre-open (locked)
+                db.session.commit()
+                flash("Show has been returned to pre-open (voting locked) state.", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error updating show state: {e}", "danger")
+        return redirect(url_for("song_contest.admin_dashboard"))
+
+
     
     # GENERATE LIVE SCOREBOARD
     import json

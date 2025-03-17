@@ -18,7 +18,7 @@ class SongShow(db.Model):
     showDate = db.Column(db.Date, nullable=False)
     totalContestants = db.Column(db.Integer, nullable=False)
     # Change TINYINT(1) to SmallInteger (SQLAlchemy-compatible)
-    voting_status = db.Column(db.SmallInteger, default=0, nullable=False)  # 0=locked, 1=open, 2=final
+    voting_status = db.Column(db.Integer, nullable=False, default=0)  # 0=locked, 1=open, 2=final
     
     def formatted_showDate(self):
         return self.showDate.strftime('%d %B %Y')

@@ -22,9 +22,10 @@ This month:
 - From there, the point awards are saved in the new songShowVotes table, from which the Scoreboard draws out the same scores as the stage manager's written script for the performers
 - View Scoreboard function generated
 - Many hours spent trying to get the NEXT / PREV buttons working properly (o3-mini-high rapidly solved what 4o could not solve in hours)
-
+- Installed Flask-Migrate
 - To do: Scoreboard, saving script values to import into scoreboard, for play-by-play
 - To do: Cosmetic enhancements - Post-vote upsell
+- Scoreboard set up, highlighting winner on final vote, and reading the script one by one
 
 
 -----
