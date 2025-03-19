@@ -32,6 +32,11 @@ This month:
 - Alt scoreboard set up, wide screen, bigger flags / fonts, and < > navigation using arrows
 - Health scare in evening due to stress, hospital visits for hours
 
+## Wed. March 19 2025 ##  hours
+- Tweaks on alt_scoreboard, ensuring countries present votes in showOrder
+
+- Alt scoreboard set up, wide screen, bigger flags / fonts, and < > navigation using arrows
+- Health scare in evening due to stress, hospital visits for hours
 
 -----
 ## Mon. March 10 2025 ## 2+ hours
