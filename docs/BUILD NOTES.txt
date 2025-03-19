@@ -27,6 +27,11 @@ This month:
 - To do: Cosmetic enhancements - Post-vote upsell
 - Scoreboard set up, highlighting winner on final vote, and reading the script one by one
 
+## Tue. March 18 2025 ## 4+ hours
+
+- Alt scoreboard set up, wide screen, bigger flags / fonts, and < > navigation using arrows
+- Health scare in evening due to stress, hospital visits for hours
+
 
 -----
 ## Mon. March 10 2025 ## 2+ hours

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Scoreboard - Alternative</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+    <style>
+        /* Ensure full-screen and 16:9 aspect ratio */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .announcement {
+            text-align: center;
+            font-size: 2.5rem;
+            padding: 10px;
+            background: #eee;
+        }
+        .scoreboard {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .column {
+            flex: 1;
+            margin: 10px;
+        }
+        .entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 2rem;
+        }
+        .entry img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .nav-buttons {
+            text-align: center;
+            padding: 20px;
+            background: #ddd;
+        }
+        .nav-buttons a {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            text-decoration: none;
+            border: 1px solid #aaa;
+            margin: 0 10px;
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Announcement Section -->
+    <div class="announcement">
+        {% if current_announcement %}
+            <p><strong>{{ current_announcement.awarding_country }} announces:</strong> {{ current_announcement.points }} points to {{ current_announcement.recipient }}!</p>
+        {% else %}
+            <p>Awaiting first award...</p>
+        {% endif %}
+    </div>
+    
+    <!-- Scoreboard Section with Two Columns -->
+    <div class="scoreboard">
+        <div class="column">
+            {% for contestant in left_contestants %}
+            <div class="entry">
+                <div style="text-align:left;">
+                    <img src="{{ url_for('static', filename=contestant.image.replace('static/', '')) }}" alt="{{ contestant.country }} Flag">
+                    {{ contestant.country }}
+                </div>
+                <div style="text-align:right;">
+                    {{ contestant.score }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="column">
+            {% for contestant in right_contestants %}
+            <div class="entry">
+                <div style="text-align:left;">
+                    <img src="{{ url_for('static', filename=contestant.image.replace('static/', '')) }}" alt="{{ contestant.country }} Flag">
+                    {{ contestant.country }}
+                </div>
+                <div style="text-align:right;">
+                    {{ contestant.score }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Navigation Controls -->
+    <div class="nav-buttons">
+        <a href="{{ url_for('song_contest.rewind_scoreboard_alt', show_id=show_id) }}">⏪ Prev</a>
+        {% if current_award + 1 < total_award_events %}
+            <a href="{{ url_for('song_contest.advance_scoreboard_alt', show_id=show_id) }}">Next ⏩</a>
+        {% else %}
+            <span>All awards announced!</span>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
