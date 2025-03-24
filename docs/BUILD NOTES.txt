@@ -15,6 +15,16 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+
+-----
+## Mon. March 24 2025 ## 2+ hours
+
+- First post-show discussions with initial Super Agency client
+- Further looking into grants and accelerators, including Filecoin, ChainGPT, Sahara Incubator)
+- Looking at 1-2 weeks of meetings and consultations to find the next few Super Agency test clients
+- Initiated AISA Technical Diagram / Whitepaper questions / answers
+
+
 -----
 ## Mon. March 17 2025 ## 5+ hours
 
