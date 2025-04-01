@@ -17,12 +17,23 @@ This month:
 
 
 -----
+## Mon. March 31 2025 ## 4 hours
+- Further Agency research, planning and strategy
+- DB architecture for compiling a directory of AI Tools - earning commissions - while seeding the LLM's recommendation engine
+- Further list of grants and accelerators
+
+## Tue. April 1 2025 ## 4+ hours
+- First call with Jarred (NZ) in one month
+- Extended AI Tools to all useful solutions to help client outcomes
+- More details on Tokyo Techstars
+
+
+-----
 ## Mon. March 24 2025 ## 2+ hours
 - First post-show discussions with initial Super Agency client
 - Further looking into grants and accelerators, including Filecoin, ChainGPT, Sahara Incubator)
 - Looking at 1-2 weeks of meetings and consultations to find the next few Super Agency test clients
 - Initiated AISA Technical Diagram / Whitepaper questions / answers
-
 
 ## Tue. March 25 2025 ## 2+ hours
 - Applied for two Filecoin grants: Open Grant ($50K) and Next Steps Grant ($10K)
