@@ -1,7 +1,0 @@
-Flask
-Flask-SQLAlchemy
-Flask-Bcrypt
-Flask-Admin
-Flask-WTF
-mysqlclient
-mysql-connector-python
