@@ -17,6 +17,12 @@ This month:
 
 
 -----
+## Thu. April 10 2025 ## 4+ hours
+- Have stopped updating this and code directories, for now, but useful daily progress
+- Initiated social posts calling for early contributors and clients, to help extend our runway
+
+
+-----
 ## Mon. March 31 2025 ## 4 hours
 - Further Agency research, planning and strategy
 - DB architecture for compiling a directory of AI Tools - earning commissions - while seeding the LLM's recommendation engine
