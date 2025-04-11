@@ -21,6 +21,8 @@ This month:
 - Have stopped updating this and code directories, for now, but useful daily progress
 - Initiated social posts calling for early contributors and clients, to help extend our runway
 
+## Fri. April 11 2025 ## 2+ hours
+- Submitted NEAR grant for AICitySim - simulating 1 million citizens product/market fit studies, hybrid of AI and humans
 
 -----
 ## Mon. March 31 2025 ## 4 hours
