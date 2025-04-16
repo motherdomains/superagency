@@ -15,6 +15,12 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+-----
+## Wed. April 16 2025 ## 1+ hours
+- Continued to progress bootstrap funding options, such as grants (Filecoin and NEAR), service credits and personal contributions
+- First offer of investment (WW)
+- South East Asia trip is confirmed
+- Continuing to develop AICitySim idea
 
 -----
 ## Thu. April 10 2025 ## 4+ hours
