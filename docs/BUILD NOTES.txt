@@ -15,6 +15,15 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+
+-----
+## Thu. April 24 2025 ## 2+ hours
+
+- Further research into investment and accelerator possibilities
+- Started to update F6S profile
+- Close to first Power Hour / Super Agency clients, booking through the MVP system
+- Several more leads in progress, include one more substantial development
+
 -----
 ## Wed. April 16 2025 ## 1+ hours
 - Continued to progress bootstrap funding options, such as grants (Filecoin and NEAR), service credits and personal contributions
