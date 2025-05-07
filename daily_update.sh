@@ -1,22 +1,16 @@
 #!/bin/bash
 
-# Navigate to your local project directory
-cd /Users/sea/Documents/dev/superapp
+cd /Users/sea/Documents/dev/superapp || exit 1
 
-# Ensure you're on the correct branch
+# Ensure we're on the main branch
 git checkout main
 
-# Pull the latest changes from GitHub first (rebasing to avoid merge commits)
+# Stage and commit changes
+git add .
+git commit -m "Daily update: $(date '+%Y-%m-%d')" || echo "No changes to commit."
+
+# Pull + rebase just in case something changed upstream
 git pull --rebase origin main
 
-# Stage all changes (new, modified, deleted files)
-git add .
-
-# (Optional) Set remote again, in case it's not already set
-git remote set-url origin git@github.com:motherdomains/superagency.git
-
-# Commit the changes with a message containing the date
-git commit -m "Daily update: $(date '+%Y-%m-%d')"
-
-# Push the changes to the remote repository
+# Push to GitHub
 git push origin main
