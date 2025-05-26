@@ -15,6 +15,13 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+-----
+## Mon. May 26 2025 ## 5+ hours
+
+- Worked over the weekend
+- Submitted Denarii Labs Accelerator application
+- Been a while since development while fundraising, but we keep plugging away until success (or death)
+
 
 -----
 ## Thu. May 15 2025 ## 2+ hours
