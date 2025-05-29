@@ -22,6 +22,11 @@ This month:
 - Submitted Denarii Labs Accelerator application
 - Been a while since development while fundraising, but we keep plugging away until success (or death)
 
+## Thu. May 29 2025 ## 2+ hours
+
+- Loads of progress this week
+- On Tuesday submitted the Outlier Post-Web Accelerator application ($200K)
+- On Wednesday submitted a Filecoin grant for the AICitySim - Simulation-as-a-Service MVP ($8.5K)
 
 -----
 ## Thu. May 15 2025 ## 2+ hours
