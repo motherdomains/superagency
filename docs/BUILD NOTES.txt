@@ -21,6 +21,7 @@ This month:
 - Main focus on fundraising and improving/streamlining various targeted pitch decks
 - Much success progressing through Accelerator evaluations
 - Budget to initiate enterprise and onboard dev team, is increasingly in possibility
+- Switching Github usage to @aisuperagency, slowly transitioning away from @motherdomains
 
 
 -----
