@@ -23,6 +23,8 @@ This month:
 - Budget to initiate enterprise and onboard dev team, is increasingly in possibility
 - Switching Github usage to @aisuperagency, slowly transitioning away from @motherdomains
 
+- Lots of "unglamorous" work - company infrastructure, documentation, onboarding of talent, deeper diving into PR
+
 
 -----
 ## Mon. May 26 2025 ## 5+ hours
