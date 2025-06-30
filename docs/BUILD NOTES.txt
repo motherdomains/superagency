@@ -25,6 +25,9 @@ This month:
 
 - Lots of "unglamorous" work - company infrastructure, documentation, onboarding of talent, deeper diving into PR
 
+## Mon. June 30
+
+- Registered "aicitysim.city", set up DNS, pointed to Singapore server, set up in Cloudstick
 
 -----
 ## Mon. May 26 2025 ## 5+ hours
