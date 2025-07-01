@@ -16,6 +16,15 @@ This month:
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
 -----
+## Tue. July 1
+
+- Set up draft of landing page for aicitysim.city
+- Tally.so email signup form, integrated with our Notion
+- Video trailer embedded - to tweak video, adding the new URL to the end title screen
+
+Tomorrow: Launch landing page, update accelerator evaluators, publicly share video trailer
+
+-----
 ## June 2025
 
 - Main focus on fundraising and improving/streamlining various targeted pitch decks
