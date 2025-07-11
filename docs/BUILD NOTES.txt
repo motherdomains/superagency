@@ -15,6 +15,12 @@ This month:
 - Client: Planning of animated scoreboard.
 - CMS established to setup/maintain basic sites: ANIMISM, GLOA/Lab, Plan Sea Book
 
+
+-----
+## Thu. July 10
+
+- Early Supporters Passes (ESP) microsite launched at superagency.pro/supporters
+
 -----
 ## Tue. July 1
 
